@@ -308,23 +308,33 @@ GENERATE_UPDATER_SCRIPT()
 
         PRINT_HEADER
 
-        # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/tools/releasetools/common.py#4007
-        echo -e "\n# --- Start patching dynamic partitions ---\n\n"
-        echo -e "# Update dynamic partition metadata\n"
-        echo -n 'assert(update_dynamic_partitions(package_extract_file("dynamic_partitions_op_list")'
-        if $HAS_SUPER_EMPTY; then
-            # https://github.com/LineageOS/android_build/commit/98549f6893c3a93057e2d4cdd1015a93e9473b16
-            # https://github.com/LineageOS/android_bootable_deprecated-ota/commit/e97be4333bd3824b8561c9637e9e6de28bc29da0
-            echo -n ', package_extract_file("unsparse_super_empty.img")'
+        if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/tools/releasetools/common.py#4007
+            echo -e "\n# --- Start patching dynamic partitions ---\n\n"
+            echo -e "# Update dynamic partition metadata\n"
+            echo -n 'assert(update_dynamic_partitions(package_extract_file("dynamic_partitions_op_list")'
+            if $HAS_SUPER_EMPTY; then
+                # https://github.com/LineageOS/android_build/commit/98549f6893c3a93057e2d4cdd1015a93e9473b16
+                # https://github.com/LineageOS/android_bootable_deprecated-ota/commit/e97be4333bd3824b8561c9637e9e6de28bc29da0
+                echo -n ', package_extract_file("unsparse_super_empty.img")'
+            fi
+            echo    '));'
         fi
-        echo    '));'
         if $HAS_SYSTEM; then
             echo -e "\n# Patch partition system\n"
             echo    'ui_print("Patching system image unconditionally...");'
             echo -n 'show_progress(0.'
             echo -n "$(bc -l <<< "9 - $PARTITION_COUNT")"
             echo    '00000, 0);'
-            echo -n 'block_image_update(map_partition("system"), package_extract_file("system.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("system"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/system", '
+            fi
+            echo -n 'package_extract_file("system.transfer.list"), "'
             echo -n "system.new.dat${BROTLI_EXTENSION}"
             echo    '", "system.patch.dat") ||'
             echo    '  abort("E1001: Failed to update system image.");'
@@ -333,7 +343,15 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition vendor\n"
             echo    'ui_print("Patching vendor image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("vendor"), package_extract_file("vendor.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("vendor"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/vendor", '
+            fi
+            echo -n 'package_extract_file("vendor.transfer.list"), "'
             echo -n "vendor.new.dat${BROTLI_EXTENSION}"
             echo    '", "vendor.patch.dat") ||'
             echo    '  abort("E2001: Failed to update vendor image.");'
@@ -342,7 +360,15 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition product\n"
             echo    'ui_print("Patching product image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("product"), package_extract_file("product.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("product"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/product", '
+            fi
+            echo -n 'package_extract_file("product.transfer.list"), "'
             echo -n "product.new.dat${BROTLI_EXTENSION}"
             echo    '", "product.patch.dat") ||'
             echo    '  abort("E2001: Failed to update product image.");'
@@ -351,7 +377,15 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition system_ext\n"
             echo    'ui_print("Patching system_ext image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("system_ext"), package_extract_file("system_ext.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("system_ext"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/system_ext", '
+            fi
+            echo -n 'package_extract_file("system_ext.transfer.list"), "'
             echo -n "system_ext.new.dat${BROTLI_EXTENSION}"
             echo    '", "system_ext.patch.dat") ||'
             echo    '  abort("E2001: Failed to update system_ext image.");'
@@ -360,7 +394,15 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition odm\n"
             echo    'ui_print("Patching odm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("odm"), package_extract_file("odm.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("odm"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/odm", '
+            fi
+            echo -n 'package_extract_file("odm.transfer.list"), "'
             echo -n "odm.new.dat${BROTLI_EXTENSION}"
             echo    '", "odm.patch.dat") ||'
             echo    '  abort("E2001: Failed to update odm image.");'
@@ -369,7 +411,15 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition vendor_dlkm\n"
             echo    'ui_print("Patching vendor_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("vendor_dlkm"), package_extract_file("vendor_dlkm.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("vendor_dlkm"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/vendor_dlkm", '
+            fi
+            echo -n 'package_extract_file("vendor_dlkm.transfer.list"), "'
             echo -n "vendor_dlkm.new.dat${BROTLI_EXTENSION}"
             echo    '", "vendor_dlkm.patch.dat") ||'
             echo    '  abort("E2001: Failed to update vendor_dlkm image.");'
@@ -378,7 +428,15 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition odm_dlkm\n"
             echo    'ui_print("Patching odm_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("odm_dlkm"), package_extract_file("odm_dlkm.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("odm_dlkm"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/odm_dlkm", '
+            fi
+            echo -n 'package_extract_file("odm_dlkm.transfer.list"), "'
             echo -n "odm_dlkm.new.dat${BROTLI_EXTENSION}"
             echo    '", "odm_dlkm.patch.dat") ||'
             echo    '  abort("E2001: Failed to update odm_dlkm image.");'
@@ -387,12 +445,24 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n# Patch partition system_dlkm\n"
             echo    'ui_print("Patching system_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
-            echo -n 'block_image_update(map_partition("system_dlkm"), package_extract_file("system_dlkm.transfer.list"), "'
+            echo -n 'block_image_update('
+            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+                echo -n 'map_partition("system_dlkm"), '
+            else
+                echo -n '"'
+                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n '/system_dlkm", '
+            fi
+            echo -n 'package_extract_file("system_dlkm.transfer.list"), "'
             echo -n "system_dlkm.new.dat${BROTLI_EXTENSION}"
             echo    '", "system_dlkm.patch.dat") ||'
             echo    '  abort("E2001: Failed to update system_dlkm image.");'
         fi
-        echo -e "\n# --- End patching dynamic partitions ---\n"
+        if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            echo -e "\n# --- End patching dynamic partitions ---\n"
+        else
+            echo -e "\n"
+        fi
         if $HAS_DTBO; then
             echo    'ui_print("Full Patching dtbo.img img...");'
             echo -n 'package_extract_file("dtbo.img", "'
@@ -507,11 +577,13 @@ while IFS= read -r f; do
 done < <(find "$WORK_DIR" -maxdepth 1 -type d)
 LOG_STEP_OUT
 
-LOG "- Building unsparse_super_empty.img"
-BUILD_SUPER_EMPTY
+if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+    LOG "- Building unsparse_super_empty.img"
+    BUILD_SUPER_EMPTY
 
-LOG "- Generating dynamic_partitions_op_list"
-GENERATE_OP_LIST
+    LOG "- Generating dynamic_partitions_op_list"
+    GENERATE_OP_LIST
+fi
 
 while IFS= read -r f; do
     PARTITION="$(basename "$f" | sed "s/.img//g")"
