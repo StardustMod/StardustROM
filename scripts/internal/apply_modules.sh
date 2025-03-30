@@ -87,16 +87,6 @@ APPLY_SMALI_PATCHES()
     while IFS= read -r p; do
         local FILE="$TARGET"
         [[ "$PARTITION" != "system" ]] && FILE="$(cut -d "/" -f 2- -s <<< "$FILE")"
-
-        # TODO remove
-        if [[ "$p" == *"0000-"* ]]; then
-            if $ROM_IS_OFFICIAL; then
-                [[ "$p" == *"AOSP"* ]] && continue
-            else
-                [[ "$p" == *"UNICA"* ]] && continue
-            fi
-        fi
-
         APPLY_PATCH "$PARTITION" "$FILE" "$p"
     done < <(find "$PATCHES_PATH/$TARGET" -type f -name "*.patch" | sort -n)
 

@@ -22,7 +22,6 @@ source "$SRC_DIR/scripts/utils/build_utils.sh" || exit 1
 FORCE=false
 FS_TYPE=""
 SPARSE=false
-AVB_SIGN=""
 MAP_FILE=false
 INPUT_DIR=""
 PARTITION=""
@@ -248,12 +247,7 @@ PREPARE_SCRIPT()
     shift
 
     while [[ "$1" == "-"* ]]; do
-        if [[ "$1" == "--avb" ]] || [[ "$1" == "--no-avb" ]]; then
-            if [ ! "$AVB_SIGN" ]; then
-                [[ "$1" == "--avb" ]] && AVB_SIGN=true
-                [[ "$1" == "--no-avb" ]] && AVB_SIGN=false
-            fi
-        elif [[ "$1" == "--force" ]] || [[ "$1" == "-f" ]]; then
+        if [[ "$1" == "--force" ]] || [[ "$1" == "-f" ]]; then
             FORCE=true
         elif [[ "$1" == "--generate-map" ]] || [[ "$1" == "-m" ]]; then
             MAP_FILE=true
@@ -292,14 +286,6 @@ PREPARE_SCRIPT()
 
         shift
     done
-
-    if [ ! "$AVB_SIGN" ]; then
-        if $TARGET_DISABLE_AVB_SIGNING; then
-            AVB_SIGN=false
-        else
-            AVB_SIGN=true
-        fi
-    fi
 
     INPUT_DIR="$1"
     if [ ! "$INPUT_DIR" ]; then
@@ -443,10 +429,6 @@ if [ ! "$IMAGE_SIZE" ]; then
         IMAGE_SIZE="$((BLOCK_COUNT << LOG_BLOCKSIZE))"
     fi
 
-    if $AVB_SIGN; then
-        IMAGE_SIZE="$(CALCULATE_AVB_MIN_PARTITION_SIZE)"
-    fi
-
     LOG "- Allocating $IMAGE_SIZE bytes ($(bc -l <<< "scale=0; $IMAGE_SIZE / 1048576") MB) for $(basename "$OUTPUT_FILE")"
 
     LOG_STEP_OUT
@@ -454,16 +436,7 @@ fi
 
 LOG "- Building image"
 if [ ! -f "$OUTPUT_FILE" ]; then
-    if $AVB_SIGN; then
-        IMAGE_SIZE="$(CALCULATE_AVB_MAX_IMAGE_SIZE "$IMAGE_SIZE")" BUILD_IMAGE_MKFS
-    else
-        BUILD_IMAGE_MKFS
-    fi
-fi
-
-if $AVB_SIGN; then
-    LOG "- Signing image with AVB"
-    EVAL "$(GET_AVBTOOL_CMD)" || exit 1
+    BUILD_IMAGE_MKFS
 fi
 
 LOG_STEP_OUT
