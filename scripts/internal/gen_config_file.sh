@@ -111,6 +111,9 @@ fi
 #   TARGET_CODENAME
 #     String containing the target device codename, it must match the `ro.product.vendor.device` prop.
 #
+#   TARGET_PLATFORM
+#     String containing the target device platform, it must match the `ro.product.board` prop.
+#
 #   [SOURCE/TARGET]_API_LEVEL
 #     Integer containing the SDK API level of the device firmware, it must match the `ro.build.version.sdk` prop.
 #
@@ -334,6 +337,7 @@ fi
     GET_BUILD_VAR "SOURCE_VENDOR_API_LEVEL"
     GET_BUILD_VAR "TARGET_NAME"
     GET_BUILD_VAR "TARGET_CODENAME"
+    GET_BUILD_VAR "TARGET_PLATFORM"
     if [ "${#TARGET_ASSERT_MODEL[@]}" -ge 1 ]; then
         echo "TARGET_ASSERT_MODEL=\"$(IFS=":"; printf '%s' "${TARGET_ASSERT_MODEL[*]}")\""
     else
