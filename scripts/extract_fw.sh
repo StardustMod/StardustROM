@@ -53,7 +53,7 @@ EXTRACT_AVB_BINARIES()
 
 EXTRACT_KERNEL_BINARIES()
 {
-    local FILES="boot.img dtbo.img init_boot.img vendor_boot.img"
+    local FILES="boot.img dtb.img dtbo.img init_boot.img vendor_boot.img"
 
     LOG_STEP_IN "- Extracting kernel binaries"
 
