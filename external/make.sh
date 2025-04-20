@@ -131,6 +131,7 @@ mkdir -p "$TOOLS_DIR/bin"
 ANDROID_TOOLS=true
 APKTOOL=true
 IMG2SDAT=true
+OMCDECODER=true
 SAMLOADER=true
 SIGNAPK=true
 SMALI=true
@@ -152,6 +153,10 @@ IMG2SDAT_EXEC=(
     "blockimgdiff.py" "common.py" "images.py" "img2sdat" "rangelib.py" "sparse_img.py"
 )
 CHECK_TOOLS "${IMG2SDAT_EXEC[@]}" && IMG2SDAT=false
+OMCDECODER_EXEC=(
+    "omcdecoder"
+)
+CHECK_TOOLS "${OMCDECODER_EXEC[@]}" && OMCDECODER=false
 SAMLOADER_EXEC=(
     "../venv/bin/samloader"
 )
@@ -169,6 +174,7 @@ if [[ "$1" == "--check-tools" ]]; then
     if ! $ANDROID_TOOLS && \
             ! $APKTOOL && \
             ! $IMG2SDAT && \
+            ! $OMCDECODER && \
             ! $SAMLOADER && \
             ! $SIGNAPK && \
             ! $SMALI; then
@@ -221,6 +227,14 @@ if $IMG2SDAT; then
     )
 
     BUILD "img2sdat" "$SRC_DIR/external/img2sdat" "${IMG2SDAT_CMDS[@]}"
+fi
+if $OMCDECODER; then
+    OMCDECODER_CMDS=(
+        "clang++ -lz -I./include decoder.cpp -o omcdecoder"
+        "cp -a \"omcdecoder\" \"$TOOLS_DIR/bin\""
+    )
+
+    BUILD "omcdecoder" "$SRC_DIR/external/omcdecoder" "${OMCDECODER_CMDS[@]}"
 fi
 if $SAMLOADER; then
     SAMLOADER_CMDS=(
