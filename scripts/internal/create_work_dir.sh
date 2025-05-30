@@ -23,7 +23,7 @@ FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$FIRMWARE")_$(cut -d "/" -f 2 -s <<< "$
 
 COPY_FIRMWARE()
 {
-    local SOURCE_FOLDERS="product system"
+    local SOURCE_FOLDERS="product system vendor"
     for f in $SOURCE_FOLDERS; do
         if [ -d "$FW_DIR/$FIRMWARE_PATH/$f" ]; then
             LOG "- Copying /$f from source firmware"
