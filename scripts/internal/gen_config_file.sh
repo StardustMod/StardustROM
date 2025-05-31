@@ -63,69 +63,69 @@ fi
 #     Integer containing the build timestamp in seconds.
 #     Defaults to the current time of execution of the script.
 #
-#   [SOURCE/TARGET]_FIRMWARE
+#   FIRMWARE
 #     String containing the source/target device firmware to use in the format of "Model number/CSC/IMEI".
 #     IMEI number is necessary to fetch the firmware from FUS, alternatively the device serial number can be used.
 #
-#   [SOURCE/TARGET]_EXTRA_FIRMWARES
+#   EXTRA_FIRMWARES
 #     If defined, this set of extra devices firmwares will be downloaded/extracted when running `download_fw`/`extract_fw`
-#     along with the ones set in [SOURCE/TARGET]_FIRMWARE.
+#     along with the ones set in FIRMWARE.
 #     This variable must be set as a string array in bash syntax, with each string element having the format of "Model number/CSC/IMEI".
 #     Please note that due to bash limitations the variable will be stored as a string with each item delimited using ":".
 #
 #     Example:
-#       - Setting the variable: `SOURCE_EXTRA_FIRMWARES=("SM-A528B/BTU/352599501234566" "SM-A528N/KOO/354049881234560")`
-#       - Converting back to array: `IFS=":" read -r -a SOURCE_EXTRA_FIRMWARES <<< "$SOURCE_EXTRA_FIRMWARES"`
+#       - Setting the variable: `EXTRA_FIRMWARES=("SM-A528B/BTU/352599501234566" "SM-A528N/KOO/354049881234560")`
+#       - Converting back to array: `IFS=":" read -r -a EXTRA_FIRMWARES <<< "$EXTRA_FIRMWARES"`
 #
-#   TARGET_NAME
-#     String containing the target device name, it must match the `SEC_FLOATING_FEATURE_SETTINGS_CONFIG_BRAND_NAME` config.
+#   DEVICE_NAME
+#     String containing the device name, it must match the `SEC_FLOATING_FEATURE_SETTINGS_CONFIG_BRAND_NAME` config.
 #     SoC OEM name can be appended in case the device has multiple variants with a different SoC.
 #
 #     Example:
-#       `TARGET_NAME="Galaxy S24 (Exynos)"`
+#       `DEVICE_NAME="Galaxy S24 (Exynos)"`
 #
-#   TARGET_CODENAME
-#     String containing the target device codename, it must match the `ro.product.vendor.device` prop.
+#   DEVICE_CODENAME
+#     String containing the device codename, it must match the `ro.product.vendor.device` prop.
 #
-#   TARGET_PLATFORM
-#     String containing the target device platform, it must match the `ro.product.board` prop.
+#   DEVICE_PLATFORM
+#     String containing the device platform, it must match the `ro.product.board` prop.
 #
-#   TARGET_ASSERT_MODEL
+#   DEVICE_MODEL
 #     If defined, the zip package will use the provided model numbers with the value in the `ro.boot.em.model` prop
-#     to ensure if it is compatible with the device it is currently being installed in, by default TARGET_CODENAME
+#     to ensure if it is compatible with the device it is currently being installed in, by default DEVICE_CODENAME
 #     is checked instead.
 #
 #     Example:
-#       `TARGET_ASSERT_MODEL=("SM-A528B" "SM-A528N")`
+#       `DEVICE_MODEL=("SM-A528B" "SM-A528N")`
 #
-#   TARGET_OS_FILE_SYSTEM
-#     String containing the target device firmware file system.
+#   OS_FILE_SYSTEM
+#     String containing the device firmware file system.
 #     Using a value different than stock will require patching the device fstab file in vendor and kernel ramdisk.
 #
-#   TARGET_BOOT_DEVICE_PATH
-#     String containing the path to the target device folder containing its block devices.
+#   BOOT_DEVICE_PATH
+#     String containing the path to the device folder containing its block devices.
 #     Defaults to "/dev/block/bootdevice/by-name".
 #
-#   TARGET_KEEP_ORIGINAL_SIGN
+#   KEEP_ORIGINAL_SIGN
 #     If set to true, the original AVB/Samsung signature footer is kept in the target device kernel images.
 #     Defaults to false.
 #
-#   TARGET_SUPER_PARTITION_SIZE
-#     Integer containing the size in bytes of the target device super partition size, which can be checked using the lpdump tool.
-#     Notice this must be bigger than TARGET_SUPER_GROUP_SIZE.
+#   SUPER_PARTITION_SIZE
+#     Integer containing the size in bytes of the device super partition size, which can be checked using the lpdump tool.
+#     Notice this must be bigger than SUPER_GROUP_SIZE.
 #
-#   [SOURCE/TARGET]_SUPER_GROUP_NAME
+#   SUPER_GROUP_NAME
 #     String containing the super partition group name the device uses.
-#     When TARGET_SUPER_GROUP_NAME is not set, the value in SOURCE_SUPER_GROUP_NAME is used by default.
+#     When SUPER_GROUP_NAME is not set, the value in SUPER_GROUP_NAME is used by default.
 #
-#   TARGET_SUPER_GROUP_SIZE
-#     Integer containing the size in bytes of the target device super group size, which can be checked using the lpdump tool.
-#     Notice this must be smaller than TARGET_SUPER_PARTITION_SIZE.
+#   SUPER_GROUP_SIZE
+#     Integer containing the size in bytes of the device super group size, which can be checked using the lpdump tool.
+#     Notice this must be smaller than SUPER_PARTITION_SIZE.
 #
-#   [SOURCE/TARGET]_HAS_SYSTEM_EXT
+#   HAS_SYSTEM_EXT
 #     Boolean which describes whether the device has a separate system_ext partition.
 #
-#   [SOURCE/TARGET]_HAS_QHD_DISPLAY
+#   HAS_QHD_DISPLAY
 #     Boolean which describes whether the device has a WQHD(+) display.
 #     It can be checked in the following ways:
 #       - `FW_DYNAMIC_RESOLUTION_CONTROL` in the `com.samsung.android.rune.CoreRune` class inside `framework.jar` is set to true
@@ -134,37 +134,28 @@ fi
     echo "# Automatically generated by scripts/internal/gen_config_file.sh"
     GET_BUILD_VAR "ROM_VERSION"
     GET_BUILD_VAR "ROM_BUILD_TIMESTAMP" "$(date +%s)"
-    GET_BUILD_VAR "SOURCE_FIRMWARE"
-    if [ "${#SOURCE_EXTRA_FIRMWARES[@]}" -ge 1 ]; then
-        echo "SOURCE_EXTRA_FIRMWARES=\"$(IFS=":"; printf '%s' "${SOURCE_EXTRA_FIRMWARES[*]}")\""
+    GET_BUILD_VAR "FIRMWARE"
+    if [ "${#EXTRA_FIRMWARES[@]}" -ge 1 ]; then
+        echo "EXTRA_FIRMWARES=\"$(IFS=":"; printf '%s' "${EXTRA_FIRMWARES[*]}")\""
     else
-        echo "SOURCE_EXTRA_FIRMWARES=\"\""
+        echo "EXTRA_FIRMWARES=\"\""
     fi
-    GET_BUILD_VAR "TARGET_NAME"
-    GET_BUILD_VAR "TARGET_CODENAME"
-    GET_BUILD_VAR "TARGET_PLATFORM"
-    if [ "${#TARGET_ASSERT_MODEL[@]}" -ge 1 ]; then
-        echo "TARGET_ASSERT_MODEL=\"$(IFS=":"; printf '%s' "${TARGET_ASSERT_MODEL[*]}")\""
+    GET_BUILD_VAR "DEVICE_NAME"
+    GET_BUILD_VAR "DEVICE_CODENAME"
+    GET_BUILD_VAR "DEVICE_PLATFORM"
+    if [ "${#DEVICE_MODEL[@]}" -ge 1 ]; then
+        echo "DEVICE_MODEL=\"$(IFS=":"; printf '%s' "${DEVICE_MODEL[*]}")\""
     else
-        echo "TARGET_ASSERT_MODEL=\"\""
+        echo "DEVICE_MODEL=\"\""
     fi
-    GET_BUILD_VAR "TARGET_FIRMWARE"
-    if [ "${#TARGET_EXTRA_FIRMWARES[@]}" -ge 1 ]; then
-        echo "TARGET_EXTRA_FIRMWARES=\"$(IFS=":"; printf '%s' "${TARGET_EXTRA_FIRMWARES[*]}")\""
-    else
-        echo "TARGET_EXTRA_FIRMWARES=\"\""
-    fi
-    GET_BUILD_VAR "TARGET_OS_FILE_SYSTEM"
-    GET_BUILD_VAR "TARGET_BOOT_DEVICE_PATH" "/dev/block/bootdevice/by-name"
-    GET_BUILD_VAR "TARGET_KEEP_ORIGINAL_SIGN" "false"
-    GET_BUILD_VAR "TARGET_SUPER_PARTITION_SIZE"
-    GET_BUILD_VAR "SOURCE_SUPER_GROUP_NAME"
-    GET_BUILD_VAR "TARGET_SUPER_GROUP_NAME" "$SOURCE_SUPER_GROUP_NAME"
-    GET_BUILD_VAR "TARGET_SUPER_GROUP_SIZE"
-    GET_BUILD_VAR "SOURCE_HAS_SYSTEM_EXT"
-    GET_BUILD_VAR "TARGET_HAS_SYSTEM_EXT"
-    GET_BUILD_VAR "SOURCE_HAS_QHD_DISPLAY"
-    GET_BUILD_VAR "TARGET_HAS_QHD_DISPLAY"
+    GET_BUILD_VAR "OS_FILE_SYSTEM"
+    GET_BUILD_VAR "BOOT_DEVICE_PATH" "/dev/block/bootdevice/by-name"
+    GET_BUILD_VAR "KEEP_ORIGINAL_SIGN" "false"
+    GET_BUILD_VAR "SUPER_PARTITION_SIZE"
+    GET_BUILD_VAR "SUPER_GROUP_NAME"
+    GET_BUILD_VAR "SUPER_GROUP_SIZE"
+    GET_BUILD_VAR "HAS_SYSTEM_EXT"
+    GET_BUILD_VAR "HAS_QHD_DISPLAY"
 } > "$OUT_DIR/config.sh"
 
 exit 0

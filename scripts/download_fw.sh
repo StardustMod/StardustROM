@@ -33,16 +33,10 @@ ZIP_FILE=""
 PREPARE_SCRIPT()
 {
     local EXTRA_FIRMWARES=()
-    local IGNORE_SOURCE=false
-    local IGNORE_TARGET=false
 
     while [ "$#" != 0 ]; do
         if [[ "$1" == "--force" ]] || [[ "$1" == "-f" ]]; then
             FORCE=true
-        elif [[ "$1" == "--ignore-source" ]]; then
-            IGNORE_SOURCE=true
-        elif [[ "$1" == "--ignore-target" ]]; then
-            IGNORE_TARGET=true
         elif [[ "$1" == "-"* ]]; then
             LOGE "Unknown option: $1"
             PRINT_USAGE
@@ -54,22 +48,11 @@ PREPARE_SCRIPT()
         shift
     done
 
-    if ! $IGNORE_SOURCE; then
-        _CHECK_NON_EMPTY_PARAM "SOURCE_FIRMWARE" "$SOURCE_FIRMWARE"
-        FIRMWARES+=("$SOURCE_FIRMWARE")
-        IFS=':' read -r -a SOURCE_EXTRA_FIRMWARES <<< "$SOURCE_EXTRA_FIRMWARES"
-        if [ "${#SOURCE_EXTRA_FIRMWARES[@]}" -ge 1 ]; then
-            FIRMWARES+=("${SOURCE_EXTRA_FIRMWARES[@]}")
-        fi
-    fi
-
-    if ! $IGNORE_TARGET; then
-        _CHECK_NON_EMPTY_PARAM "TARGET_FIRMWARE" "$TARGET_FIRMWARE"
-        FIRMWARES+=("$TARGET_FIRMWARE")
-        IFS=':' read -r -a TARGET_EXTRA_FIRMWARES <<< "$TARGET_EXTRA_FIRMWARES"
-        if [ "${#TARGET_EXTRA_FIRMWARES[@]}" -ge 1 ]; then
-            FIRMWARES+=("${TARGET_EXTRA_FIRMWARES[@]}")
-        fi
+    _CHECK_NON_EMPTY_PARAM "FIRMWARE" "$FIRMWARE"
+    FIRMWARES+=("$FIRMWARE")
+    IFS=':' read -r -a EXTRA_FIRMWARES <<< "$EXTRA_FIRMWARES"
+    if [ "${#EXTRA_FIRMWARES[@]}" -ge 1 ]; then
+        FIRMWARES+=("${EXTRA_FIRMWARES[@]}")
     fi
 
     if [ "${#EXTRA_FIRMWARES[@]}" -ge 1 ]; then
@@ -80,8 +63,6 @@ PREPARE_SCRIPT()
 PRINT_USAGE()
 {
     echo "Usage: download_fw [options] <firmware>" >&2
-    echo " --ignore-source : Skip parsing source firmware flags" >&2
-    echo " --ignore-target : Skip parsing target firmware flags" >&2
     echo " -f, --force : Force firmware download" >&2
 }
 
