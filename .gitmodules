@@ -6,10 +6,6 @@
 	path = external/apktool
 	url = https://github.com/iBotPeaches/Apktool.git
 	ignore = dirty
-[submodule "external/erofs-utils"]
-	path = external/erofs-utils
-	url = https://github.com/sekaiacg/erofs-utils.git
-	ignore = dirty
 [submodule "external/img2sdat"]
 	path = external/img2sdat
 	url = https://github.com/salvogiangri/img2sdat.git

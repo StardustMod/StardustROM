@@ -130,7 +130,6 @@ mkdir -p "$TOOLS_DIR/bin"
 
 ANDROID_TOOLS=true
 APKTOOL=true
-EROFS_UTILS=true
 IMG2SDAT=true
 SAMLOADER=true
 SIGNAPK=true
@@ -149,10 +148,6 @@ APKTOOL_EXEC=(
     "apktool" "apktool.jar"
 )
 CHECK_TOOLS "${APKTOOL_EXEC[@]}" && APKTOOL=false
-EROFS_UTILS_EXEC=(
-    "dump.erofs" "extract.erofs" "fsck.erofs" "fuse.erofs" "mkfs.erofs"
-)
-CHECK_TOOLS "${EROFS_UTILS_EXEC[@]}" && EROFS_UTILS=false
 IMG2SDAT_EXEC=(
     "blockimgdiff.py" "common.py" "images.py" "img2sdat" "rangelib.py" "sparse_img.py"
 )
@@ -173,7 +168,6 @@ CHECK_TOOLS "${SMALI_EXEC[@]}" && SMALI=false
 if [[ "$1" == "--check-tools" ]]; then
     if ! $ANDROID_TOOLS && \
             ! $APKTOOL && \
-            ! $EROFS_UTILS && \
             ! $IMG2SDAT && \
             ! $SAMLOADER && \
             ! $SIGNAPK && \
@@ -220,15 +214,6 @@ if $APKTOOL; then
     )
 
     BUILD "apktool" "$SRC_DIR/external/apktool" "${APKTOOL_CMDS[@]}"
-fi
-if $EROFS_UTILS; then
-    EROFS_UTILS_CMDS=(
-        "cmake -S \"build/cmake\" -B \"out\" $(GET_CMAKE_FLAGS) -DRUN_ON_WSL=\"$(IS_WSL)\" -DENABLE_FULL_LTO=\"ON\" -DMAX_BLOCK_SIZE=\"4096\""
-        "make -C \"out\" -j\"$(nproc)\""
-        "find \"out/erofs-tools\" -maxdepth 1 -type f -exec test -x {} \; -exec cp -a {} \"$TOOLS_DIR/bin\" \;"
-    )
-
-    BUILD "erofs-utils" "$SRC_DIR/external/erofs-utils" "${EROFS_UTILS_CMDS[@]}"
 fi
 if $IMG2SDAT; then
     IMG2SDAT_CMDS=(

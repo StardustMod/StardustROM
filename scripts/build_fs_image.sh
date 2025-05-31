@@ -90,26 +90,6 @@ BUILD_IMAGE_MKFS()
                 fi
             fi
             ;;
-        "erofs")
-            BUILD_CMD+="mkfs.erofs "
-            # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/core/Makefile#2084
-            BUILD_CMD+="-z \"lz4hc,9\" "
-            BUILD_CMD+="-b \"4096\" "
-            BUILD_CMD+="--mount-point \"$MOUNT_POINT\" "
-            BUILD_CMD+="--fs-config-file \"$FS_CONFIG_FILE\" "
-            BUILD_CMD+="--file-contexts \"$FILE_CONTEXT_FILE\" "
-            # Samsung uses a different default fixed timestamp for erofs/f2fs
-            BUILD_CMD+="-T \"1640995200\" "
-            if $MAP_FILE; then
-                BUILD_CMD+="--block-list-file \"${OUTPUT_FILE//.img/.map}\" "
-            fi
-            BUILD_CMD+="\"$OUTPUT_FILE\" \"$INPUT_DIR\""
-
-            # mkfs.erofs has no built-in sparse support
-            if $SPARSE; then
-                MANUAL_SPARSE=true
-            fi
-            ;;
         "f2fs")
             BUILD_CMD+="mkf2fsuserimg "
             BUILD_CMD+="\"$OUTPUT_FILE\" \"$IMAGE_SIZE\" "
@@ -120,7 +100,7 @@ BUILD_IMAGE_MKFS()
             BUILD_CMD+="-f \"$INPUT_DIR\" "
             BUILD_CMD+="-s \"$FILE_CONTEXT_FILE\" "
             BUILD_CMD+="-t \"$MOUNT_POINT\" "
-            # Samsung uses a different default fixed timestamp for erofs/f2fs
+            # Samsung uses a different default fixed timestamp for f2fs
             BUILD_CMD+="-T \"1640995200\" "
             if $MAP_FILE; then
                 BUILD_CMD+="-B \"${OUTPUT_FILE//.img/.map}\" "
@@ -216,14 +196,8 @@ CALCULATE_SIZE_AND_RESERVED()
     local SIZE="$1"
 
     # Assume reserved partition size is not set
-    if [[ "$FS_TYPE" == "erofs" ]]; then
-        # give .3% margin or a minimum size for AVB footer
-        SIZE="$(bc -l <<< "scale=0; ($SIZE * 1003) / 1000")"
-        [[ "$SIZE" -lt "262144" ]] && SIZE="262144"
-    else
-        SIZE="$(bc -l <<< "scale=0; ($SIZE * 1.1) / 1")" # 10% headroom to avoid failures
-        SIZE="$(bc -l <<< "$SIZE + 16777216")" # add 16 MB of reserved space
-    fi
+    SIZE="$(bc -l <<< "scale=0; ($SIZE * 1.1) / 1")" # 10% headroom to avoid failures
+    SIZE="$(bc -l <<< "$SIZE + 16777216")" # add 16 MB of reserved space
 
     echo "$SIZE"
 }
@@ -266,8 +240,7 @@ PREPARE_SCRIPT()
 
     FS_TYPE="$1"
     if [[ "$FS_TYPE" != "ext4" ]] && \
-            [[ "$FS_TYPE" != "f2fs" ]] && \
-            [[ "$FS_TYPE" != "erofs" ]]; then
+            [[ "$FS_TYPE" != "f2fs" ]]; then
         LOGE "Unsupported file system type: $FS_TYPE"
         exit 1
     fi
@@ -419,12 +392,7 @@ fi
 if [ ! "$IMAGE_SIZE" ]; then
     LOG_STEP_IN "! Partition size is not set, detecting minimum size"
 
-    if [[ "$FS_TYPE" == "erofs" ]]; then
-        BUILD_IMAGE_MKFS
-        IMAGE_SIZE="$(GET_IMAGE_SIZE "$OUTPUT_FILE")"
-    else
-        IMAGE_SIZE="$(GET_DISK_USAGE "$INPUT_DIR")"
-    fi
+    IMAGE_SIZE="$(GET_DISK_USAGE "$INPUT_DIR")"
 
     LOG "- The tree size of $(basename "$OUTPUT_FILE") is $IMAGE_SIZE bytes ($(bc -l <<< "scale=0; $IMAGE_SIZE / 1048576") MB)"
 
