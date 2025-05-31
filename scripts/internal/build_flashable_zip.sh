@@ -23,10 +23,10 @@ TMP_DIR="$OUT_DIR/zip"
 
 ZIP_FILE_SUFFIX=".zip"
 
-ZIP_FILE_NAME="StardustROM-${ROM_VERSION}-$(date +%Y%m%d)-${TARGET_CODENAME}${ZIP_FILE_SUFFIX}"
+ZIP_FILE_NAME="StardustROM-${ROM_VERSION}-$(date +%Y%m%d)-${DEVICE_CODENAME}${ZIP_FILE_SUFFIX}"
 while [ -f "$OUT_DIR/$ZIP_FILE_NAME" ]; do
     INCREMENTAL=$((INCREMENTAL + 1))
-    ZIP_FILE_NAME="StardustROM-${ROM_VERSION}-$(date +%Y%m%d)-${INCREMENTAL}-${TARGET_CODENAME}${ZIP_FILE_SUFFIX}"
+    ZIP_FILE_NAME="StardustROM-${ROM_VERSION}-$(date +%Y%m%d)-${INCREMENTAL}-${DEVICE_CODENAME}${ZIP_FILE_SUFFIX}"
 done
 
 trap 'rm -rf "$TMP_DIR"' EXIT INT
@@ -43,31 +43,31 @@ BUILD_SUPER_EMPTY()
     CMD+=" --super-name \"super\""
     # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/tools/releasetools/build_super_image.py#85
     CMD+=" --metadata-slots \"2\""
-    CMD+=" --device \"super:$TARGET_SUPER_PARTITION_SIZE\""
-    CMD+=" --group \"$TARGET_SUPER_GROUP_NAME:$TARGET_SUPER_GROUP_SIZE\""
+    CMD+=" --device \"super:$SUPER_PARTITION_SIZE\""
+    CMD+=" --group \"$SUPER_GROUP_NAME:$SUPER_GROUP_SIZE\""
     if [ -f "$TMP_DIR/system.img" ]; then
-        CMD+=" --partition \"system:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"system:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/vendor.img" ]; then
-        CMD+=" --partition \"vendor:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"vendor:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/product.img" ]; then
-        CMD+=" --partition \"product:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"product:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/system_ext.img" ]; then
-        CMD+=" --partition \"system_ext:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"system_ext:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/odm.img" ]; then
-        CMD+=" --partition \"odm:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"odm:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/vendor_dlkm.img" ]; then
-        CMD+=" --partition \"vendor_dlkm:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"vendor_dlkm:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/odm_dlkm.img" ]; then
-        CMD+=" --partition \"odm_dlkm:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"odm_dlkm:readonly:0:$SUPER_GROUP_NAME\""
     fi
     if [ -f "$TMP_DIR/system_dlkm.img" ]; then
-        CMD+=" --partition \"system_dlkm:readonly:0:$TARGET_SUPER_GROUP_NAME\""
+        CMD+=" --partition \"system_dlkm:readonly:0:$SUPER_GROUP_NAME\""
     fi
     CMD+=" --output \"$TMP_DIR/unsparse_super_empty.img\""
 
@@ -79,7 +79,7 @@ GENERATE_BUILD_INFO()
     local BUILD_INFO_FILE="$TMP_DIR/build_info.txt"
 
     {
-        echo "device=$TARGET_CODENAME"
+        echo "device=$DEVICE_CODENAME"
         echo "version=$ROM_VERSION"
         echo "timestamp=$ROM_BUILD_TIMESTAMP"
         echo "security_patch_version=$(GET_PROP "system" "ro.build.version.security_patch")"
@@ -115,24 +115,24 @@ GENERATE_OP_LIST()
     {
         echo "# Remove all existing dynamic partitions and groups before applying full OTA"
         echo "remove_all_groups"
-        echo "# Add group $TARGET_SUPER_GROUP_NAME with maximum size $TARGET_SUPER_GROUP_SIZE"
-        echo "add_group $TARGET_SUPER_GROUP_NAME $TARGET_SUPER_GROUP_SIZE"
-        $HAS_SYSTEM && echo "# Add partition system to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_SYSTEM && echo "add system $TARGET_SUPER_GROUP_NAME"
-        $HAS_VENDOR && echo "# Add partition vendor to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_VENDOR && echo "add vendor $TARGET_SUPER_GROUP_NAME"
-        $HAS_PRODUCT && echo "# Add partition product to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_PRODUCT && echo "add product $TARGET_SUPER_GROUP_NAME"
-        $HAS_SYSTEM_EXT && echo "# Add partition system_ext to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_SYSTEM_EXT && echo "add system_ext $TARGET_SUPER_GROUP_NAME"
-        $HAS_ODM && echo "# Add partition odm to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_ODM && echo "add odm $TARGET_SUPER_GROUP_NAME"
-        $HAS_VENDOR_DLKM && echo "# Add partition vendor_dlkm to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_VENDOR_DLKM && echo "add vendor_dlkm $TARGET_SUPER_GROUP_NAME"
-        $HAS_ODM_DLKM && echo "# Add partition odm_dlkm to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_ODM_DLKM && echo "add odm_dlkm $TARGET_SUPER_GROUP_NAME"
-        $HAS_SYSTEM_DLKM && echo "# Add partition system_dlkm to group $TARGET_SUPER_GROUP_NAME"
-        $HAS_SYSTEM_DLKM && echo "add system_dlkm $TARGET_SUPER_GROUP_NAME"
+        echo "# Add group $SUPER_GROUP_NAME with maximum size $SUPER_GROUP_SIZE"
+        echo "add_group $SUPER_GROUP_NAME $SUPER_GROUP_SIZE"
+        $HAS_SYSTEM && echo "# Add partition system to group $SUPER_GROUP_NAME"
+        $HAS_SYSTEM && echo "add system $SUPER_GROUP_NAME"
+        $HAS_VENDOR && echo "# Add partition vendor to group $SUPER_GROUP_NAME"
+        $HAS_VENDOR && echo "add vendor $SUPER_GROUP_NAME"
+        $HAS_PRODUCT && echo "# Add partition product to group $SUPER_GROUP_NAME"
+        $HAS_PRODUCT && echo "add product $SUPER_GROUP_NAME"
+        $HAS_SYSTEM_EXT && echo "# Add partition system_ext to group $SUPER_GROUP_NAME"
+        $HAS_SYSTEM_EXT && echo "add system_ext $SUPER_GROUP_NAME"
+        $HAS_ODM && echo "# Add partition odm to group $SUPER_GROUP_NAME"
+        $HAS_ODM && echo "add odm $SUPER_GROUP_NAME"
+        $HAS_VENDOR_DLKM && echo "# Add partition vendor_dlkm to group $SUPER_GROUP_NAME"
+        $HAS_VENDOR_DLKM && echo "add vendor_dlkm $SUPER_GROUP_NAME"
+        $HAS_ODM_DLKM && echo "# Add partition odm_dlkm to group $SUPER_GROUP_NAME"
+        $HAS_ODM_DLKM && echo "add odm_dlkm $SUPER_GROUP_NAME"
+        $HAS_SYSTEM_DLKM && echo "# Add partition system_dlkm to group $SUPER_GROUP_NAME"
+        $HAS_SYSTEM_DLKM && echo "add system_dlkm $SUPER_GROUP_NAME"
         if $HAS_SYSTEM; then
             PARTITION_SIZE="$(GET_IMAGE_SIZE "$TMP_DIR/system.img")"
             echo "# Grow partition system from 0 to $PARTITION_SIZE"
@@ -183,8 +183,8 @@ GENERATE_OP_LIST()
         fi
     } > "$OP_LIST_FILE"
 
-    if [[ "$OCCUPIED_SPACE" -gt "$TARGET_SUPER_GROUP_SIZE" ]]; then
-        LOGE "OS size ($OCCUPIED_SPACE) is bigger than the target group size ($TARGET_SUPER_GROUP_SIZE)"
+    if [[ "$OCCUPIED_SPACE" -gt "$SUPER_GROUP_SIZE" ]]; then
+        LOGE "OS size ($OCCUPIED_SPACE) is bigger than the target group size ($SUPER_GROUP_SIZE)"
         exit 1
     fi
 }
@@ -213,8 +213,8 @@ GENERATE_OTA_METADATA()
         local MESSAGE
 
         MESSAGE+="type: BLOCK"
-        MESSAGE+=", precondition: {device: \\\"$TARGET_CODENAME\\\"}"
-        MESSAGE+=", postcondition: {device: \\\"$TARGET_CODENAME\\\""
+        MESSAGE+=", precondition: {device: \\\"$DEVICE_CODENAME\\\"}"
+        MESSAGE+=", postcondition: {device: \\\"$DEVICE_CODENAME\\\""
         MESSAGE+=", build: \\\"$FINGERPRINT\\\""
         MESSAGE+=", build_incremental: \\\"$INCREMENTAL\\\""
         MESSAGE+=", timestamp: $TIMESTAMP"
@@ -233,7 +233,7 @@ GENERATE_OTA_METADATA()
         echo "post-sdk-level=$RELEASE"
         echo "post-security-patch-level=$SECURITY_PATCH_LEVEL"
         echo "post-timestamp=$TIMESTAMP"
-        echo "pre-device=$TARGET_CODENAME"
+        echo "pre-device=$DEVICE_CODENAME"
     } > "$TMP_DIR/META-INF/com/android/metadata"
 }
 
@@ -274,30 +274,30 @@ GENERATE_UPDATER_SCRIPT()
     [ -f "$TMP_DIR/vendor_dlkm.new.dat${BROTLI_EXTENSION}" ] && HAS_VENDOR_DLKM=true && PARTITION_COUNT=$((PARTITION_COUNT + 1))
     [ -f "$TMP_DIR/odm_dlkm.new.dat${BROTLI_EXTENSION}" ] && HAS_ODM_DLKM=true && PARTITION_COUNT=$((PARTITION_COUNT + 1))
     [ -f "$TMP_DIR/system_dlkm.new.dat${BROTLI_EXTENSION}" ] && HAS_SYSTEM_DLKM=true && PARTITION_COUNT=$((PARTITION_COUNT + 1))
-    [ -f "$SRC_DIR/target/$TARGET_CODENAME/postinstall.edify" ] && HAS_POST_INSTALL=true
+    [ -f "$SRC_DIR/target/$DEVICE_CODENAME/postinstall.edify" ] && HAS_POST_INSTALL=true
 
     {
-        if [ -n "$TARGET_ASSERT_MODEL" ]; then
-            IFS=':' read -r -a TARGET_ASSERT_MODEL <<< "$TARGET_ASSERT_MODEL"
-            for i in "${TARGET_ASSERT_MODEL[@]}"; do
+        if [ -n "$DEVICE_MODEL" ]; then
+            IFS=':' read -r -a DEVICE_MODEL <<< "$DEVICE_MODEL"
+            for i in "${DEVICE_MODEL[@]}"; do
                 echo -n 'getprop("ro.boot.em.model") == "'
                 echo -n "$i"
                 echo -n '" || '
             done
             echo -n 'abort("E3004: This package is for \"'
-            echo -n "$TARGET_CODENAME"
+            echo -n "$DEVICE_CODENAME"
             echo    '\" devices; this is a \"" + getprop("ro.product.device") + "\".");'
         else
             echo -n 'getprop("ro.product.device") == "'
-            echo -n "$TARGET_CODENAME"
+            echo -n "$DEVICE_CODENAME"
             echo -n '" || abort("E3004: This package is for \"'
-            echo -n "$TARGET_CODENAME"
+            echo -n "$DEVICE_CODENAME"
             echo    '\" devices; this is a \"" + getprop("ro.product.device") + "\".");'
         fi
 
         PRINT_HEADER
 
-        if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+        if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
             # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/tools/releasetools/common.py#4007
             echo -e "\n# --- Start patching dynamic partitions ---\n\n"
             echo -e "# Update dynamic partition metadata\n"
@@ -316,11 +316,11 @@ GENERATE_UPDATER_SCRIPT()
             echo -n "$(bc -l <<< "9 - $PARTITION_COUNT")"
             echo    '00000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("system"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/system", '
             fi
             echo -n 'package_extract_file("system.transfer.list"), "'
@@ -333,11 +333,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching vendor image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("vendor"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/vendor", '
             fi
             echo -n 'package_extract_file("vendor.transfer.list"), "'
@@ -350,11 +350,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching product image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("product"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/product", '
             fi
             echo -n 'package_extract_file("product.transfer.list"), "'
@@ -367,11 +367,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching system_ext image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("system_ext"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/system_ext", '
             fi
             echo -n 'package_extract_file("system_ext.transfer.list"), "'
@@ -384,11 +384,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching odm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("odm"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/odm", '
             fi
             echo -n 'package_extract_file("odm.transfer.list"), "'
@@ -401,11 +401,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching vendor_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("vendor_dlkm"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/vendor_dlkm", '
             fi
             echo -n 'package_extract_file("vendor_dlkm.transfer.list"), "'
@@ -418,11 +418,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching odm_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("odm_dlkm"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/odm_dlkm", '
             fi
             echo -n 'package_extract_file("odm_dlkm.transfer.list"), "'
@@ -435,11 +435,11 @@ GENERATE_UPDATER_SCRIPT()
             echo    'ui_print("Patching system_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
-            if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+            if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
                 echo -n 'map_partition("system_dlkm"), '
             else
                 echo -n '"'
-                echo -n "$TARGET_BOOT_DEVICE_PATH"
+                echo -n "$BOOT_DEVICE_PATH"
                 echo -n '/system_dlkm", '
             fi
             echo -n 'package_extract_file("system_dlkm.transfer.list"), "'
@@ -447,7 +447,7 @@ GENERATE_UPDATER_SCRIPT()
             echo    '", "system_dlkm.patch.dat") ||'
             echo    '  abort("E2001: Failed to update system_dlkm image.");'
         fi
-        if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+        if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
             echo -e "\n# --- End patching dynamic partitions ---\n"
         else
             echo -e "\n"
@@ -455,36 +455,36 @@ GENERATE_UPDATER_SCRIPT()
         if $HAS_DTB; then
             echo    'ui_print("Full Patching dtb.img img...");'
             echo -n 'package_extract_file("dtb.img", "'
-            echo -n "$TARGET_BOOT_DEVICE_PATH"
+            echo -n "$BOOT_DEVICE_PATH"
             echo    '/dtb");'
         fi
         if $HAS_DTBO; then
             echo    'ui_print("Full Patching dtbo.img img...");'
             echo -n 'package_extract_file("dtbo.img", "'
-            echo -n "$TARGET_BOOT_DEVICE_PATH"
+            echo -n "$BOOT_DEVICE_PATH"
             echo    '/dtbo");'
         fi
         if $HAS_INIT_BOOT; then
             echo    'ui_print("Full Patching init_boot.img img...");'
             echo -n 'package_extract_file("init_boot.img", "'
-            echo -n "$TARGET_BOOT_DEVICE_PATH"
+            echo -n "$BOOT_DEVICE_PATH"
             echo    '/init_boot");'
         fi
         if $HAS_VENDOR_BOOT; then
             echo    'ui_print("Full Patching vendor_boot.img img...");'
             echo -n 'package_extract_file("vendor_boot.img", "'
-            echo -n "$TARGET_BOOT_DEVICE_PATH"
+            echo -n "$BOOT_DEVICE_PATH"
             echo    '/vendor_boot");'
         fi
         if $HAS_BOOT; then
             echo    'ui_print("Installing boot image...");'
             echo -n 'package_extract_file("boot.img", "'
-            echo -n "$TARGET_BOOT_DEVICE_PATH"
+            echo -n "$BOOT_DEVICE_PATH"
             echo    '/boot");'
         fi
 
         if $HAS_POST_INSTALL; then
-            cat "$SRC_DIR/target/$TARGET_CODENAME/postinstall.edify"
+            cat "$SRC_DIR/target/$DEVICE_CODENAME/postinstall.edify"
         fi
 
         echo    'set_progress(1.000000);'
@@ -513,7 +513,7 @@ PRINT_HEADER()
     echo    'ui_print(" ");'
     echo    'ui_print("****************************************");'
     echo -n 'ui_print("'
-    echo -n "StardustROM $ROM_VERSION for $TARGET_NAME"
+    echo -n "StardustROM $ROM_VERSION for $DEVICE_NAME"
     echo    '");'
     echo    'ui_print("Coded by salvo_giangri @XDAforums");'
     echo    'ui_print("****************************************");'
@@ -521,10 +521,7 @@ PRINT_HEADER()
     echo -n "One UI version: $ONEUI_VERSION"
     echo    '");'
     echo -n 'ui_print("'
-    echo -n "Source: $(GET_PROP "system" "ro.system.build.fingerprint")"
-    echo    '");'
-    echo -n 'ui_print("'
-    echo -n "Target: $(GET_PROP "vendor" "ro.vendor.build.fingerprint")"
+    echo -n "Device: $(GET_PROP "vendor" "ro.vendor.build.fingerprint")"
     echo    '");'
     echo    'ui_print("****************************************");'
 }
@@ -539,13 +536,13 @@ while IFS= read -r f; do
     PARTITION=$(basename "$f")
     IS_VALID_PARTITION_NAME "$PARTITION" || continue
 
-    "$SRC_DIR/scripts/build_fs_image.sh" "$TARGET_OS_FILE_SYSTEM" \
+    "$SRC_DIR/scripts/build_fs_image.sh" "$OS_FILE_SYSTEM" \
         -o "$TMP_DIR/$PARTITION.img" -m -S \
         "$WORK_DIR/$PARTITION" "$WORK_DIR/configs/file_context-$PARTITION" "$WORK_DIR/configs/fs_config-$PARTITION" || exit 1
 done < <(find "$WORK_DIR" -maxdepth 1 -type d)
 LOG_STEP_OUT
 
-if [ "$TARGET_SUPER_PARTITION_SIZE" -ne 0 ]; then
+if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
     LOG "- Building unsparse_super_empty.img"
     BUILD_SUPER_EMPTY
 

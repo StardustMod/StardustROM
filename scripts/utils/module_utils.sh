@@ -281,7 +281,7 @@ SET_PROP()
                 FILE="$WORK_DIR/system/system/build.prop"
                 ;;
             "system_ext")
-                if $TARGET_HAS_SYSTEM_EXT; then
+                if $HAS_SYSTEM_EXT; then
                     FILE="$WORK_DIR/system_ext/etc/build.prop"
                 else
                     FILE="$WORK_DIR/system/system/system_ext/etc/build.prop"

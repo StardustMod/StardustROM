@@ -25,12 +25,11 @@ BUILD_ZIP=true
 
 START_TIME="$(date +%s)"
 
-SOURCE_FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$SOURCE_FIRMWARE")_$(cut -d "/" -f 2 -s <<< "$SOURCE_FIRMWARE")"
-TARGET_FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$TARGET_FIRMWARE")_$(cut -d "/" -f 2 -s <<< "$TARGET_FIRMWARE")"
+FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$FIRMWARE")_$(cut -d "/" -f 2 -s <<< "$FIRMWARE")"
 
 GET_WORK_DIR_HASH()
 {
-    find "$SRC_DIR/stardust" "$SRC_DIR/target/$TARGET_CODENAME" -type f -print0 | \
+    find "$SRC_DIR/stardust" "$SRC_DIR/target/$DEVICE_CODENAME" -type f -print0 | \
         sort -z | xargs -0 sha1sum | sha1sum | cut -d " " -f 1
 }
 
@@ -103,8 +102,8 @@ if $BUILD_ROM; then
     [ -d "$APKTOOL_DIR" ] && rm -rf "$APKTOOL_DIR"
     [ -f "$WORK_DIR/.completed" ] && rm -f "$WORK_DIR/.completed"
 
-    if [ ! -f "$FW_DIR/$SOURCE_FIRMWARE_PATH/.extracted" ] || [ ! -f "$FW_DIR/$TARGET_FIRMWARE_PATH/.extracted" ]; then
-        if [ ! -f "$ODIN_DIR/$SOURCE_FIRMWARE_PATH/.downloaded" ] || [ ! -f "$ODIN_DIR/$TARGET_FIRMWARE_PATH/.downloaded" ]; then
+    if [ ! -f "$FW_DIR/$FIRMWARE_PATH/.extracted" ]; then
+        if [ ! -f "$ODIN_DIR/$FIRMWARE_PATH/.downloaded" ]; then
             LOG_STEP_IN true "Downloading required firmwares"
             "$SRC_DIR/scripts/download_fw.sh" || exit 1
             LOG_STEP_OUT
@@ -124,21 +123,21 @@ if $BUILD_ROM; then
         LOG_STEP_OUT
     fi
 
-    if [ -d "$SRC_DIR/platform/$TARGET_PLATFORM/patches" ]; then
-        LOG_STEP_IN true "Applying $TARGET_PLATFORM patches"
-        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/platform/$TARGET_PLATFORM/patches" || exit 1
+    if [ -d "$SRC_DIR/platform/$DEVICE_PLATFORM/patches" ]; then
+        LOG_STEP_IN true "Applying $DEVICE_PLATFORM patches"
+        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/platform/$DEVICE_PLATFORM/patches" || exit 1
         LOG_STEP_OUT
     fi
 
-    if [ -d "$SRC_DIR/platform/$TARGET_PLATFORM/mods" ]; then
-        LOG_STEP_IN true "Applying $TARGET_PLATFORM mods"
-        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/platform/$TARGET_PLATFORM/mods" || exit 1
+    if [ -d "$SRC_DIR/platform/$DEVICE_PLATFORM/mods" ]; then
+        LOG_STEP_IN true "Applying $DEVICE_PLATFORM mods"
+        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/platform/$DEVICE_PLATFORM/mods" || exit 1
         LOG_STEP_OUT
     fi
 
-    if [ -d "$SRC_DIR/target/$TARGET_CODENAME/patches" ]; then
-        LOG_STEP_IN true "Applying $TARGET_CODENAME patches"
-        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/target/$TARGET_CODENAME/patches" || exit 1
+    if [ -d "$SRC_DIR/target/$DEVICE_CODENAME/patches" ]; then
+        LOG_STEP_IN true "Applying $DEVICE_CODENAME patches"
+        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/target/$DEVICE_CODENAME/patches" || exit 1
         LOG_STEP_OUT
     fi
 
