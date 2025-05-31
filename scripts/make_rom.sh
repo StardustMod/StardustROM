@@ -30,7 +30,7 @@ TARGET_FIRMWARE_PATH="$(cut -d "/" -f 1 -s <<< "$TARGET_FIRMWARE")_$(cut -d "/" 
 
 GET_WORK_DIR_HASH()
 {
-    find "$SRC_DIR/unica" "$SRC_DIR/target/$TARGET_CODENAME" -type f -print0 | \
+    find "$SRC_DIR/stardust" "$SRC_DIR/target/$TARGET_CODENAME" -type f -print0 | \
         sort -z | xargs -0 sha1sum | sha1sum | cut -d " " -f 1
 }
 
@@ -118,9 +118,9 @@ if $BUILD_ROM; then
     "$SRC_DIR/scripts/internal/create_work_dir.sh" || exit 1
     LOG_STEP_OUT
 
-    if [ -d "$SRC_DIR/unica/patches" ]; then
+    if [ -d "$SRC_DIR/stardust/patches" ]; then
         LOG_STEP_IN true "Applying universal ROM patches"
-        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/unica/patches" || exit 1
+        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/stardust/patches" || exit 1
         LOG_STEP_OUT
     fi
 
@@ -142,9 +142,9 @@ if $BUILD_ROM; then
         LOG_STEP_OUT
     fi
 
-    if [ -d "$SRC_DIR/unica/mods" ]; then
+    if [ -d "$SRC_DIR/stardust/mods" ]; then
         LOG_STEP_IN true "Applying ROM mods"
-        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/unica/mods" || exit 1
+        "$SRC_DIR/scripts/internal/apply_modules.sh" "$SRC_DIR/stardust/mods" || exit 1
         LOG_STEP_OUT
     fi
 

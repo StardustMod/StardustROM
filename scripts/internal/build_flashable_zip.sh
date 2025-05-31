@@ -23,10 +23,10 @@ TMP_DIR="$OUT_DIR/zip"
 
 ZIP_FILE_SUFFIX=".zip"
 
-ZIP_FILE_NAME="UN1CA_${ROM_VERSION}_$(date +%Y%m%d)_${TARGET_CODENAME}${ZIP_FILE_SUFFIX}"
+ZIP_FILE_NAME="StardustROM-${ROM_VERSION}-$(date +%Y%m%d)-${TARGET_CODENAME}${ZIP_FILE_SUFFIX}"
 while [ -f "$OUT_DIR/$ZIP_FILE_NAME" ]; do
     INCREMENTAL=$((INCREMENTAL + 1))
-    ZIP_FILE_NAME="UN1CA_${ROM_VERSION}_$(date +%Y%m%d)-${INCREMENTAL}_${TARGET_CODENAME}${ZIP_FILE_SUFFIX}"
+    ZIP_FILE_NAME="StardustROM-${ROM_VERSION}-$(date +%Y%m%d)-${INCREMENTAL}-${TARGET_CODENAME}${ZIP_FILE_SUFFIX}"
 done
 
 trap 'rm -rf "$TMP_DIR"' EXIT INT
@@ -513,7 +513,7 @@ PRINT_HEADER()
     echo    'ui_print(" ");'
     echo    'ui_print("****************************************");'
     echo -n 'ui_print("'
-    echo -n "UN1CA $ROM_VERSION for $TARGET_NAME"
+    echo -n "StardustROM $ROM_VERSION for $TARGET_NAME"
     echo    '");'
     echo    'ui_print("Coded by salvo_giangri @XDAforums");'
     echo    'ui_print("****************************************");'
