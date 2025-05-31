@@ -20,7 +20,7 @@
 # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/envsetup.sh#18
 _GET_SRC_DIR()
 {
-    local TOPFILE="unica/configs/version.sh"
+    local TOPFILE="stardust/config.sh"
     if [ -n "$SRC_DIR" ] && [ -f "$SRC_DIR/$TOPFILE" ]; then
         # The following circumlocution ensures we remove symlinks from SRC_DIR.
         (cd "$SRC_DIR"; PWD= /bin/pwd)
@@ -102,7 +102,7 @@ run_cmd()
     fi
 }
 
-alias unica=run_cmd
+alias stardust=run_cmd
 # ]
 
 SRC_DIR="$(_GET_SRC_DIR)"

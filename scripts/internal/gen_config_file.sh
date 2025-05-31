@@ -44,7 +44,7 @@ elif [ ! -f "$SRC_DIR/target/$1/config.sh" ]; then
     LOGE "File not found: target/$1/config.sh"
     exit 1
 else
-    source "$SRC_DIR/unica/configs/version.sh" || exit 1
+    source "$SRC_DIR/stardust/config.sh" || exit 1
     source "$SRC_DIR/target/$1/config.sh" || exit 1
 fi
 
@@ -57,10 +57,10 @@ fi
 #
 #   ROM_VERSION
 #     String containing the version name in the format of "x.y.z-xxxxxxxx",
-#     it is set in unica/configs/version.sh.
+#     it is set in stardust/config.sh.
 #
 #   ROM_BUILD_TIMESTAMP
-#     Integer containing the build timestamp in seconds, this is used by the UN1CA Updates app.
+#     Integer containing the build timestamp in seconds.
 #     Defaults to the current time of execution of the script.
 #
 #   [SOURCE/TARGET]_FIRMWARE
