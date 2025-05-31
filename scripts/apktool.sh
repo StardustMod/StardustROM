@@ -127,7 +127,14 @@ DECODE()
     fi
 
     LOG "- Decoding ${INPUT_FILE//$WORK_DIR/}"
-    EVAL "apktool d -j \"$(nproc)\" -o \"$OUTPUT_PATH\" -p \"$FRAMEWORK_DIR\" -t \"$FRAMEWORK_TAG\" -s \"$INPUT_FILE\"" || exit 1
+
+    if [[ "$INPUT_FILE" == *SecSettings.apk ]]; then
+        ALLOW_DECODE=""
+    else
+        ALLOW_DECODE="-r"
+    fi
+
+    EVAL "apktool d -j \"$(nproc)\" -o \"$OUTPUT_PATH\" -p \"$FRAMEWORK_DIR\" -t \"$FRAMEWORK_TAG\" $ALLOW_DECODE -s \"$INPUT_FILE\"" || exit 1
 
     # DEX format version might not be matching minSdkVersion, currently we handle
     # baksmali manually as apktool will by default use minSdkVersion when available
