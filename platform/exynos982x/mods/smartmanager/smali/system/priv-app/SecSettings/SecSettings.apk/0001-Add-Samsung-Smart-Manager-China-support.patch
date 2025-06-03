@@ -1,0 +1,116 @@
+From d47c296e1b2f5045acd74ad394edaad89723750f Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 17 Jun 2025 01:44:03 -0700
+Subject: [PATCH] Add Samsung Smart Manager China
+
+---
+ res/values/strings.xml                          |  8 ++++----
+ .../settings/fuelgauge/PowerUsageSummary.smali  |  2 +-
+ .../batterysaver/BatterySaverSettings.smali     |  2 +-
+ .../com/samsung/android/settings/Rune.smali     | 17 +----------------
+ .../settings/fuelgauge/DeviceCareManager.smali  |  2 +-
+ 5 files changed, 8 insertions(+), 23 deletions(-)
+
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 5060d24f..21a72304 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -548,7 +548,7 @@ Widget: %2$s
+     <string name="animator_duration_scale_title">Animator duration scale</string>
+     <string name="another_migration_already_in_progress">Another migration is already in progress.</string>
+     <string name="answering_end_call_title">Answering and ending calls</string>
+-    <string name="anti_malware">Device care</string>
++    <string name="anti_malware">Smart manager</string>
+     <string name="aod_disable_by_powersaving_mode">Turn off Power saving mode or change its settings to use Always On Display.</string>
+     <string name="aod_disable_by_screen_mirroring">Unavailable while Screen mirroring is active.</string>
+     <string name="aod_disable_by_smart_view">"Can't be used while Smart View is on."</string>
+@@ -629,7 +629,7 @@ Widget: %2$s
+     <string name="app_list_preference_none">None</string>
+     <string name="app_memory_use">Memory use</string>
+     <string name="app_name">EULAProviderContract</string>
+-    <string name="app_name_device_care">Battery and device care</string>
++    <string name="app_name_device_care">Battery and smart manager</string>
+     <string name="app_name_digital_wellbeing">Digital wellbeing and parental controls</string>
+     <string name="app_name_digital_wellbeing_abb">Digital Wellbeing</string>
+     <string name="app_name_label">App</string>
+@@ -1913,8 +1913,8 @@ This affects other apps or conversations that are allowed to bubble."</string>
+     <string name="config_rtt_setting_intent_action" />
+     <string name="config_rtt_setting_package_name" />
+     <string name="config_search_featureFactory">com.samsung.android.settings.search.overlay.FeatureFactoryImpl</string>
+-    <string name="config_sec_toplevel_devicecare_class">com.samsung.android.sm.score.ui.ScoreBoardActivity</string>
+-    <string name="config_sec_toplevel_devicecare_package">com.samsung.android.lool</string>
++    <string name="config_sec_toplevel_devicecare_class">com.samsung.android.sm.score.CScoreBoardActivity</string>
++    <string name="config_sec_toplevel_devicecare_package">com.samsung.android.sm_cn</string>
+     <string name="config_sec_toplevel_digitalwellbeing_class">com.samsung.android.forest.home.DefaultActivity</string>
+     <string name="config_sec_toplevel_digitalwellbeing_package">com.samsung.android.forest</string>
+     <string name="config_sec_toplevel_homescreen_class">com.android.homescreen.settings.HomeScreenSettingsActivity</string>
+diff --git a/smali/com/android/settings/fuelgauge/PowerUsageSummary.smali b/smali/com/android/settings/fuelgauge/PowerUsageSummary.smali
+index 7e55f51c..d6aa9c96 100644
+--- a/smali/com/android/settings/fuelgauge/PowerUsageSummary.smali
++++ b/smali/com/android/settings/fuelgauge/PowerUsageSummary.smali
+@@ -305,7 +305,7 @@
+ 
+     const-string v0, "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"
+ 
+-    const-string v1, "com.samsung.android.lool"
++    const-string v1, "com.samsung.android.sm_cn"
+ 
+     invoke-virtual {p1, v0, v1}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ 
+diff --git a/smali/com/android/settings/fuelgauge/batterysaver/BatterySaverSettings.smali b/smali/com/android/settings/fuelgauge/batterysaver/BatterySaverSettings.smali
+index ea0fe686..4a1aa1fb 100644
+--- a/smali/com/android/settings/fuelgauge/batterysaver/BatterySaverSettings.smali
++++ b/smali/com/android/settings/fuelgauge/batterysaver/BatterySaverSettings.smali
+@@ -164,7 +164,7 @@
+ 
+     const-string v0, "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"
+ 
+-    const-string v1, "com.samsung.android.lool"
++    const-string v1, "com.samsung.android.sm_cn"
+ 
+     invoke-virtual {p1, v0, v1}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ 
+diff --git a/smali_classes2/com/samsung/android/settings/Rune.smali b/smali_classes2/com/samsung/android/settings/Rune.smali
+index 656f54b2..9398c02e 100644
+--- a/smali_classes2/com/samsung/android/settings/Rune.smali
++++ b/smali_classes2/com/samsung/android/settings/Rune.smali
+@@ -770,22 +770,7 @@
+ 
+     sput-object v0, Lcom/samsung/android/settings/Rune;->mSupportLEDIndicator:Ljava/lang/Boolean;
+ 
+-    invoke-static {}, Lcom/samsung/android/feature/SemFloatingFeature;->getInstance()Lcom/samsung/android/feature/SemFloatingFeature;
+-
+-    move-result-object v0
+-
+-    const-string v2, "com.samsung.android.lool"
+-
+-    invoke-virtual {v0, v1, v2}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+-
+-    move-result-object v0
+-
+-    const-string v1, "com.samsung.android.sm_cn"
+-
+-    invoke-virtual {v1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+-
+-    move-result v0
+-
++    const/4 v0, 0x1
+     sput-boolean v0, Lcom/samsung/android/settings/Rune;->SUPPORT_NOTI_CHN_SMART_MANAGER:Z
+ 
+     invoke-static {}, Lcom/samsung/android/feature/SemCscFeature;->getInstance()Lcom/samsung/android/feature/SemCscFeature;
+diff --git a/smali_classes2/com/samsung/android/settings/fuelgauge/DeviceCareManager.smali b/smali_classes2/com/samsung/android/settings/fuelgauge/DeviceCareManager.smali
+index 3527e83b..c5384df8 100644
+--- a/smali_classes2/com/samsung/android/settings/fuelgauge/DeviceCareManager.smali
++++ b/smali_classes2/com/samsung/android/settings/fuelgauge/DeviceCareManager.smali
+@@ -73,7 +73,7 @@
+ 
+     const-string v0, "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"
+ 
+-    const-string v1, "com.samsung.android.lool"
++    const-string v1, "com.samsung.android.sm_cn"
+ 
+     invoke-virtual {p0, v0, v1}, Lcom/samsung/android/feature/SemFloatingFeature;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ 
+-- 
+2.43.0
+
