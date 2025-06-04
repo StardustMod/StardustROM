@@ -189,6 +189,11 @@ GENERATE_OP_LIST()
     fi
 }
 
+DECORATE()
+{
+    echo    'ui_print("-----------------------------------------------");' 
+}
+
 GENERATE_UPDATER_SCRIPT()
 {
     local SCRIPT_FILE="$TMP_DIR/META-INF/com/google/android/updater-script"
@@ -263,7 +268,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_SYSTEM; then
             echo -e "\n# Patch partition system\n"
-            echo    'ui_print("Patching system image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching system image unconditionally...");'
             echo -n 'show_progress(0.'
             echo -n "$(bc -l <<< "9 - $PARTITION_COUNT")"
             echo    '00000, 0);'
@@ -282,7 +288,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_VENDOR; then
             echo -e "\n# Patch partition vendor\n"
-            echo    'ui_print("Patching vendor image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching vendor image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -299,7 +306,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_PRODUCT; then
             echo -e "\n# Patch partition product\n"
-            echo    'ui_print("Patching product image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching product image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -316,7 +324,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_SYSTEM_EXT; then
             echo -e "\n# Patch partition system_ext\n"
-            echo    'ui_print("Patching system_ext image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching system_ext image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -333,7 +342,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_ODM; then
             echo -e "\n# Patch partition odm\n"
-            echo    'ui_print("Patching odm image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching odm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -350,7 +360,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_VENDOR_DLKM; then
             echo -e "\n# Patch partition vendor_dlkm\n"
-            echo    'ui_print("Patching vendor_dlkm image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching vendor_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -367,7 +378,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_ODM_DLKM; then
             echo -e "\n# Patch partition odm_dlkm\n"
-            echo    'ui_print("Patching odm_dlkm image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching odm_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -384,7 +396,8 @@ GENERATE_UPDATER_SCRIPT()
         fi
         if $HAS_SYSTEM_DLKM; then
             echo -e "\n# Patch partition system_dlkm\n"
-            echo    'ui_print("Patching system_dlkm image unconditionally...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Patching system_dlkm image unconditionally...");'
             echo    'show_progress(0.100000, 0);'
             echo -n 'block_image_update('
             if [ "$SUPER_PARTITION_SIZE" -ne 0 ]; then
@@ -405,31 +418,36 @@ GENERATE_UPDATER_SCRIPT()
             echo -e "\n"
         fi
         if $HAS_DTB; then
-            echo    'ui_print("Full Patching dtb.img img...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Installing dtb image...");'
             echo -n 'package_extract_file("dtb.img", "'
             echo -n "$BOOT_DEVICE_PATH"
             echo    '/dtb");'
         fi
         if $HAS_DTBO; then
-            echo    'ui_print("Full Patching dtbo.img img...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Installing dtbo image...");'
             echo -n 'package_extract_file("dtbo.img", "'
             echo -n "$BOOT_DEVICE_PATH"
             echo    '/dtbo");'
         fi
         if $HAS_INIT_BOOT; then
-            echo    'ui_print("Full Patching init_boot.img img...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Installing init_boot image...");'
             echo -n 'package_extract_file("init_boot.img", "'
             echo -n "$BOOT_DEVICE_PATH"
             echo    '/init_boot");'
         fi
         if $HAS_VENDOR_BOOT; then
-            echo    'ui_print("Full Patching vendor_boot.img img...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Installing vendor_boot image...");'
             echo -n 'package_extract_file("vendor_boot.img", "'
             echo -n "$BOOT_DEVICE_PATH"
             echo    '/vendor_boot");'
         fi
         if $HAS_BOOT; then
-            echo    'ui_print("Installing boot image...");'
+            echo    'ui_print(" ");'
+            echo    'ui_print("-- Installing boot image...");'
             echo -n 'package_extract_file("boot.img", "'
             echo -n "$BOOT_DEVICE_PATH"
             echo    '/boot");'
@@ -439,9 +457,13 @@ GENERATE_UPDATER_SCRIPT()
             cat "$SRC_DIR/target/$DEVICE_CODENAME/postinstall.edify"
         fi
 
-        echo    'set_progress(1.000000);'
-        echo    'ui_print("****************************************");'
         echo    'ui_print(" ");'
+        DECORATE
+        echo    'ui_print(" ");'
+        echo    'ui_print("-- Installation Done!");'
+        echo    'ui_print(" ");'
+        DECORATE
+        echo    'set_progress(1.000000);'
     } > "$SCRIPT_FILE"
 }
 
@@ -463,19 +485,38 @@ PRINT_HEADER()
     fi
 
     echo    'ui_print(" ");'
-    echo    'ui_print("****************************************");'
+    DECORATE
+    echo    'ui_print("     ____ __                 __           __   ");'
+    echo    'ui_print("    / __// /_ ___ _ ____ ___/ /__ __ ___ / /_  ");'
+    echo    'ui_print("   _\ \ / __// _ `// __// _  // // /(_-</ __/  ");'
+    echo    'ui_print("  /___/ \__/ \_,_//_/   \_,_/ \_,_//___/\__/   ");'
+    echo    'ui_print(" ");'
+    echo    'run_program("/sbin/sh", "-c", "sleep 3");'
+    echo    'ui_print("------------------- ROM Info ------------------");'
+    echo    'ui_print(" ");'
+    echo    'ui_print(" ROM Name: StardustROM");'
+    echo    'ui_print(" ");'
+    echo    'ui_print(" ROM Version: '$ROM_VERSION'");'
+    echo    'ui_print(" ");'
+    echo    'ui_print(" ROM Device: '$DEVICE_NAME'");'
+    echo    'ui_print(" ");'
+    echo    'ui_print(" Device Codename: '$DEVICE_CODENAME'");'
+    echo    'ui_print(" ");'
     echo -n 'ui_print("'
-    echo -n "StardustROM $ROM_VERSION for $DEVICE_NAME"
+    echo -n " ROM Based: $(GET_PROP "system" "ro.build.version.incremental") (OneUI $ONEUI_VERSION)"
     echo    '");'
-    echo    'ui_print("Coded by salvo_giangri @XDAforums");'
-    echo    'ui_print("****************************************");'
-    echo -n 'ui_print("'
-    echo -n "One UI version: $ONEUI_VERSION"
-    echo    '");'
-    echo -n 'ui_print("'
-    echo -n "Device: $(GET_PROP "vendor" "ro.vendor.build.fingerprint")"
-    echo    '");'
-    echo    'ui_print("****************************************");'
+    echo    'ui_print(" ");'
+    echo    'ui_print(" ROM Author: oItsMineZ");'
+    echo    'ui_print(" ");'
+    echo    'ui_print(" Build System: UN1CA by salvo_giangri");'
+    echo    'ui_print(" ");'
+    echo    'run_program("/sbin/sh", "-c", "sleep 1");'
+    DECORATE
+    echo    'ui_print(" ");'
+    echo    'ui_print("-- Installing StardustROM RIGHT NOW!!!");'
+    echo    'ui_print(" ");'
+    DECORATE
+    echo    'run_program("/sbin/sh", "-c", "sleep 1");'
 }
 # ]
 
