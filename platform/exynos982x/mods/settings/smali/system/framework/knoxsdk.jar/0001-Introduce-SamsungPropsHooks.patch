@@ -1,0 +1,62 @@
+From 861325b554f8021a9111bf5bcb17b0600da5a050 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Fri, 30 May 2025 08:04:26 -0700
+Subject: [PATCH] Introduce Samsung props hooks
+
+Co-Authored-By: Salvo Giangreco <giangrecosalvo9@gmail.com>
+---
+ .../knox/EnterpriseDeviceManager.smali        | 33 ++-----------------
+ 1 file changed, 2 insertions(+), 31 deletions(-)
+
+diff --git a/smali/com/samsung/android/knox/EnterpriseDeviceManager.smali b/smali/com/samsung/android/knox/EnterpriseDeviceManager.smali
+index b6a9101..ac31ecc 100644
+--- a/smali/com/samsung/android/knox/EnterpriseDeviceManager.smali
++++ b/smali/com/samsung/android/knox/EnterpriseDeviceManager.smali
+@@ -573,42 +573,13 @@
+ .end method
+ 
+ .method public static greylist getAPILevel()I
+-    .locals 3
+-
+-    :try_start_0
+-    invoke-static {}, Lcom/samsung/android/knox/EnterpriseDeviceManager;->isOfficiallySupported()Z
+-
+-    move-result v0
+-
+-    if-eqz v0, :cond_0
++    .locals 1
+ 
+-    invoke-static {}, Lcom/samsung/android/knox/EnterpriseDeviceManager;->getAPILevelForInternal()I
++    invoke-static {}, Lcom/oitsminez/stardust/SamsungPropsHooks;->onEDMGetAPILevelHook()I
+ 
+     move-result v0
+-    :try_end_0
+-    .catch Ljava/lang/UnsupportedOperationException; {:try_start_0 .. :try_end_0} :catch_0
+-
+-    return v0
+-
+-    :cond_0
+-    const/4 v0, -0x1
+ 
+     return v0
+-
+-    :catch_0
+-    move-exception v0
+-
+-    sget-object v1, Lcom/samsung/android/knox/EnterpriseDeviceManager;->TAG:Ljava/lang/String;
+-
+-    invoke-virtual {v0}, Ljava/lang/UnsupportedOperationException;->getMessage()Ljava/lang/String;
+-
+-    move-result-object v2
+-
+-    invoke-static {v1, v2}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    const/4 v1, 0x0
+-
+-    return v1
+ .end method
+ 
+ .method public static greylist getAPILevelForInternal()I
+-- 
+2.46.0
+
