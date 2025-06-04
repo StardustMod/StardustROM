@@ -1,0 +1,289 @@
+From c7e994a56f1baa5102d43c373e88cf3ecb7b15b1 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 3 Jun 2025 03:11:11 -0700
+Subject: [PATCH] Allow app downgrade
+
+Co-Authored-By: Salvo Giangreco <giangrecosalvo9@gmail.com>
+---
+ .../server/pm/PackageManagerService.smali     | 263 +-----------------
+ 1 file changed, 3 insertions(+), 260 deletions(-)
+
+diff --git a/smali_classes2/com/android/server/pm/PackageManagerService.smali b/smali_classes2/com/android/server/pm/PackageManagerService.smali
+index cd9595fb..7d06bbac 100644
+--- a/smali_classes2/com/android/server/pm/PackageManagerService.smali
++++ b/smali_classes2/com/android/server/pm/PackageManagerService.smali
+@@ -77206,268 +77206,11 @@
+ .end method
+ 
+ .method private verifyReplacingVersionCode(Landroid/content/pm/PackageInfoLite;JI)I
+-    .locals 9
+-
+-    iget-object v0, p1, Landroid/content/pm/PackageInfoLite;->packageName:Ljava/lang/String;
+-
+-    iget-object v1, p0, Lcom/android/server/pm/PackageManagerService;->mLock:Lcom/android/server/pm/PackageManagerTracedLock;
+-
+-    monitor-enter v1
+-
+-    :try_start_0
+-    iget-object v2, p0, Lcom/android/server/pm/PackageManagerService;->mPackages:Lcom/android/server/utils/WatchedArrayMap;
+-
+-    invoke-virtual {v2, v0}, Lcom/android/server/utils/WatchedArrayMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+-
+-    move-result-object v2
+-
+-    check-cast v2, Lcom/android/server/pm/parsing/pkg/AndroidPackage;
+-
+-    iget-object v3, p0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+-
+-    invoke-virtual {v3, v0}, Lcom/android/server/pm/Settings;->getPackageLPr(Ljava/lang/String;)Lcom/android/server/pm/PackageSetting;
+-
+-    move-result-object v3
+-
+-    if-nez v2, :cond_0
+-
+-    if-eqz v3, :cond_0
+-
+-    invoke-virtual {v3}, Lcom/android/server/pm/PackageSetting;->getPkg()Lcom/android/server/pm/parsing/pkg/AndroidPackage;
+-
+-    move-result-object v4
+-
+-    move-object v2, v4
+-
+-    :cond_0
+-    const-wide/16 v4, -0x1
+-
+-    cmp-long v4, p2, v4
+-
+-    if-eqz v4, :cond_2
+-
+-    const/16 v4, -0x79
+-
+-    if-nez v2, :cond_1
+-
+-    const-string v5, "PackageManager"
+-
+-    new-instance v6, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+-
+-    const-string v7, "Required installed version code was "
+-
+-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v6, p2, p3}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+-
+-    const-string v7, " but package is not installed"
+-
+-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v6
+-
+-    invoke-static {v5, v6}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    monitor-exit v1
+-
+-    return v4
+-
+-    :cond_1
+-    invoke-interface {v2}, Lcom/android/server/pm/parsing/pkg/AndroidPackage;->getLongVersionCode()J
+-
+-    move-result-wide v5
+-
+-    cmp-long v5, v5, p2
+-
+-    if-eqz v5, :cond_2
+-
+-    const-string v5, "PackageManager"
+-
+-    new-instance v6, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
+-
+-    const-string v7, "Required installed version code was "
+-
+-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v6, p2, p3}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+-
+-    const-string v7, " but actual installed version is "
+-
+-    invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-interface {v2}, Lcom/android/server/pm/parsing/pkg/AndroidPackage;->getLongVersionCode()J
+-
+-    move-result-wide v7
+-
+-    invoke-virtual {v6, v7, v8}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v6
+-
+-    invoke-static {v5, v6}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    monitor-exit v1
+-
+-    return v4
+-
+-    :cond_2
+-    if-eqz v2, :cond_5
+-
+-    nop
+-
+-    invoke-interface {v2}, Lcom/android/server/pm/parsing/pkg/AndroidPackage;->isDebuggable()Z
+-
+-    move-result v4
+-
+-    invoke-static {p4, v4}, Lcom/android/server/pm/PackageManagerServiceUtils;->isDowngradePermitted(IZ)Z
+-
+-    move-result v4
+-    :try_end_0
+-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+-
+-    const/16 v5, -0x19
+-
+-    if-nez v4, :cond_3
+-
+-    :try_start_1
+-    invoke-static {v2, p1}, Lcom/android/server/pm/PackageManagerService;->checkDowngrade(Lcom/android/server/pm/parsing/pkg/AndroidPackage;Landroid/content/pm/PackageInfoLite;)V
+-    :try_end_1
+-    .catch Lcom/android/server/pm/PackageManagerException; {:try_start_1 .. :try_end_1} :catch_0
+-    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+-
+-    goto :goto_0
+-
+-    :catch_0
+-    move-exception v4
+-
+-    :try_start_2
+-    const-string v6, "PackageManager"
+-
+-    new-instance v7, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+-
+-    const-string v8, "Downgrade detected: "
+-
+-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v4}, Lcom/android/server/pm/PackageManagerException;->getMessage()Ljava/lang/String;
+-
+-    move-result-object v8
+-
+-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v7
+-
+-    invoke-static {v6, v7}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    monitor-exit v1
+-
+-    return v5
+-
+-    :cond_3
+-    invoke-virtual {v3}, Lcom/android/server/pm/PackageSetting;->isSystem()Z
+-
+-    move-result v4
+-
+-    if-eqz v4, :cond_5
+-
+-    iget-object v4, p0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+-
+-    invoke-virtual {v4, v3}, Lcom/android/server/pm/Settings;->getDisabledSystemPkgLPr(Lcom/android/server/pm/PackageSetting;)Lcom/android/server/pm/PackageSetting;
+-
+-    move-result-object v4
+-
+-    if-eqz v4, :cond_4
+-
+-    invoke-virtual {v4}, Lcom/android/server/pm/PackageSetting;->getPkg()Lcom/android/server/pm/parsing/pkg/AndroidPackage;
+-
+-    move-result-object v6
+-
+-    move-object v2, v6
+-
+-    :cond_4
+-    sget-boolean v6, Landroid/os/Build;->IS_DEBUGGABLE:Z
+-
+-    if-nez v6, :cond_5
+-
+-    invoke-interface {v2}, Lcom/android/server/pm/parsing/pkg/AndroidPackage;->isDebuggable()Z
+-
+-    move-result v6
+-    :try_end_2
+-    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+-
+-    if-nez v6, :cond_5
+-
+-    :try_start_3
+-    invoke-static {v2, p1}, Lcom/android/server/pm/PackageManagerService;->checkDowngrade(Lcom/android/server/pm/parsing/pkg/AndroidPackage;Landroid/content/pm/PackageInfoLite;)V
+-    :try_end_3
+-    .catch Lcom/android/server/pm/PackageManagerException; {:try_start_3 .. :try_end_3} :catch_1
+-    .catchall {:try_start_3 .. :try_end_3} :catchall_0
+-
+-    goto :goto_0
+-
+-    :catch_1
+-    move-exception v6
+-
+-    :try_start_4
+-    new-instance v7, Ljava/lang/StringBuilder;
+-
+-    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
+-
+-    const-string v8, "System app: "
+-
+-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    const-string v8, " cannot be downgraded to older than its preloaded version on the system image. "
+-
+-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v6}, Lcom/android/server/pm/PackageManagerException;->getMessage()Ljava/lang/String;
+-
+-    move-result-object v8
+-
+-    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+-    move-result-object v7
+-
+-    const-string v8, "PackageManager"
+-
+-    invoke-static {v8, v7}, Landroid/util/Slog;->w(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    monitor-exit v1
+-
+-    return v5
+-
+-    :cond_5
+-    :goto_0
+-    monitor-exit v1
+-
+-    const/4 v1, 0x1
+-
+-    return v1
+-
+-    :catchall_0
+-    move-exception v2
++    .locals 1
+ 
+-    monitor-exit v1
+-    :try_end_4
+-    .catchall {:try_start_4 .. :try_end_4} :catchall_0
++    const/16 v0, 0x1
+ 
+-    throw v2
++    return v0
+ .end method
+ 
+ .method static waitForNativeBinariesExtraction(Landroid/util/ArraySet;)V
+-- 
+2.46.0
+
