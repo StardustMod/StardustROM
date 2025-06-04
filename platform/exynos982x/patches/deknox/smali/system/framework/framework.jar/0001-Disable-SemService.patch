@@ -1,0 +1,26 @@
+From 3cda613be50adbd1da2b8bdd50cadbd64e38cd5d Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Fri, 30 May 2025 07:53:32 -0700
+Subject: [PATCH] Disable SemService
+
+Co-Authored-By: ExtremeXT <75576145+ExtremeXT@users.noreply.github.com>
+---
+ .../samsung/android/service/SemService/SemServiceManager.smali  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali_classes5/com/samsung/android/service/SemService/SemServiceManager.smali b/smali_classes5/com/samsung/android/service/SemService/SemServiceManager.smali
+index 7f5dcbe1..052ea504 100644
+--- a/smali_classes5/com/samsung/android/service/SemService/SemServiceManager.smali
++++ b/smali_classes5/com/samsung/android/service/SemService/SemServiceManager.smali
+@@ -62,7 +62,7 @@
+ 
+ .field private static final blacklist TAG:Ljava/lang/String; = "SEC_ESE_ServiceManager"
+ 
+-.field private static final blacklist isSupportSemService:Z = true
++.field private static final blacklist isSupportSemService:Z = false
+ 
+ .field private static final blacklist normalSpi_Flag:I = 0x0
+ 
+-- 
+2.43.0
+
