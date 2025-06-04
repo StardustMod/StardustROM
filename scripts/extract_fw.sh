@@ -28,6 +28,7 @@ LATEST_FIRMWARE=""
 DOWNLOADED_FIRMWARE=""
 BL_TAR=""
 AP_TAR=""
+CSC_TAR=""
 
 TMP_DIR="$(mktemp -d)"
 
@@ -103,6 +104,10 @@ EXTRACT_OS_PARTITIONS()
     else
         for f in $FILES; do
             EXTRACT_FILE_FROM_TAR "$AP_TAR" "$f" || exit 1
+            if tar tf "$CSC_TAR" "$f.lz4" &>/dev/null; then
+                local EXTRACT_CSC=1
+                EXTRACT_FILE_FROM_TAR "$CSC_TAR" "$f" || exit 1
+            fi
             [ -f "$FW_DIR/${MODEL}_${CSC}/$f" ] || continue
             UNSPARSE_IMAGE "$FW_DIR/${MODEL}_${CSC}/$f" || exit 1
             STORE_OS_PARTITION_METADATA "$FW_DIR/${MODEL}_${CSC}/$f"
@@ -385,12 +390,16 @@ for i in "${FIRMWARES[@]}"; do
 
     BL_TAR="$(find "$ODIN_DIR/${MODEL}_${CSC}" -name "BL_$(cut -d "/" -f 1 -s <<< "$DOWNLOADED_FIRMWARE")*.md5" | sort -r | head -n 1)"
     AP_TAR="$(find "$ODIN_DIR/${MODEL}_${CSC}" -name "AP_$(cut -d "/" -f 1 -s <<< "$DOWNLOADED_FIRMWARE")*.md5" | sort -r | head -n 1)"
+    CSC_TAR="$(find "$ODIN_DIR/${MODEL}_${CSC}" -name "CSC_OXM_$(cut -d "/" -f 2 -s <<< "$DOWNLOADED_FIRMWARE")*.md5" | sort -r | head -n 1)"
 
     if [ ! "$BL_TAR" ]; then
         LOG "\033[0;31m! No BL tar found\033[0m"
         exit 1
     elif [ ! "$AP_TAR" ]; then
         LOG "\033[0;31m! No AP tar found\033[0m"
+        exit 1
+    elif [ ! "$CSC_TAR" ]; then
+        LOG "\033[0;31m! No CSC tar found\033[0m"
         exit 1
     fi
 
