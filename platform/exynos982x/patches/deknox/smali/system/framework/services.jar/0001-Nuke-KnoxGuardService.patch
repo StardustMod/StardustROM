@@ -1,0 +1,30 @@
+From 977957fda65ef96c1c1abbb24aeaa305c4d70648 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Fri, 30 May 2025 07:16:14 -0700
+Subject: [PATCH] Nuke KnoxGuard Service
+
+Co-Authored-By: ExtremeXT <75576145+ExtremeXT@users.noreply.github.com>
+---
+ smali/com/android/server/SystemServer.smali | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/smali/com/android/server/SystemServer.smali b/smali/com/android/server/SystemServer.smali
+index 01c35134..b2fc18fe 100644
+--- a/smali/com/android/server/SystemServer.smali
++++ b/smali/com/android/server/SystemServer.smali
+@@ -8140,11 +8140,7 @@
+ 
+     invoke-virtual/range {p1 .. p1}, Lcom/android/server/utils/TimingsTraceAndSlog;->traceEnd()V
+ 
+-    invoke-static {}, Landroid/os/FactoryTest;->isFactoryBinary()Z
+-
+-    move-result v8
+-
+-    if-nez v8, :cond_38
++    goto :cond_38
+ 
+     const-string v8, "StartKnoxGuard"
+ 
+-- 
+2.43.0
+
