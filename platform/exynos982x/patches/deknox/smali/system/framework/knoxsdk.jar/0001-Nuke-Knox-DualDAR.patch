@@ -1,0 +1,59 @@
+From e6190111e4fe05e454f59ed09af0c074fe270add Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Fri, 30 May 2025 07:11:47 -0700
+Subject: [PATCH] Nuke Knox DualDAR version
+
+---
+ .../android/knox/ddar/DualDARPolicy.smali     | 34 ++-----------------
+ 1 file changed, 3 insertions(+), 31 deletions(-)
+
+diff --git a/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali b/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali
+index d51fe86..389d00c 100644
+--- a/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali
++++ b/smali/com/samsung/android/knox/ddar/DualDARPolicy.smali
+@@ -94,39 +94,11 @@
+ .end method
+ 
+ .method public static greylist getDualDARVersion()Ljava/lang/String;
+-    .locals 3
+-
+-    const-string v0, "ro.product.first_api_level"
+-
+-    const/4 v1, 0x0
+-
+-    invoke-static {v0, v1}, Landroid/os/SemSystemProperties;->getInt(Ljava/lang/String;I)I
+-
+-    move-result v0
+-
+-    const-string v1, "0"
+-
+-    invoke-static {v1}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
+-
+-    move-result v1
+-
+-    const/4 v2, 0x1
+-
+-    if-ne v1, v2, :cond_0
+-
+-    const/16 v1, 0x1f
+-
+-    if-lt v0, v1, :cond_0
+-
+-    const-string v1, "1.4.1"
+-
+-    goto :goto_0
++    .locals 1
+ 
+-    :cond_0
+-    const-string v1, "1.4.0"
++    const/4 v0, 0x0
+ 
+-    :goto_0
+-    return-object v1
++    return-object v0
+ .end method
+ 
+ .method private greylist getService()Lcom/samsung/android/knox/ddar/IDualDARPolicy;
+-- 
+2.46.0
+
