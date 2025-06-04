@@ -1,0 +1,26 @@
+From bd709558efd25adb4c5fadf26d91247ead902a2b Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 3 Jun 2025 01:52:54 -0700
+Subject: [PATCH] Better model detection in FreecessController
+
+Co-Authored-By: Salvo Giangreco <giangrecosalvo9@gmail.com>
+---
+ smali/com/android/server/am/FreecessController.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali/com/android/server/am/FreecessController.smali b/smali/com/android/server/am/FreecessController.smali
+index 0f3dbd62..cc170c5b 100644
+--- a/smali/com/android/server/am/FreecessController.smali
++++ b/smali/com/android/server/am/FreecessController.smali
+@@ -587,7 +587,7 @@
+ 
+     sput-boolean v0, Lcom/android/server/am/FreecessController;->IS_MINIMIZE_OLAF_LOCK:Z
+ 
+-    const-string/jumbo v0, "ro.product.model"
++    const-string/jumbo v0, "ro.product.vendor.model"
+ 
+     invoke-static {v0}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+ 
+-- 
+2.46.0
+
