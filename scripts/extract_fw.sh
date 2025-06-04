@@ -54,7 +54,7 @@ EXTRACT_AVB_BINARIES()
 
 EXTRACT_KERNEL_BINARIES()
 {
-    local FILES="boot.img dtb.img dtbo.img init_boot.img vendor_boot.img"
+    local FILES="boot.img dt.img dtb.img dtbo.img init_boot.img vendor_boot.img"
 
     LOG_STEP_IN "- Extracting kernel binaries"
 
@@ -64,9 +64,15 @@ EXTRACT_KERNEL_BINARIES()
 
         EXTRACT_FILE_FROM_TAR "$AP_TAR" "$f" || exit 1
         [ -f "$FW_DIR/${MODEL}_${CSC}/$f" ] || continue
-        mv -f "$FW_DIR/${MODEL}_${CSC}/$f" "$FW_DIR/${MODEL}_${CSC}/kernel/$f"
 
-        STORE_KERNEL_IMAGE_METADATA "$FW_DIR/${MODEL}_${CSC}/kernel/$f"
+        if [ $f == "dt.img" ]; then
+            mv -f "$FW_DIR/${MODEL}_${CSC}/$f" "$FW_DIR/${MODEL}_${CSC}/kernel/dtb.img"
+            STORE_KERNEL_IMAGE_METADATA "$FW_DIR/${MODEL}_${CSC}/kernel/dtb.img"
+            mv -f "$FW_DIR/${MODEL}_${CSC}/${f}_metadata.txt" "$FW_DIR/${MODEL}_${CSC}/dtb.img_metadata.txt"
+        else
+            mv -f "$FW_DIR/${MODEL}_${CSC}/$f" "$FW_DIR/${MODEL}_${CSC}/kernel/$f"
+            STORE_KERNEL_IMAGE_METADATA "$FW_DIR/${MODEL}_${CSC}/kernel/$f"
+        fi
     done
 
     LOG_STEP_OUT
