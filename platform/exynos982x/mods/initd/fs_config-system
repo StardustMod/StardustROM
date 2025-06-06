@@ -1,0 +1,2 @@
+system/bin/initd.sh 0 2000 755 capabilities=0x0
+system/etc/init/initd.rc 0 0 644 capabilities=0x0
