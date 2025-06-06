@@ -1,0 +1,147 @@
+From 5f81c0112cbe558b3f1e67f706b8d25bbabea838 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 17 Jun 2025 07:26:14 -0700
+Subject: [PATCH] Disable 5GHz Hotspot Country Check
+
+---
+ .../server/wifi/SemWifiServiceImpl.smali      | 34 +++++++++----------
+ .../wifi/softap/SemSoftApConfiguration.smali  | 34 +++++++++----------
+ 2 files changed, 34 insertions(+), 34 deletions(-)
+
+diff --git a/smali/com/samsung/android/server/wifi/SemWifiServiceImpl.smali b/smali/com/samsung/android/server/wifi/SemWifiServiceImpl.smali
+index adfc3c4..9b01672 100644
+--- a/smali/com/samsung/android/server/wifi/SemWifiServiceImpl.smali
++++ b/smali/com/samsung/android/server/wifi/SemWifiServiceImpl.smali
+@@ -8676,23 +8676,23 @@
+ 
+     if-ge v7, v8, :cond_3
+ 
+-    const-string v9, "BO"
++    const-string v9, "XY"
+ 
+-    const-string v10, "QA"
++    const-string v10, "XY"
+ 
+-    const-string v11, "KZ"
++    const-string v11, "XY"
+ 
+-    const-string v12, "RU"
++    const-string v12, "XY"
+ 
+-    const-string v13, "KP"
++    const-string v13, "XY"
+ 
+-    const-string v14, "SY"
++    const-string v14, "XY"
+ 
+-    const-string v15, "CU"
++    const-string v15, "XY"
+ 
+-    const-string v16, "IR"
++    const-string v16, "XY"
+ 
+-    const-string v17, "SD"
++    const-string v17, "XY"
+ 
+     filled-new-array/range {v9 .. v17}, [Ljava/lang/String;
+ 
+@@ -8701,21 +8701,21 @@
+     goto :goto_1
+ 
+     :cond_3
+-    const-string v9, "QA"
++    const-string v9, "XY"
+ 
+-    const-string v10, "KZ"
++    const-string v10, "XY"
+ 
+-    const-string v11, "RU"
++    const-string v11, "XY"
+ 
+-    const-string v12, "KP"
++    const-string v12, "XY"
+ 
+-    const-string v13, "SY"
++    const-string v13, "XY"
+ 
+-    const-string v14, "CU"
++    const-string v14, "XY"
+ 
+-    const-string v15, "IR"
++    const-string v15, "XY"
+ 
+-    const-string v16, "SD"
++    const-string v16, "XY"
+ 
+     filled-new-array/range {v9 .. v16}, [Ljava/lang/String;
+ 
+diff --git a/smali/com/samsung/android/server/wifi/softap/SemSoftApConfiguration.smali b/smali/com/samsung/android/server/wifi/softap/SemSoftApConfiguration.smali
+index 6709263..d7c398d 100644
+--- a/smali/com/samsung/android/server/wifi/softap/SemSoftApConfiguration.smali
++++ b/smali/com/samsung/android/server/wifi/softap/SemSoftApConfiguration.smali
+@@ -165,23 +165,23 @@
+ 
+     if-ge v1, v2, :cond_0
+ 
+-    const-string v3, "BO"
++    const-string v3, "XY"
+ 
+-    const-string v4, "QA"
++    const-string v4, "XY"
+ 
+-    const-string v5, "KZ"
++    const-string v5, "XY"
+ 
+-    const-string v6, "RU"
++    const-string v6, "XY"
+ 
+-    const-string v7, "KP"
++    const-string v7, "XY"
+ 
+-    const-string v8, "SY"
++    const-string v8, "XY"
+ 
+-    const-string v9, "CU"
++    const-string v9, "XY"
+ 
+-    const-string v10, "IR"
++    const-string v10, "XY"
+ 
+-    const-string v11, "SD"
++    const-string v11, "XY"
+ 
+     filled-new-array/range {v3 .. v11}, [Ljava/lang/String;
+ 
+@@ -192,21 +192,21 @@
+     goto :goto_0
+ 
+     :cond_0
+-    const-string v3, "QA"
++    const-string v3, "XY"
+ 
+-    const-string v4, "KZ"
++    const-string v4, "XY"
+ 
+-    const-string v5, "RU"
++    const-string v5, "XY"
+ 
+-    const-string v6, "KP"
++    const-string v6, "XY"
+ 
+-    const-string v7, "SY"
++    const-string v7, "XY"
+ 
+-    const-string v8, "CU"
++    const-string v8, "XY"
+ 
+-    const-string v9, "IR"
++    const-string v9, "XY"
+ 
+-    const-string v10, "SD"
++    const-string v10, "XY"
+ 
+     filled-new-array/range {v3 .. v10}, [Ljava/lang/String;
+ 
+-- 
+2.43.0
+
