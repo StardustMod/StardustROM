@@ -1,0 +1,4 @@
+id=initd
+name=init.d Support
+author=oItsMineZ
+description=Adds init.d scripts support.
