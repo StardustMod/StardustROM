@@ -1,0 +1,30 @@
+From 71bb7113836c4265fffb18724d0a0b811efd7ed5 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 01:20:46 -0700
+Subject: [PATCH] Enable outdoor mode support
+
+Co-Authored-By: ExtremeXT <75576145+ExtremeXT@users.noreply.github.com>
+---
+ .../controller/SecOutDoorModePreferenceController.smali     | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/smali_classes2/com/samsung/android/settings/display/controller/SecOutDoorModePreferenceController.smali b/smali_classes2/com/samsung/android/settings/display/controller/SecOutDoorModePreferenceController.smali
+index 6c691bc3..c805c6c7 100644
+--- a/smali_classes2/com/samsung/android/settings/display/controller/SecOutDoorModePreferenceController.smali
++++ b/smali_classes2/com/samsung/android/settings/display/controller/SecOutDoorModePreferenceController.smali
+@@ -81,11 +81,7 @@
+ .method public isAvailable()Z
+     .locals 0
+ 
+-    iget-object p0, p0, Lcom/android/settingslib/core/AbstractPreferenceController;->mContext:Landroid/content/Context;
+-
+-    invoke-static {p0}, Lcom/samsung/android/settings/Rune;->supportOutdoorMode(Landroid/content/Context;)Z
+-
+-    move-result p0
++    const/4 p0, 0x1
+ 
+     return p0
+ .end method
+-- 
+2.43.0
+
