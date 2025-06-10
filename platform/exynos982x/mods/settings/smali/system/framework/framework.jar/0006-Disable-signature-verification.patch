@@ -1,0 +1,218 @@
+From 3beaa15e6208e54864baeb6b4041fc68525e14bf Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Thu, 12 Jun 2025 08:39:22 -0700
+Subject: [PATCH] Disable signature verification
+
+---
+ .../pm/PackageParser$SigningDetails.smali     | 178 +-----------------
+ 1 file changed, 4 insertions(+), 174 deletions(-)
+
+diff --git a/smali/android/content/pm/PackageParser$SigningDetails.smali b/smali/android/content/pm/PackageParser$SigningDetails.smali
+index 294ed245..2c316318 100644
+--- a/smali/android/content/pm/PackageParser$SigningDetails.smali
++++ b/smali/android/content/pm/PackageParser$SigningDetails.smali
+@@ -799,110 +799,17 @@
+ .method public greylist-max-o checkCapability(Landroid/content/pm/PackageParser$SigningDetails;I)Z
+     .locals 4
+ 
+-    sget-object v0, Landroid/content/pm/PackageParser$SigningDetails;->UNKNOWN:Landroid/content/pm/PackageParser$SigningDetails;
+-
+-    const/4 v1, 0x0
+-
+-    if-eq p0, v0, :cond_3
+-
+-    if-ne p1, v0, :cond_0
+-
+-    goto :goto_0
+-
+-    :cond_0
+-    iget-object v0, p1, Landroid/content/pm/PackageParser$SigningDetails;->signatures:[Landroid/content/pm/Signature;
+-
+-    array-length v2, v0
+-
+-    if-nez v2, :cond_1
+-
+-    const-string v0, "PackageParser"
+-
+-    const-string v2, "There isn\'t any certificates in this package"
+-
+-    invoke-static {v0, v2}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;)I
+-
+-    return v1
+-
+-    :cond_1
+-    array-length v2, v0
+-
+-    const/4 v3, 0x1
+-
+-    if-le v2, v3, :cond_2
+-
+-    invoke-virtual {p0, p1}, Landroid/content/pm/PackageParser$SigningDetails;->signaturesMatchExactly(Landroid/content/pm/PackageParser$SigningDetails;)Z
+-
+-    move-result v0
+-
+-    return v0
+-
+-    :cond_2
+-    aget-object v0, v0, v1
+-
+-    invoke-virtual {p0, v0, p2}, Landroid/content/pm/PackageParser$SigningDetails;->hasCertificate(Landroid/content/pm/Signature;I)Z
+-
+-    move-result v0
++    const/4 v0, 0x1
+ 
+     return v0
+-
+-    :cond_3
+-    :goto_0
+-    return v1
+ .end method
+ 
+ .method public greylist-max-o checkCapability(Ljava/lang/String;I)Z
+     .locals 4
+ 
+-    sget-object v0, Landroid/content/pm/PackageParser$SigningDetails;->UNKNOWN:Landroid/content/pm/PackageParser$SigningDetails;
+-
+-    const/4 v1, 0x0
+-
+-    if-ne p0, v0, :cond_0
+-
+-    return v1
+-
+-    :cond_0
+-    if-nez p1, :cond_1
+-
+-    const/4 v0, 0x0
+-
+-    goto :goto_0
+-
+-    :cond_1
+-    invoke-static {p1, v1}, Llibcore/util/HexEncoding;->decode(Ljava/lang/String;Z)[B
+-
+-    move-result-object v0
+-
+-    :goto_0
+-    invoke-virtual {p0, v0, p2}, Landroid/content/pm/PackageParser$SigningDetails;->hasSha256Certificate([BI)Z
+-
+-    move-result v1
+-
+-    if-eqz v1, :cond_2
+-
+-    const/4 v1, 0x1
+-
+-    return v1
+-
+-    :cond_2
+-    iget-object v1, p0, Landroid/content/pm/PackageParser$SigningDetails;->signatures:[Landroid/content/pm/Signature;
+-
+-    invoke-static {v1}, Landroid/util/PackageUtils;->computeSignaturesSha256Digests([Landroid/content/pm/Signature;)[Ljava/lang/String;
+-
+-    move-result-object v1
+-
+-    nop
+-
+-    invoke-static {v1}, Landroid/util/PackageUtils;->computeSignaturesSha256Digest([Ljava/lang/String;)Ljava/lang/String;
+-
+-    move-result-object v2
+-
+-    invoke-virtual {v2, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+-
+-    move-result v3
++    const/4 v0, 0x1
+ 
+-    return v3
++    return v0
+ .end method
+ 
+ .method public greylist-max-o checkCapabilityRecover(Landroid/content/pm/PackageParser$SigningDetails;I)Z
+@@ -913,86 +820,9 @@
+         }
+     .end annotation
+ 
+-    sget-object v0, Landroid/content/pm/PackageParser$SigningDetails;->UNKNOWN:Landroid/content/pm/PackageParser$SigningDetails;
+-
+-    const/4 v1, 0x0
+-
+-    if-eq p1, v0, :cond_4
+-
+-    if-ne p0, v0, :cond_0
+-
+-    goto :goto_1
+-
+-    :cond_0
+-    invoke-virtual {p0}, Landroid/content/pm/PackageParser$SigningDetails;->hasPastSigningCertificates()Z
+-
+-    move-result v0
+-
+-    if-eqz v0, :cond_3
+-
+-    iget-object v0, p1, Landroid/content/pm/PackageParser$SigningDetails;->signatures:[Landroid/content/pm/Signature;
+-
+-    array-length v0, v0
+-
+-    const/4 v2, 0x1
+-
+-    if-ne v0, v2, :cond_3
+-
+-    const/4 v0, 0x0
+-
+-    :goto_0
+-    iget-object v3, p0, Landroid/content/pm/PackageParser$SigningDetails;->pastSigningCertificates:[Landroid/content/pm/Signature;
+-
+-    array-length v4, v3
+-
+-    if-ge v0, v4, :cond_2
+-
+-    iget-object v4, p1, Landroid/content/pm/PackageParser$SigningDetails;->signatures:[Landroid/content/pm/Signature;
+-
+-    aget-object v4, v4, v1
+-
+-    aget-object v3, v3, v0
+-
+-    invoke-static {v4, v3}, Landroid/content/pm/Signature;->areEffectiveMatch(Landroid/content/pm/Signature;Landroid/content/pm/Signature;)Z
+-
+-    move-result v3
+-
+-    if-eqz v3, :cond_1
+-
+-    iget-object v3, p0, Landroid/content/pm/PackageParser$SigningDetails;->pastSigningCertificates:[Landroid/content/pm/Signature;
+-
+-    aget-object v3, v3, v0
+-
+-    invoke-virtual {v3}, Landroid/content/pm/Signature;->getFlags()I
+-
+-    move-result v3
+-
+-    if-ne v3, p2, :cond_1
+-
+-    return v2
+-
+-    :cond_1
+-    add-int/lit8 v0, v0, 0x1
+-
+-    goto :goto_0
+-
+-    :cond_2
+-    return v1
+-
+-    :cond_3
+-    iget-object v0, p1, Landroid/content/pm/PackageParser$SigningDetails;->signatures:[Landroid/content/pm/Signature;
+-
+-    iget-object v1, p0, Landroid/content/pm/PackageParser$SigningDetails;->signatures:[Landroid/content/pm/Signature;
+-
+-    invoke-static {v0, v1}, Landroid/content/pm/Signature;->areEffectiveMatch([Landroid/content/pm/Signature;[Landroid/content/pm/Signature;)Z
+-
+-    move-result v0
++    const/4 v0, 0x1
+ 
+     return v0
+-
+-    :cond_4
+-    :goto_1
+-    return v1
+ .end method
+ 
+ .method public whitelist describeContents()I
+-- 
+2.43.0
+
