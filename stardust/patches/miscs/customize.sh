@@ -3,3 +3,6 @@ SET_PROP "system" "ro.build.display.id" "StardustROM-$ROM_VERSION-$DEVICE_CODENA
 
 # Disable FRP
 SET_PROP "vendor" "ro.frp.pst" ""
+
+# Use GPU Composition
+SET_PROP "system" "debug.composition.type" "gpu"
