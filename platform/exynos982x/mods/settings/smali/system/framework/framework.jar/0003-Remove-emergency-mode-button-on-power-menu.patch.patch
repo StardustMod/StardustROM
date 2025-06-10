@@ -1,0 +1,83 @@
+From 84f62806c4b16e6fe292a13502286534db50465d Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 08:04:15 -0700
+Subject: [PATCH] Remove emergency mode button on power menu
+
+---
+ .../SamsungGlobalActionsPresenter.smali       | 58 +------------------
+ 1 file changed, 1 insertion(+), 57 deletions(-)
+
+diff --git a/smali_classes5/com/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter.smali b/smali_classes5/com/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter.smali
+index 5523a5df..8037feb5 100644
+--- a/smali_classes5/com/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter.smali
++++ b/smali_classes5/com/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter.smali
+@@ -527,65 +527,9 @@
+     :cond_3
+     iget-object v1, p0, Lcom/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter;->mSystemCondition:Lcom/samsung/android/globalactions/util/ConditionChecker;
+ 
+-    sget-object v2, Lcom/samsung/android/globalactions/util/SystemConditions;->IS_SUPPORT_EMERGENCY_MODE:Lcom/samsung/android/globalactions/util/SystemConditions;
+-
+-    invoke-interface {v1, v2}, Lcom/samsung/android/globalactions/util/ConditionChecker;->isEnabled(Ljava/lang/Object;)Z
+-
+-    move-result v1
+-
+-    if-eqz v1, :cond_6
+-
+-    iget-object v1, p0, Lcom/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter;->mFactory:Lcom/samsung/android/globalactions/presentation/features/FeatureFactory;
+-
+-    const-string v2, "emergency"
+-
+-    invoke-interface {v1, p0, v2}, Lcom/samsung/android/globalactions/presentation/features/FeatureFactory;->createDefaultActionsCreationStrategy(Lcom/samsung/android/globalactions/presentation/SamsungGlobalActions;Ljava/lang/String;)Ljava/util/List;
+-
+-    move-result-object v0
+-
+     const/4 v1, 0x0
+ 
+-    invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+-
+-    move-result-object v3
+-
+-    :goto_2
+-    invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z
+-
+-    move-result v4
+-
+-    if-eqz v4, :cond_5
+-
+-    invoke-interface {v3}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+-
+-    move-result-object v4
+-
+-    check-cast v4, Lcom/samsung/android/globalactions/presentation/strategies/DefaultActionsCreationStrategy;
+-
+-    invoke-interface {v4}, Lcom/samsung/android/globalactions/presentation/strategies/DefaultActionsCreationStrategy;->onCreateEmergencyAction()Z
+-
+-    move-result v5
+-
+-    if-nez v5, :cond_4
+-
+-    const/4 v1, 0x1
+-
+-    goto :goto_3
+-
+-    :cond_4
+-    goto :goto_2
+-
+-    :cond_5
+-    :goto_3
+-    if-nez v1, :cond_6
+-
+-    iget-object v3, p0, Lcom/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter;->mViewModelFactory:Lcom/samsung/android/globalactions/presentation/viewmodel/ActionViewModelFactory;
+-
+-    invoke-interface {v3, p0, v2}, Lcom/samsung/android/globalactions/presentation/viewmodel/ActionViewModelFactory;->createActionViewModel(Lcom/samsung/android/globalactions/presentation/SamsungGlobalActions;Ljava/lang/String;)Lcom/samsung/android/globalactions/presentation/viewmodel/ActionViewModel;
+-
+-    move-result-object v2
+-
+-    invoke-virtual {p0, v2}, Lcom/samsung/android/globalactions/presentation/SamsungGlobalActionsPresenter;->addAction(Lcom/samsung/android/globalactions/presentation/viewmodel/ActionViewModel;)V
++    if-eqz v1, :cond_6
+ 
+     :cond_6
+     return-void
+-- 
+2.43.0
+
