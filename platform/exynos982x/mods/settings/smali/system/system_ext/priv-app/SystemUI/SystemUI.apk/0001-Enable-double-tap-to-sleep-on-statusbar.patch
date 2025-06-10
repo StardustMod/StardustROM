@@ -1,0 +1,25 @@
+From 9c8146b01ca94f97ddffa51c26c1e89d4df1385a Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 03:15:22 -0700
+Subject: [PATCH] Enable double tap to sleep on statusbar
+
+---
+ smali/com/android/systemui/knox/CustomSdkMonitor.smali | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/smali/com/android/systemui/knox/CustomSdkMonitor.smali b/smali/com/android/systemui/knox/CustomSdkMonitor.smali
+index e4562300..10909c6c 100644
+--- a/smali/com/android/systemui/knox/CustomSdkMonitor.smali
++++ b/smali/com/android/systemui/knox/CustomSdkMonitor.smali
+@@ -870,7 +870,7 @@
+ .method public isStatusBarDoubleTapEnabled()Z
+     .locals 0
+ 
+-    iget-boolean p0, p0, Lcom/android/systemui/knox/CustomSdkMonitor;->mKnoxCustomDoubleTapState:Z
++    const/4 p0, 0x1
+ 
+     return p0
+ .end method
+-- 
+2.43.0
+
