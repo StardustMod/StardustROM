@@ -1,0 +1,38 @@
+From 7ece67dac0797ccf97c8bf3d5fbdd9d46c1766e9 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 18:44:22 -0700
+Subject: [PATCH] Enable advanced hotspot options
+
+---
+ smali/com/android/settings/Utils.smali | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+
+diff --git a/smali/com/android/settings/Utils.smali b/smali/com/android/settings/Utils.smali
+index e7ef51a8..c7a1413f 100644
+--- a/smali/com/android/settings/Utils.smali
++++ b/smali/com/android/settings/Utils.smali
+@@ -5542,9 +5542,7 @@
+ 
+     sput v1, Lcom/android/settings/Utils;->MAX_CLIENT_4_MOBILEAP:I
+ 
+-    invoke-virtual {p0}, Lcom/samsung/android/wifi/SemWifiManager;->supportWifiAp5GBasedOnCountry()Z
+-
+-    move-result v1
++    const/4 v1, 0x1
+ 
+     sput-boolean v1, Lcom/android/settings/Utils;->SUPPORT_MOBILEAP_5G_BASED_ON_COUNTRY:Z
+ 
+@@ -5554,9 +5552,7 @@
+ 
+     sput-boolean v1, Lcom/android/settings/Utils;->SUPPORT_MOBILEAP_6G_BASED_ON_COUNTRY:Z
+ 
+-    invoke-static {}, Lcom/android/settings/Utils;->getRegion()Ljava/lang/String;
+-
+-    move-result-object v1
++    const-string v1, "NA"
+ 
+     sput-object v1, Lcom/android/settings/Utils;->SUPPORT_MOBILEAP_REGION:Ljava/lang/String;
+ 
+-- 
+2.43.0
+
