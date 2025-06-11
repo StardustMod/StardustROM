@@ -1,0 +1,76 @@
+From 183bdcb268a7c5f79bdc6959cc358a408a88c242 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 10:23:11 -0700
+Subject: [PATCH] Disable high brightness warning popup
+
+---
+ .../brightness/BrightnessSlider.smali         | 53 -------------------
+ 1 file changed, 53 deletions(-)
+
+diff --git a/smali_classes2/com/android/systemui/settings/brightness/BrightnessSlider.smali b/smali_classes2/com/android/systemui/settings/brightness/BrightnessSlider.smali
+index 60638442..2cb6cad6 100644
+--- a/smali_classes2/com/android/systemui/settings/brightness/BrightnessSlider.smali
++++ b/smali_classes2/com/android/systemui/settings/brightness/BrightnessSlider.smali
+@@ -556,59 +556,6 @@
+ .method private showUsingHighBrightnessDialog()V
+     .locals 3
+ 
+-    iget-object v0, p0, Lcom/android/systemui/settings/brightness/BrightnessSlider;->mUsingHighBrightnessDialog:Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    if-nez v0, :cond_0
+-
+-    new-instance v0, Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    invoke-virtual {p0}, Lcom/android/systemui/util/ViewController;->getContext()Landroid/content/Context;
+-
+-    move-result-object v1
+-
+-    invoke-direct {v0, v1}, Lcom/android/systemui/statusbar/phone/SystemUIDialog;-><init>(Landroid/content/Context;)V
+-
+-    iput-object v0, p0, Lcom/android/systemui/settings/brightness/BrightnessSlider;->mUsingHighBrightnessDialog:Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    invoke-virtual {p0}, Lcom/android/systemui/util/ViewController;->getContext()Landroid/content/Context;
+-
+-    move-result-object v0
+-
+-    invoke-virtual {v0}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+-
+-    move-result-object v0
+-
+-    sget v1, Lcom/android/systemui/R$string;->sec_brightness_using_high_brightness_dialog_message:I
+-
+-    invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getString(I)Ljava/lang/String;
+-
+-    move-result-object v0
+-
+-    iget-object v1, p0, Lcom/android/systemui/settings/brightness/BrightnessSlider;->mUsingHighBrightnessDialog:Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    invoke-virtual {v1, v0}, Landroid/app/AlertDialog;->setMessage(Ljava/lang/CharSequence;)V
+-
+-    iget-object v0, p0, Lcom/android/systemui/settings/brightness/BrightnessSlider;->mUsingHighBrightnessDialog:Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    sget v1, Lcom/android/systemui/R$string;->sec_brightness_using_high_brightness_dialog_button:I
+-
+-    const/4 v2, 0x0
+-
+-    invoke-virtual {v0, v1, v2}, Lcom/android/systemui/statusbar/phone/SystemUIDialog;->setPositiveButton(ILandroid/content/DialogInterface$OnClickListener;)V
+-
+-    iget-object v0, p0, Lcom/android/systemui/settings/brightness/BrightnessSlider;->mUsingHighBrightnessDialog:Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    new-instance v1, Lcom/android/systemui/settings/brightness/BrightnessSlider$3;
+-
+-    invoke-direct {v1, p0}, Lcom/android/systemui/settings/brightness/BrightnessSlider$3;-><init>(Lcom/android/systemui/settings/brightness/BrightnessSlider;)V
+-
+-    invoke-virtual {v0, v1}, Landroid/app/AlertDialog;->setOnDismissListener(Landroid/content/DialogInterface$OnDismissListener;)V
+-
+-    iget-object p0, p0, Lcom/android/systemui/settings/brightness/BrightnessSlider;->mUsingHighBrightnessDialog:Lcom/android/systemui/statusbar/phone/SystemUIDialog;
+-
+-    invoke-virtual {p0}, Landroid/app/AlertDialog;->show()V
+-
+-    :cond_0
+     return-void
+ .end method
+ 
+-- 
+2.43.0
+

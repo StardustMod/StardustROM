@@ -1,0 +1,44 @@
+From 09c76250dcb9d09ef58ffa41673eae9f9a843b5f Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 18:35:07 -0700
+Subject: [PATCH] Disable high brightness warning popup
+
+---
+ .../BrightnessSeekBarPreference$5.smali       | 19 -------------------
+ 1 file changed, 19 deletions(-)
+
+diff --git a/smali_classes2/com/samsung/android/settings/display/BrightnessSeekBarPreference$5.smali b/smali_classes2/com/samsung/android/settings/display/BrightnessSeekBarPreference$5.smali
+index d5f69ce2..c7d24909 100644
+--- a/smali_classes2/com/samsung/android/settings/display/BrightnessSeekBarPreference$5.smali
++++ b/smali_classes2/com/samsung/android/settings/display/BrightnessSeekBarPreference$5.smali
+@@ -36,27 +36,8 @@
+ 
+     iget-object p0, p0, Lcom/samsung/android/settings/display/BrightnessSeekBarPreference$5;->this$0:Lcom/samsung/android/settings/display/BrightnessSeekBarPreference;
+ 
+-    invoke-static {p0}, Lcom/samsung/android/settings/display/BrightnessSeekBarPreference;->access$200(Lcom/samsung/android/settings/display/BrightnessSeekBarPreference;)Landroid/content/Context;
+-
+-    move-result-object p1
+-
+-    invoke-virtual {p1}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+-
+-    move-result-object p1
+-
+-    const-string v0, "shown_max_brightness_dialog"
+-
+-    const/4 v1, 0x0
+-
+-    invoke-static {p1, v0, v1}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+-
+-    move-result p1
+-
+-    if-eqz p1, :cond_0
+-
+     const/4 v1, 0x1
+ 
+-    :cond_0
+     invoke-static {p0, v1}, Lcom/samsung/android/settings/display/BrightnessSeekBarPreference;->access$302(Lcom/samsung/android/settings/display/BrightnessSeekBarPreference;Z)Z
+ 
+     return-void
+-- 
+2.43.0
+
