@@ -1,0 +1,69 @@
+From 2b07f5f257f1063048872c5e909b676384009f11 Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Tue, 10 Jun 2025 19:01:38 -0700
+Subject: [PATCH] Enable multi user support
+
+---
+ smali_classes2/android/os/UserManager.smali | 45 +--------------------
+ 1 file changed, 1 insertion(+), 44 deletions(-)
+
+diff --git a/smali_classes2/android/os/UserManager.smali b/smali_classes2/android/os/UserManager.smali
+index 483117f4..d5344460 100644
+--- a/smali_classes2/android/os/UserManager.smali
++++ b/smali_classes2/android/os/UserManager.smali
+@@ -1118,51 +1118,8 @@
+ .method public static whitelist supportsMultipleUsers()Z
+     .locals 5
+ 
+-    invoke-static {}, Landroid/content/pm/PackageSamsungUtils;->isLduSkuBinary()Z
+-
+-    move-result v0
+-
+-    const/4 v1, 0x0
+-
+-    if-eqz v0, :cond_0
+-
+-    return v1
+-
+-    :cond_0
+-    invoke-static {}, Landroid/os/UserManager;->getConfigStatusMultiUser()Z
+-
+-    move-result v0
+-
+-    const-string v2, "persist.sys.show_multiuserui"
+-
+-    invoke-static {v2, v0}, Landroid/os/SystemProperties;->getBoolean(Ljava/lang/String;Z)Z
+-
+-    move-result v2
+-
+-    invoke-static {}, Landroid/os/UserManager;->getMaxSupportedUsers()I
+-
+-    move-result v3
+-
+-    const/4 v4, 0x1
+-
+-    if-le v3, v4, :cond_1
+-
+-    const-string v3, "fw.show_multiuserui"
+-
+-    invoke-static {v3, v2}, Landroid/os/SystemProperties;->getBoolean(Ljava/lang/String;Z)Z
+-
+-    move-result v3
+-
+-    if-eqz v3, :cond_1
+-
+-    move v1, v4
+-
+-    goto :goto_0
+-
+-    :cond_1
+-    nop
++    const/4 v1, 0x1
+ 
+-    :goto_0
+     return v1
+ .end method
+ 
+-- 
+2.43.0
+
