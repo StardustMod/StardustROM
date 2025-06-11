@@ -1,0 +1,204 @@
+From b1da1e858228a64978af7da41a79f173524dfc3a Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Mon, 16 Jun 2025 21:39:40 -0700
+Subject: [PATCH] Setup Settings ROM infomation
+
+---
+ res/values/strings.xml                        |  5 +++
+ res/xml/sec_software_info_settings.xml        |  5 +++
+ smali/com/android/settings/Utils.smali        | 14 +++----
+ .../ROMVersionPreferenceController.smali      | 38 +++++++++++++++++++
+ .../deviceinfo/SoftwareInfoSettings.smali     | 10 ++++-
+ ...pLevelUserManualPreferenceController.smali | 14 +------
+ 6 files changed, 65 insertions(+), 21 deletions(-)
+ create mode 100644 smali_classes2/com/oitsminez/stardust/settings/ROMVersionPreferenceController.smali
+
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 1130e1bb..5060d24f 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -9588,6 +9588,11 @@ A trusted credential installed on your device is making this possible."</string>
+     <string name="sswl_on_tts">On</string>
+     <string name="sswl_voice_guide_tts">Voice guide</string>
+     <string name="standby_bucket_summary">App standby state: %s</string>
++    <string name="stardust_dev">Developer</string>
++    <string name="stardust_github">StardustROM GitHub</string>
++    <string name="stardust_github_info">Visit our GitHub!</string>
++    <string name="stardust_info">StardustROM information</string>
++    <string name="stardust_ver">StardustROM version</string>
+     <string name="start_finger_plus_enroll">Start</string>
+     <string name="starting_android">Starting Android…</string>
+     <string name="status2_summay">Some services may not be available</string>
+diff --git a/res/xml/sec_software_info_settings.xml b/res/xml/sec_software_info_settings.xml
+index 473a4704..3e22d3fe 100644
+--- a/res/xml/sec_software_info_settings.xml
++++ b/res/xml/sec_software_info_settings.xml
+@@ -2,6 +2,11 @@
+ <PreferenceScreen android:title="@string/device_info_software_title" settings:hierarchicalParentFragment="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment" settings:topLevelPreferenceKey="top_level_about_phone"
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
++    <PreferenceCategory android:title="@string/stardust_info" />
++    <Preference android:title="@string/stardust_ver" android:key="stardust_version" android:summary="@string/summary_placeholder" settings:controller="com.oitsminez.stardust.settings.ROMVersionPreferenceController" />
++    <Preference android:title="@string/stardust_dev" android:key="stardust_developer" android:summary="oItsMineZ" />
++    <Preference android:title="@string/stardust_github" android:key="stardust_github" android:summary="@string/stardust_github_info" settings:controller="com.samsung.android.settings.homepage.TopLevelUserManualPreferenceController" />
++    <PreferenceCategory android:title="@string/wifi_p2p_device_info" />
+     <Preference android:enabled="false" android:title="@string/one_ui_version_title" android:key="one_ui_version" android:summary="@string/summary_placeholder" android:shouldDisableView="false" settings:controller="com.samsung.android.settings.deviceinfo.softwareinfo.OneUIVersionPreferenceController" />
+     <Preference android:title="@string/firmware_version" android:key="android_firmware_version" android:summary="@string/summary_placeholder" settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController" />
+     <Preference android:title="@string/module_version" android:key="module_version" android:summary="@string/summary_placeholder" settings:controller="com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController" />
+diff --git a/smali/com/android/settings/Utils.smali b/smali/com/android/settings/Utils.smali
+index c7a1413f..3ddc26da 100644
+--- a/smali/com/android/settings/Utils.smali
++++ b/smali/com/android/settings/Utils.smali
+@@ -4952,9 +4952,9 @@
+ 
+     new-instance v0, Landroid/content/ComponentName;
+ 
+-    const-string v1, "com.sec.android.app.sbrowser"
++    const-string v1, ""
+ 
+-    const-string v2, "com.sec.android.app.sbrowser.SBrowserMainActivity"
++    const-string v2, ""
+ 
+     invoke-direct {v0, v1, v2}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+ 
+@@ -4989,7 +4989,7 @@
+ 
+     move-result-object p0
+ 
+-    const-string v0, "online_manual_url"
++    const-string v0, ""
+ 
+     invoke-static {p0, v0}, Landroid/provider/Settings$Global;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
+ 
+@@ -5018,7 +5018,7 @@
+     if-ge v1, v0, :cond_2
+ 
+     :cond_1
+-    const-string p0, "http://www.samsung.com/m-manual/common"
++    const-string p0, "https://github.com/StardustMod"
+ 
+     :cond_2
+     invoke-virtual {p0}, Ljava/lang/String;->trim()Ljava/lang/String;
+@@ -5060,7 +5060,7 @@
+ 
+     invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+ 
+-    const-string p0, "ro.product.model"
++    const-string p0, ""
+ 
+     invoke-static {p0}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+ 
+@@ -5068,11 +5068,11 @@
+ 
+     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    const-string p0, "/Android"
++    const-string p0, "/StardustROM"
+ 
+     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
+-    const-string p0, "ro.build.version.release"
++    const-string p0, ""
+ 
+     invoke-static {p0}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+ 
+diff --git a/smali_classes2/com/oitsminez/stardust/settings/ROMVersionPreferenceController.smali b/smali_classes2/com/oitsminez/stardust/settings/ROMVersionPreferenceController.smali
+new file mode 100644
+index 00000000..20ea0588
+--- /dev/null
++++ b/smali_classes2/com/oitsminez/stardust/settings/ROMVersionPreferenceController.smali
+@@ -0,0 +1,38 @@
++.class public Lcom/oitsminez/stardust/settings/ROMVersionPreferenceController;
++.super Lcom/android/settings/core/BasePreferenceController;
++.source "ROMVersionPreferenceController.java"
++
++
++# direct methods
++.method public constructor <init>(Landroid/content/Context;Ljava/lang/String;)V
++    .locals 0
++
++    invoke-direct {p0, p1, p2}, Lcom/android/settings/core/BasePreferenceController;-><init>(Landroid/content/Context;Ljava/lang/String;)V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public getAvailabilityStatus()I
++    .locals 0
++
++    const/4 p0, 0x0
++
++    return p0
++.end method
++
++.method public getSummary()Ljava/lang/CharSequence;
++    .locals 2
++
++    const-string v0, "ro.build.version.stardust"
++
++    const-string v1, "Unknown"
++
++    invoke-static {v0, v1}, Landroid/os/SemSystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
++
++    move-result-object v0
++
++    return-object v0
++
++.end method
+diff --git a/smali_classes2/com/samsung/android/settings/deviceinfo/SoftwareInfoSettings.smali b/smali_classes2/com/samsung/android/settings/deviceinfo/SoftwareInfoSettings.smali
+index 4fb5cb68..9c4eee8b 100644
+--- a/smali_classes2/com/samsung/android/settings/deviceinfo/SoftwareInfoSettings.smali
++++ b/smali_classes2/com/samsung/android/settings/deviceinfo/SoftwareInfoSettings.smali
+@@ -45,7 +45,7 @@
+ .end method
+ 
+ .method private static buildPreferenceControllers(Landroid/content/Context;Landroid/app/Activity;Landroidx/fragment/app/Fragment;Lcom/android/settingslib/core/lifecycle/Lifecycle;)Ljava/util/List;
+-    .locals 0
++    .locals 2
+     .annotation system Ldalvik/annotation/Signature;
+         value = {
+             "(",
+@@ -106,6 +106,14 @@
+ 
+     invoke-interface {p1, p2}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+ 
++    new-instance v0, Lcom/oitsminez/stardust/settings/ROMVersionPreferenceController;
++
++    const-string v1, "stardust_version"
++
++    invoke-direct {v0, p0, v1}, Lcom/oitsminez/stardust/settings/ROMVersionPreferenceController;-><init>(Landroid/content/Context;Ljava/lang/String;)V
++
++    invoke-interface {p1, v0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
++
+     return-object p1
+ .end method
+ 
+diff --git a/smali_classes2/com/samsung/android/settings/homepage/TopLevelUserManualPreferenceController.smali b/smali_classes2/com/samsung/android/settings/homepage/TopLevelUserManualPreferenceController.smali
+index e84ad0bf..193ed2c9 100644
+--- a/smali_classes2/com/samsung/android/settings/homepage/TopLevelUserManualPreferenceController.smali
++++ b/smali_classes2/com/samsung/android/settings/homepage/TopLevelUserManualPreferenceController.smali
+@@ -212,19 +212,7 @@
+ .method public getSummary()Ljava/lang/CharSequence;
+     .locals 1
+ 
+-    iget-object v0, p0, Lcom/android/settingslib/core/AbstractPreferenceController;->mContext:Landroid/content/Context;
+-
+-    invoke-static {v0}, Lcom/android/settings/Utils;->getOnlineHelpMenuState(Landroid/content/Context;)Lcom/android/settings/Utils$OnlineHelpMenuState;
+-
+-    move-result-object v0
+-
+-    iget-object p0, p0, Lcom/android/settingslib/core/AbstractPreferenceController;->mContext:Landroid/content/Context;
+-
+-    iget v0, v0, Lcom/android/settings/Utils$OnlineHelpMenuState;->summaryRes:I
+-
+-    invoke-virtual {p0, v0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
+-
+-    move-result-object p0
++    const/4 p0, 0x0
+ 
+     return-object p0
+ .end method
+-- 
+2.43.0
+

@@ -9,3 +9,6 @@ SET_PROP "system" "debug.composition.type" "gpu"
 
 # Disable OEM Unlock Toggle
 SET_PROP "system" "ro.oem_unlock_supported" "0"
+
+# Set ROM Version
+SET_PROP "system" "ro.build.version.stardust" "$ROM_VERSION"
