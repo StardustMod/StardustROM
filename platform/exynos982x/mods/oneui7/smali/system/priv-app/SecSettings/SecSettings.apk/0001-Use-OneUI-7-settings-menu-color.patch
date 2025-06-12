@@ -1,0 +1,92 @@
+From 00671a1ca9925951eb947f82b5eb18bec0386e3e Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Sun, 15 Jun 2025 06:22:33 -0700
+Subject: [PATCH] Use OneUI 7 settings menu color
+
+---
+ res/values/colors.xml | 64 +++++++++++++++++++++++--------------------
+ 1 file changed, 34 insertions(+), 30 deletions(-)
+
+diff --git a/res/values/colors.xml b/res/values/colors.xml
+index ea3acac6..27a8d18d 100644
+--- a/res/values/colors.xml
++++ b/res/values/colors.xml
+@@ -450,41 +450,45 @@
+     <color name="sec_dark_mode_clock_tab_tint_unselected">@color/sesl_tablayout_text_color_default</color>
+     <color name="sec_dark_mode_time_picker_tab_background">@android:color/transparent</color>
+     <color name="sec_dark_mode_time_text_color">@color/sesl_dialog_title_text_color_light</color>
+-    <color name="sec_dashboard_about_phone_color">#ff8b8b8b</color>
+-    <color name="sec_dashboard_accessibility_color">#ff3ca766</color>
+-    <color name="sec_dashboard_account_default_id_color">#ffc4c4c4</color>
++    <color name="sec_dashboard_about_phone_color">#ff6868a3</color>
++    <color name="sec_dashboard_accessibility_color">#ff65c23b</color>
++    <color name="sec_dashboard_account_default_id_color">#ff94b4f2</color>
+     <color name="sec_dashboard_advanced_features_color">#fffdbe4e</color>
+-    <color name="sec_dashboard_applications_color">#ff75b4fb</color>
+-    <color name="sec_dashboard_biometrics_and_security_color">#ff7b84ff</color>
+-    <color name="sec_dashboard_cloud_account_color">#ff4772e6</color>
+-    <color name="sec_dashboard_connections_color">#ff5aa6fc</color>
+-    <color name="sec_dashboard_cover_screen_color">#ff2badbd</color>
+-    <color name="sec_dashboard_development_color">#ff8b8b8b</color>
+-    <color name="sec_dashboard_devicecare_color">#ff05bba5</color>
+-    <color name="sec_dashboard_digitalwellbeing_color">#ff78c66f</color>
++    <color name="sec_dashboard_applications_color">#ff387aff</color>
++    <color name="sec_dashboard_biometrics_and_security_color">#ff715aff</color>
++    <color name="sec_dashboard_cloud_account_color">#ff387aff</color>
++    <color name="sec_dashboard_connections_color">#ff387aff</color>
++    <color name="sec_dashboard_cover_screen_color">#ff28b0bb</color>
++    <color name="sec_dashboard_development_color">#ff6868a3</color>
++    <color name="sec_dashboard_devicecare_color">#ff6868a3</color>
++    <color name="sec_dashboard_digitalwellbeing_color">#ff65c23b</color>
+     <color name="sec_dashboard_display_color">#ffa4d925</color>
+-    <color name="sec_dashboard_docomo_au_color">#ffe17282</color>
+-    <color name="sec_dashboard_emergency_color">#ffee7567</color>
+-    <color name="sec_dashboard_general_device_management_color">#ff6b8ea6</color>
+-    <color name="sec_dashboard_google_color">#ff4d8efb</color>
+-    <color name="sec_dashboard_homescreen_color">#ff30c5e5</color>
++    <color name="sec_dashboard_docomo_au_color">#ffea7b8b</color>
++    <color name="sec_dashboard_emergency_color">#ffd93e36</color>
++    <color name="sec_dashboard_galaxy_ai_settings_gradient_color1">#ff7634ff</color>
++    <color name="sec_dashboard_galaxy_ai_settings_gradient_color2">#ff1ca7ff</color>
++    <color name="sec_dashboard_galaxy_ai_settings_gradient_color3">#ff43f2a9</color>
++    <color name="sec_dashboard_galaxy_ai_settings_gradient_color4">#ff6cff00</color>
++    <color name="sec_dashboard_general_device_management_color">#ff6868a3</color>
++    <color name="sec_dashboard_google_color">#ff387aff</color>
++    <color name="sec_dashboard_homescreen_color">#ff387aff</color>
+     <color name="sec_dashboard_kt_menu_color">#ff4c4948</color>
+     <color name="sec_dashboard_layer_color">@android:color/transparent</color>
+     <color name="sec_dashboard_lgu_color">#ffff8d93</color>
+-    <color name="sec_dashboard_location_color">#ff71bd67</color>
+-    <color name="sec_dashboard_lock_screen_security_color">#ff35baaa</color>
+-    <color name="sec_dashboard_notifications_color">#fffc8e81</color>
+-    <color name="sec_dashboard_online_help_color">#ffd7be0d</color>
+-    <color name="sec_dashboard_privacy_color">#ff7ba2f1</color>
+-    <color name="sec_dashboard_remotesupport_color">#ff29b9d8</color>
+-    <color name="sec_dashboard_software_update_color">#ff818afe</color>
+-    <color name="sec_dashboard_sounds_color">#ff9991ff</color>
+-    <color name="sec_dashboard_t_roaming_color">#ff797dd3</color>
+-    <color name="sec_dashboard_t_service_color">#ff797dd3</color>
+-    <color name="sec_dashboard_tab_selected_text_color">#ff252525</color>
+-    <color name="sec_dashboard_tips_color">#ffffac51</color>
+-    <color name="sec_dashboard_wallpapers_and_themes_color">#ffca84e8</color>
+-    <color name="sec_dashboard_wallpapers_color">#fff47b9d</color>
++    <color name="sec_dashboard_location_color">#ff715aff</color>
++    <color name="sec_dashboard_lock_screen_security_color">#ff387aff</color>
++    <color name="sec_dashboard_notifications_color">#ffe65b17</color>
++    <color name="sec_dashboard_online_help_color">#fffdbe4e</color>
++    <color name="sec_dashboard_privacy_color">#ff6ba6e2</color>
++    <color name="sec_dashboard_remotesupport_color">#fffdbe4e</color>
++    <color name="sec_dashboard_software_update_color">#ff387aff</color>
++    <color name="sec_dashboard_sounds_color">#ff715aff</color>
++    <color name="sec_dashboard_t_roaming_color">#ff605de4</color>
++    <color name="sec_dashboard_t_service_color">#ff605de4</color>
++    <color name="sec_dashboard_tab_selected_text_color">@color/sesl_edit_text_tint_color_light</color>
++    <color name="sec_dashboard_tips_color">#fffdbe4e</color>
++    <color name="sec_dashboard_wallpapers_and_themes_color">#ffec5881</color>
++    <color name="sec_dashboard_wallpapers_color">#ffec5881</color>
+     <color name="sec_dashboard_workspace_color">#ff457ae5</color>
+     <color name="sec_data_usage_graph_bottom_line_color">#80979797</color>
+     <color name="sec_data_usage_graph_label_text_color">#ff979797</color>
+-- 
+2.43.0
+

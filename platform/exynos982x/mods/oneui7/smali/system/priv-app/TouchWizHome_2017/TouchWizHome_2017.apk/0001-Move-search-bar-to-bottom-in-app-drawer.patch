@@ -1,0 +1,1345 @@
+From 2f0fe05bfe689d3b2bc901663df04d4ffac5e59e Mon Sep 17 00:00:00 2001
+From: oItsMineZ <135024283+oItsMineZ@users.noreply.github.com>
+Date: Wed, 18 Jun 2025 19:46:57 -0700
+Subject: [PATCH] Move search bar to bottom in app drawer
+
+---
+ apktool.yml                   | 2 +-
+ res/layout/apps.xml           | 4 ++--
+ res/values-ar/strings.xml     | 2 +-
+ res/values-as/strings.xml     | 2 +-
+ res/values-az-rAZ/strings.xml | 2 +-
+ res/values-be-rBY/strings.xml | 2 +-
+ res/values-bg/strings.xml     | 2 +-
+ res/values-bn-rBD/strings.xml | 2 +-
+ res/values-bn-rIN/strings.xml | 2 +-
+ res/values-bo/strings.xml     | 2 +-
+ res/values-bs/strings.xml     | 2 +-
+ res/values-ca/strings.xml     | 2 +-
+ res/values-cs/strings.xml     | 2 +-
+ res/values-da/strings.xml     | 2 +-
+ res/values-de/strings.xml     | 2 +-
+ res/values-el/strings.xml     | 2 +-
+ res/values-en-rAU/strings.xml | 2 +-
+ res/values-en-rCA/strings.xml | 2 +-
+ res/values-en-rGB/strings.xml | 2 +-
+ res/values-en-rIN/strings.xml | 2 +-
+ res/values-en-rPH/strings.xml | 2 +-
+ res/values-en-rUS/strings.xml | 2 +-
+ res/values-en-rZG/strings.xml | 2 +-
+ res/values-en/strings.xml     | 2 +-
+ res/values-es-rES/strings.xml | 2 +-
+ res/values-es-rUS/strings.xml | 2 +-
+ res/values-et-rEE/strings.xml | 2 +-
+ res/values-eu-rES/strings.xml | 2 +-
+ res/values-fa/strings.xml     | 2 +-
+ res/values-fi/strings.xml     | 2 +-
+ res/values-fr-rCA/strings.xml | 2 +-
+ res/values-fr/strings.xml     | 2 +-
+ res/values-ga/strings.xml     | 2 +-
+ res/values-gl-rES/strings.xml | 2 +-
+ res/values-gu-rIN/strings.xml | 2 +-
+ res/values-hi/strings.xml     | 2 +-
+ res/values-hr/strings.xml     | 2 +-
+ res/values-hu/strings.xml     | 2 +-
+ res/values-hy-rAM/strings.xml | 2 +-
+ res/values-in/strings.xml     | 2 +-
+ res/values-is-rIS/strings.xml | 2 +-
+ res/values-it/strings.xml     | 2 +-
+ res/values-iw/strings.xml     | 2 +-
+ res/values-ja/strings.xml     | 2 +-
+ res/values-ka-rGE/strings.xml | 2 +-
+ res/values-kk-rKZ/strings.xml | 2 +-
+ res/values-km-rKH/strings.xml | 2 +-
+ res/values-kn-rIN/strings.xml | 2 +-
+ res/values-ko/strings.xml     | 2 +-
+ res/values-ky-rKG/strings.xml | 2 +-
+ res/values-lo-rLA/strings.xml | 2 +-
+ res/values-lt/strings.xml     | 2 +-
+ res/values-lv/strings.xml     | 2 +-
+ res/values-mk-rMK/strings.xml | 2 +-
+ res/values-ml-rIN/strings.xml | 2 +-
+ res/values-mn-rMN/strings.xml | 2 +-
+ res/values-mr-rIN/strings.xml | 2 +-
+ res/values-ms-rMY/strings.xml | 2 +-
+ res/values-my-rMM/strings.xml | 2 +-
+ res/values-my-rZG/strings.xml | 2 +-
+ res/values-nb/strings.xml     | 2 +-
+ res/values-ne-rNP/strings.xml | 2 +-
+ res/values-ne/strings.xml     | 2 +-
+ res/values-nl/strings.xml     | 2 +-
+ res/values-or/strings.xml     | 2 +-
+ res/values-pa-rIN/strings.xml | 2 +-
+ res/values-pl-rSP/strings.xml | 2 +-
+ res/values-pl/strings.xml     | 2 +-
+ res/values-pt-rBR/strings.xml | 2 +-
+ res/values-pt-rPT/strings.xml | 2 +-
+ res/values-ro/strings.xml     | 2 +-
+ res/values-ru/strings.xml     | 2 +-
+ res/values-si-rLK/strings.xml | 2 +-
+ res/values-si/strings.xml     | 2 +-
+ res/values-sk/strings.xml     | 2 +-
+ res/values-sl/strings.xml     | 2 +-
+ res/values-sq-rAL/strings.xml | 2 +-
+ res/values-sr/strings.xml     | 2 +-
+ res/values-sv/strings.xml     | 2 +-
+ res/values-ta-rIN/strings.xml | 2 +-
+ res/values-te-rIN/strings.xml | 2 +-
+ res/values-tg/strings.xml     | 2 +-
+ res/values-th/strings.xml     | 2 +-
+ res/values-tk/strings.xml     | 2 +-
+ res/values-tl/strings.xml     | 2 +-
+ res/values-tr/strings.xml     | 2 +-
+ res/values-ug-rCN/strings.xml | 2 +-
+ res/values-uk/strings.xml     | 2 +-
+ res/values-ur-rPK/strings.xml | 2 +-
+ res/values-uz-rUZ/strings.xml | 2 +-
+ res/values-vi/strings.xml     | 2 +-
+ res/values-zh-rCN/strings.xml | 2 +-
+ res/values-zh-rHK/strings.xml | 2 +-
+ res/values-zh-rTW/strings.xml | 2 +-
+ res/values/strings.xml        | 2 +-
+ 95 files changed, 96 insertions(+), 96 deletions(-)
+
+diff --git a/apktool.yml b/apktool.yml
+index ea97d10..87159e6 100644
+--- a/apktool.yml
++++ b/apktool.yml
+@@ -12,7 +12,7 @@ packageInfo:
+   renameManifestPackage: null
+ versionInfo:
+   versionCode: 1310905019
+-  versionName: 13.1.09.19
++  versionName: 13.1.09.19-stardust
+ sparseResources: false
+ compactEntries: false
+ doNotCompress:
+diff --git a/res/layout/apps.xml b/res/layout/apps.xml
+index 66fb9af..d98387b 100644
+--- a/res/layout/apps.xml
++++ b/res/layout/apps.xml
+@@ -1,11 +1,11 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <com.android.homescreen.apptray.AppsContainerView android:id="@id/apptray_view" android:focusable="true" android:focusableInTouchMode="true" android:clipChildren="false" android:clipToPadding="false" android:descendantFocusability="afterDescendants" android:layout_width="fill_parent" android:layout_height="fill_parent"
+   xmlns:android="http://schemas.android.com/apk/res/android" xmlns:launcher="http://schemas.android.com/apk/res-auto">
+-    <com.android.homescreen.apptray.AppsPagedView android:layout_gravity="center" android:id="@id/apps_content" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" launcher:pageIndicator="@id/apps_page_indicator" />
++    <com.android.homescreen.apptray.AppsPagedView android:layout_gravity="center" android:id="@id/apps_content" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingBottom="120dp" launcher:pageIndicator="@id/apps_page_indicator" android:layout_marginTop="-30dp" />
+     <com.android.launcher3.pageindicators.HomePageIndicatorView android:theme="@style/HomeScreenElementTheme" android:layout_gravity="center|bottom" android:id="@id/apps_page_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+     <com.android.launcher3.pageindicators.HomePageIndicatorView android:theme="@style/HomeScreenElementTheme" android:layout_gravity="center|bottom" android:id="@id/apps_page_indicator_workspace" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+     <com.android.launcher3.pageindicators.HomePageIndicatorView android:theme="@style/HomeScreenElementTheme" android:layout_gravity="center|bottom" android:id="@id/apps_page_indicator_monetize" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+-    <include android:layout_gravity="top" android:id="@id/apps_searchbar_container" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/apps_search_bar" />
+     <include android:id="@id/apps_clean_up_container" layout="@layout/apps_clean_up_button" />
+     <include android:id="@id/apps_change_button_container" android:visibility="gone" layout="@layout/apps_change_page_mode_button" />
++    <include android:layout_gravity="bottom" android:id="@id/apps_searchbar_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="60dp" layout="@layout/apps_search_bar" />
+ </com.android.homescreen.apptray.AppsContainerView>
+diff --git a/res/values-ar/strings.xml b/res/values-ar/strings.xml
+index d28dcdb..659feee 100644
+--- a/res/values-ar/strings.xml
++++ b/res/values-ar/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">معلومات حول التطبيق</string>
+     <string name="app_installing_title">جارٍ تثبيت %1$s، مستوى التقدم: %2$s</string>
+     <string name="app_locked">تم إقفال الطلب</string>
+-    <string name="app_name">شاشة One UI الرئيسية</string>
++    <string name="app_name">شاشة Stardust الرئيسية</string>
+     <string name="app_pair_added_on_home_screen">تمت إضافة زوج من التطبيقات إلى الشاشة الرئيسية.</string>
+     <string name="app_search">بحث</string>
+     <string name="app_search_no_results_found">لم يتم العثور علي اي نتيجة</string>
+diff --git a/res/values-as/strings.xml b/res/values-as/strings.xml
+index 7c28d73..6945f08 100644
+--- a/res/values-as/strings.xml
++++ b/res/values-as/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">এপ্প্‌ৰ তথ্য</string>
+     <string name="app_installing_title">%1$s ইনষ্টল কৰি থকা হৈছে, %2$s সম্পূৰ্ণ হৈছে</string>
+     <string name="app_locked">এপ্প্‌ লক হৈছে</string>
+-    <string name="app_name">One UI হোম</string>
++    <string name="app_name">Stardust হোম</string>
+     <string name="app_pair_added_on_home_screen">গৃহ স্ক্ৰীণত এপ্প্‌ৰ যোৰ যোগ কৰা হৈছে।</string>
+     <string name="app_search">অনুসন্ধান কৰক</string>
+     <string name="app_search_no_results_found">কোনো ফলাফল পোৱা নগল</string>
+diff --git a/res/values-az-rAZ/strings.xml b/res/values-az-rAZ/strings.xml
+index a3d920c..065574f 100644
+--- a/res/values-az-rAZ/strings.xml
++++ b/res/values-az-rAZ/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Proqram
+ məlumatı"</string>
+     <string name="app_locked">Proqr kilidləndi</string>
+-    <string name="app_name">One UI Ana ekran</string>
++    <string name="app_name">Stardust Ana ekran</string>
+     <string name="app_pair_added_on_home_screen">Proqram cütü Əsas ekrana əlavə edildi.</string>
+     <string name="app_search">Axtar</string>
+     <string name="app_search_no_results_found">Nəticə tapılmadı</string>
+diff --git a/res/values-be-rBY/strings.xml b/res/values-be-rBY/strings.xml
+index 89ee952..2ee0035 100644
+--- a/res/values-be-rBY/strings.xml
++++ b/res/values-be-rBY/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Інф аб
+ праграме"</string>
+     <string name="app_locked">Прагр. заблакір.</string>
+-    <string name="app_name">Галоўны экран One UI</string>
++    <string name="app_name">Галоўны экран Stardust</string>
+     <string name="app_pair_added_on_home_screen">Спалучэнне праграм дададзена на галоўны экран.</string>
+     <string name="app_search">Пошук</string>
+     <string name="app_search_no_results_found">Вынікі не знойдзены</string>
+diff --git a/res/values-bg/strings.xml b/res/values-bg/strings.xml
+index 106ffda..e502f3b 100644
+--- a/res/values-bg/strings.xml
++++ b/res/values-bg/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Инфо приложение</string>
+     <string name="app_installing_title">%1$s се инсталира, %2$s завършено</string>
+     <string name="app_locked">Прилож. заключено</string>
+-    <string name="app_name">Начален екран на One UI</string>
++    <string name="app_name">Начален екран на Stardust</string>
+     <string name="app_pair_added_on_home_screen">„Двойка приложения“ е добавено на началния екран.</string>
+     <string name="app_search">Търсете</string>
+     <string name="app_search_no_results_found">Няма намерени резултати</string>
+diff --git a/res/values-bn-rBD/strings.xml b/res/values-bn-rBD/strings.xml
+index 3303c79..100408e 100644
+--- a/res/values-bn-rBD/strings.xml
++++ b/res/values-bn-rBD/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"অ্যাপের
+ তথ্য"</string>
+     <string name="app_locked">অ্যাপ লক হয়েছে</string>
+-    <string name="app_name">One UI হোম</string>
++    <string name="app_name">Stardust হোম</string>
+     <string name="app_pair_added_on_home_screen">হোম স্ক্রিনে অ্যাপ যুগল যোগ করা হয়েছে৷</string>
+     <string name="app_search">অনুসন্ধান</string>
+     <string name="app_search_no_results_found">কোনো ফলাফল পাওয়া যায়নি</string>
+diff --git a/res/values-bn-rIN/strings.xml b/res/values-bn-rIN/strings.xml
+index 6df7b15..4d13159 100644
+--- a/res/values-bn-rIN/strings.xml
++++ b/res/values-bn-rIN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">অ্যাপ আইকনের ব্যাজগুলি</string>
+     <string name="app_info_drop_target_label">অ্যাপের তথ্য</string>
+     <string name="app_locked">অ্যাপ লক হয়েছে</string>
+-    <string name="app_name">One UI হোম</string>
++    <string name="app_name">Stardust হোম</string>
+     <string name="app_pair_added_on_home_screen">অ্যাপের জোড় বাঁধা হোম স্ক্রিনে যুক্ত হয়েছে।</string>
+     <string name="app_search">অনুসন্ধান</string>
+     <string name="app_search_no_results_found">কোনও ফলাফল পাওয়া যায়নি</string>
+diff --git a/res/values-bo/strings.xml b/res/values-bo/strings.xml
+index d68d566..cb4c2da 100644
+--- a/res/values-bo/strings.xml
++++ b/res/values-bo/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"ཉེར་སྤྱོད་ཆ་
+ འཕྲིན།"</string>
+     <string name="app_locked">ཉེར་སྤྱོད་བྱ་རིམ་བསྡམ་སྒྲིག་བྱས་ཟིན།</string>
+-    <string name="app_name">One UI་འཆར་ཡོལ་གཙོ་བོ།</string>
++    <string name="app_name">Stardust་འཆར་ཡོལ་གཙོ་བོ།</string>
+     <string name="app_pair_added_on_home_screen">ཉེར་སྤྱོད་ཆ་ནི་འཆར་ཡོལ་དུ་ཁ་སྣོན་བྱས་ཟིན།</string>
+     <string name="app_search">འཚོལ་ཞིབ།</string>
+     <string name="app_search_no_results_found">འབྲས་བུ་མ་རྙེད།</string>
+diff --git a/res/values-bs/strings.xml b/res/values-bs/strings.xml
+index 7c2c450..d66f64c 100644
+--- a/res/values-bs/strings.xml
++++ b/res/values-bs/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Info. o aplikaciji</string>
+     <string name="app_installing_title">Instaliranje aplikacije %1$s, završeno je %2$s</string>
+     <string name="app_locked">Aplik. je zaklj.</string>
+-    <string name="app_name">One UI početna stranica</string>
++    <string name="app_name">Stardust početna stranica</string>
+     <string name="app_pair_added_on_home_screen">Par aplikacija je dodan na Početni ekran.</string>
+     <string name="app_search">Pretraži</string>
+     <string name="app_search_no_results_found">Nema rezultata</string>
+diff --git a/res/values-ca/strings.xml b/res/values-ca/strings.xml
+index b2d9e8e..e29a97c 100644
+--- a/res/values-ca/strings.xml
++++ b/res/values-ca/strings.xml
+@@ -123,7 +123,7 @@
+ aplicació"</string>
+     <string name="app_installing_title">"S'està instal·lant %1$s; s'ha completat un %2$s"</string>
+     <string name="app_locked">Aplic. bloquejada</string>
+-    <string name="app_name">Inici One UI</string>
++    <string name="app_name">Inici Stardust</string>
+     <string name="app_pair_added_on_home_screen">"Grup d'aplicacions s'ha afegit a la Pantalla d'inici."</string>
+     <string name="app_search">Cercar</string>
+     <string name="app_search_no_results_found">"No s'han trobat resultats"</string>
+diff --git a/res/values-cs/strings.xml b/res/values-cs/strings.xml
+index cb7f06b..a54eafd 100644
+--- a/res/values-cs/strings.xml
++++ b/res/values-cs/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Info o aplikaci</string>
+     <string name="app_installing_title">Instalace aplikace %1$s, dokončeno %2$s</string>
+     <string name="app_locked">Aplikace zamknuta</string>
+-    <string name="app_name">Domovská obrazovka One UI</string>
++    <string name="app_name">Domovská obrazovka Stardust</string>
+     <string name="app_pair_added_on_home_screen">Pár aplikací byl přidán na Domovskou obrazovku.</string>
+     <string name="app_search">Hledat</string>
+     <string name="app_search_no_results_found">Nebyly nalezeny žádné výsledky</string>
+diff --git a/res/values-da/strings.xml b/res/values-da/strings.xml
+index 354f429..b4da43e 100644
+--- a/res/values-da/strings.xml
++++ b/res/values-da/strings.xml
+@@ -124,7 +124,7 @@
+ lysninger"</string>
+     <string name="app_installing_title">%1$s installeres. %2$s fuldført</string>
+     <string name="app_locked">Appen er låst</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App-parret er blevet tilføjet på startskærmen.</string>
+     <string name="app_search">Søg</string>
+     <string name="app_search_no_results_found">Ingen resultater fundet</string>
+diff --git a/res/values-de/strings.xml b/res/values-de/strings.xml
+index 84cdaee..9271905 100644
+--- a/res/values-de/strings.xml
++++ b/res/values-de/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">App-Info</string>
+     <string name="app_installing_title">%1$s wird installiert, %2$s abgeschlossen</string>
+     <string name="app_locked">App gesperrt</string>
+-    <string name="app_name">One UI-Startbildschirm</string>
++    <string name="app_name">Stardust-Startbildschirm</string>
+     <string name="app_pair_added_on_home_screen">App-Paar auf Startbildschirm hinzugefügt.</string>
+     <string name="app_search">Suchen</string>
+     <string name="app_search_no_results_found">Keine Ergebnisse</string>
+diff --git a/res/values-el/strings.xml b/res/values-el/strings.xml
+index 254b8fc..4aece4e 100644
+--- a/res/values-el/strings.xml
++++ b/res/values-el/strings.xml
+@@ -123,7 +123,7 @@
+ εφαρμ."</string>
+     <string name="app_installing_title">Έχει ολοκληρωθεί το %2$s της εγκατάστασης της εφαρμογής %1$s</string>
+     <string name="app_locked">Η εφαρμ. κλειδώθ.</string>
+-    <string name="app_name">Αρχική One UI</string>
++    <string name="app_name">Αρχική Stardust</string>
+     <string name="app_pair_added_on_home_screen">Προστέθηκε ζεύγος εφαρμογών στην Αρχική οθόνη.</string>
+     <string name="app_search">Αναζήτηση</string>
+     <string name="app_search_no_results_found">Δεν βρέθηκαν αποτελέσματα</string>
+diff --git a/res/values-en-rAU/strings.xml b/res/values-en-rAU/strings.xml
+index 438a396..38a9613 100644
+--- a/res/values-en-rAU/strings.xml
++++ b/res/values-en-rAU/strings.xml
+@@ -74,7 +74,7 @@
+     <string name="app_downloading_title">%1$s downloading, %2$s complete</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_installing_title">%1$s installing, %2$s complete</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_waiting_download_title">%1$s waiting to install</string>
+     <string name="auto_add_shortcuts_description">For new apps</string>
+     <string name="auto_add_shortcuts_label">Add icon to Home screen</string>
+diff --git a/res/values-en-rCA/strings.xml b/res/values-en-rCA/strings.xml
+index 4d2cf35..424612e 100644
+--- a/res/values-en-rCA/strings.xml
++++ b/res/values-en-rCA/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_installing_title">%1$s installing, %2$s complete</string>
+     <string name="app_locked">App locked</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App pair added to the Home screen.</string>
+     <string name="app_search">Search</string>
+     <string name="app_search_no_results_found">No results found</string>
+diff --git a/res/values-en-rGB/strings.xml b/res/values-en-rGB/strings.xml
+index e58ea2d..7b5f265 100644
+--- a/res/values-en-rGB/strings.xml
++++ b/res/values-en-rGB/strings.xml
+@@ -75,7 +75,7 @@
+     <string name="app_downloading_title">%1$s downloading, %2$s complete</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_installing_title">%1$s installing, %2$s complete</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_waiting_download_title">%1$s waiting to install</string>
+     <string name="auto_add_shortcuts_description">For new apps</string>
+     <string name="auto_add_shortcuts_label">Add app icons to the home screen</string>
+diff --git a/res/values-en-rIN/strings.xml b/res/values-en-rIN/strings.xml
+index 438a396..38a9613 100644
+--- a/res/values-en-rIN/strings.xml
++++ b/res/values-en-rIN/strings.xml
+@@ -74,7 +74,7 @@
+     <string name="app_downloading_title">%1$s downloading, %2$s complete</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_installing_title">%1$s installing, %2$s complete</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_waiting_download_title">%1$s waiting to install</string>
+     <string name="auto_add_shortcuts_description">For new apps</string>
+     <string name="auto_add_shortcuts_label">Add icon to Home screen</string>
+diff --git a/res/values-en-rPH/strings.xml b/res/values-en-rPH/strings.xml
+index be7bfa1..e4fc4ee 100644
+--- a/res/values-en-rPH/strings.xml
++++ b/res/values-en-rPH/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">App icon badges</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_locked">App locked</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App pair added on Home screen.</string>
+     <string name="app_search">Search</string>
+     <string name="app_search_no_results_found">No results found</string>
+diff --git a/res/values-en-rUS/strings.xml b/res/values-en-rUS/strings.xml
+index 20ccda1..8e61a37 100644
+--- a/res/values-en-rUS/strings.xml
++++ b/res/values-en-rUS/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">App icon badges</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_locked">App locked</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App pair added on Home screen.</string>
+     <string name="app_search">Search</string>
+     <string name="app_search_no_results_found">No results found</string>
+diff --git a/res/values-en-rZG/strings.xml b/res/values-en-rZG/strings.xml
+index ae5342d..668b772 100644
+--- a/res/values-en-rZG/strings.xml
++++ b/res/values-en-rZG/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">App icon badges</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_locked">App locked</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App pair added on Home screen.</string>
+     <string name="app_search">Search</string>
+     <string name="app_search_no_results_found">No results found</string>
+diff --git a/res/values-en/strings.xml b/res/values-en/strings.xml
+index 2b07c59..0992de1 100644
+--- a/res/values-en/strings.xml
++++ b/res/values-en/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">App icon badges</string>
+     <string name="app_info_drop_target_label">App info</string>
+     <string name="app_locked">App locked</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App pair added on Home screen.</string>
+     <string name="app_search">Search</string>
+     <string name="app_search_no_results_found">No results found</string>
+diff --git a/res/values-es-rES/strings.xml b/res/values-es-rES/strings.xml
+index 0d4a2df..6a049ff 100644
+--- a/res/values-es-rES/strings.xml
++++ b/res/values-es-rES/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Alertas de iconos de apps</string>
+     <string name="app_info_drop_target_label">Info de app</string>
+     <string name="app_locked">App protegida</string>
+-    <string name="app_name">Inicio de One UI</string>
++    <string name="app_name">Inicio de Stardust</string>
+     <string name="app_pair_added_on_home_screen">Grupo de apps se ha añadido a la pantalla Inicio.</string>
+     <string name="app_search">Buscar</string>
+     <string name="app_search_no_results_found">No se han encontrado resultados</string>
+diff --git a/res/values-es-rUS/strings.xml b/res/values-es-rUS/strings.xml
+index 716eee4..d7d8edf 100644
+--- a/res/values-es-rUS/strings.xml
++++ b/res/values-es-rUS/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Info. aplicación</string>
+     <string name="app_installing_title">Se está instalando %1$s; %2$s completado</string>
+     <string name="app_locked">Aplic. bloqueada</string>
+-    <string name="app_name">Inicio de One UI</string>
++    <string name="app_name">Inicio de Stardust</string>
+     <string name="app_pair_added_on_home_screen">Se añadió App pair a la pantalla de inicio.</string>
+     <string name="app_search">Buscar</string>
+     <string name="app_search_no_results_found">No se encontraron resultados</string>
+diff --git a/res/values-et-rEE/strings.xml b/res/values-et-rEE/strings.xml
+index c3c8cc6..0c6dc39 100644
+--- a/res/values-et-rEE/strings.xml
++++ b/res/values-et-rEE/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Rakenduse
+ teave"</string>
+     <string name="app_locked">Rak. lukustatud</string>
+-    <string name="app_name">One UI avaekraan</string>
++    <string name="app_name">Stardust avaekraan</string>
+     <string name="app_pair_added_on_home_screen">Rakenduste paar lisati avaekraanile.</string>
+     <string name="app_search">Otsing</string>
+     <string name="app_search_no_results_found">Tulemusi ei leitud</string>
+diff --git a/res/values-eu-rES/strings.xml b/res/values-eu-rES/strings.xml
+index d74e8c6..cf4c8a9 100644
+--- a/res/values-eu-rES/strings.xml
++++ b/res/values-eu-rES/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Aplik. ikonoen bereizgarriak</string>
+     <string name="app_info_drop_target_label">Aplikazio inform.</string>
+     <string name="app_locked">Aplik. babestu da</string>
+-    <string name="app_name">One UI Pantaila nagusia</string>
++    <string name="app_name">Stardust Pantaila nagusia</string>
+     <string name="app_pair_added_on_home_screen">Aplikazio multzoa Pantaila nagusian gehitu da.</string>
+     <string name="app_search">Bilatu</string>
+     <string name="app_search_no_results_found">Ez da emaitzarik aurkitu</string>
+diff --git a/res/values-fa/strings.xml b/res/values-fa/strings.xml
+index ad73084..97c8d2d 100644
+--- a/res/values-fa/strings.xml
++++ b/res/values-fa/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">اطلاعات برنامه</string>
+     <string name="app_installing_title">%1$s درحال نصب است، %2$s تکمیل شده است</string>
+     <string name="app_locked">برنامه قفل شد</string>
+-    <string name="app_name">صفحه اصلی One UI</string>
++    <string name="app_name">صفحه اصلی Stardust</string>
+     <string name="app_pair_added_on_home_screen">جفت برنامه به صفحه اصلی اضافه شد.</string>
+     <string name="app_search">جستجو</string>
+     <string name="app_search_no_results_found">نتیجه‌ای یافت نشد</string>
+diff --git a/res/values-fi/strings.xml b/res/values-fi/strings.xml
+index 84066c0..c23ae70 100644
+--- a/res/values-fi/strings.xml
++++ b/res/values-fi/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Sovell. tiedot</string>
+     <string name="app_installing_title">%1$s asennetaan, %2$s valmis</string>
+     <string name="app_locked">Sovellus lukittu</string>
+-    <string name="app_name">One UI:n etusivu</string>
++    <string name="app_name">Stardust:n etusivu</string>
+     <string name="app_pair_added_on_home_screen">Sovelluspari lisätty alkunäyttöön.</string>
+     <string name="app_search">Haku</string>
+     <string name="app_search_no_results_found">Tuloksia ei löytynyt</string>
+diff --git a/res/values-fr-rCA/strings.xml b/res/values-fr-rCA/strings.xml
+index 89a84e4..6c59571 100644
+--- a/res/values-fr-rCA/strings.xml
++++ b/res/values-fr-rCA/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">"Infos sur l'appli."</string>
+     <string name="app_installing_title">"Installation de l'application %1$s en cours, %2$s terminée"</string>
+     <string name="app_locked">Appli. verrouillée</string>
+-    <string name="app_name">"Écran d'accueil One UI"</string>
++    <string name="app_name">"Écran d'accueil Stardust"</string>
+     <string name="app_pair_added_on_home_screen">"La paire d'applications a été ajoutée sur l'écran d'accueil."</string>
+     <string name="app_search">Rechercher</string>
+     <string name="app_search_no_results_found">Aucun résultat trouvé</string>
+diff --git a/res/values-fr/strings.xml b/res/values-fr/strings.xml
+index e29519d..0395741 100644
+--- a/res/values-fr/strings.xml
++++ b/res/values-fr/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">"Infos sur l'appli."</string>
+     <string name="app_installing_title">Installation de %1$s… (%2$s terminés)</string>
+     <string name="app_locked">Appli. verrouillée</string>
+-    <string name="app_name">"Écran d'accueil One UI"</string>
++    <string name="app_name">"Écran d'accueil Stardust"</string>
+     <string name="app_pair_added_on_home_screen">"La paire d'applications a été ajoutée sur l'écran d'accueil."</string>
+     <string name="app_search">Rechercher</string>
+     <string name="app_search_no_results_found">Aucun résultat trouvé</string>
+diff --git a/res/values-ga/strings.xml b/res/values-ga/strings.xml
+index de5ffea..ddb8bcd 100644
+--- a/res/values-ga/strings.xml
++++ b/res/values-ga/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Suaitheantais íocóin f.chláir</string>
+     <string name="app_info_drop_target_label">Faisnéis f.chláir</string>
+     <string name="app_locked">F.chlár glasáilte</string>
+-    <string name="app_name">Baile One UI</string>
++    <string name="app_name">Baile Stardust</string>
+     <string name="app_pair_added_on_home_screen">Péire feidhmchlár curtha leis ar an Scáileán baile.</string>
+     <string name="app_search">Cuardaigh</string>
+     <string name="app_search_no_results_found">Níor aimsíodh torthaí</string>
+diff --git a/res/values-gl-rES/strings.xml b/res/values-gl-rES/strings.xml
+index c6c46ea..e376f8f 100644
+--- a/res/values-gl-rES/strings.xml
++++ b/res/values-gl-rES/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Distintivos iconas das aplicacións</string>
+     <string name="app_info_drop_target_label">Info. da aplicación</string>
+     <string name="app_locked">Aplic. bloqueada</string>
+-    <string name="app_name">Inicio de One UI</string>
++    <string name="app_name">Inicio de Stardust</string>
+     <string name="app_pair_added_on_home_screen">Engadiuse Grupo de aplicacións á pantalla Inicio.</string>
+     <string name="app_search">Buscar</string>
+     <string name="app_search_no_results_found">Non se atoparon resultados</string>
+diff --git a/res/values-gu-rIN/strings.xml b/res/values-gu-rIN/strings.xml
+index 750948d..bb1454b 100644
+--- a/res/values-gu-rIN/strings.xml
++++ b/res/values-gu-rIN/strings.xml
+@@ -86,7 +86,7 @@
+     <string name="app_icon_badges_title">ઍપ ચિહ્ન બેજીસ</string>
+     <string name="app_info_drop_target_label">ઍપ માહિતી</string>
+     <string name="app_locked">ઍપ લૉક કરી</string>
+-    <string name="app_name">One UI હોમ</string>
++    <string name="app_name">Stardust હોમ</string>
+     <string name="app_pair_added_on_home_screen">હોમ સ્ક્રીન પર એપ જોડી બનાવો ઉમેરાયેલ છે.</string>
+     <string name="app_search">શોધ</string>
+     <string name="app_search_no_results_found">કોઈ પરિણામો મળ્યાં નથી</string>
+diff --git a/res/values-hi/strings.xml b/res/values-hi/strings.xml
+index a33019b..0091973 100644
+--- a/res/values-hi/strings.xml
++++ b/res/values-hi/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">एप जानकारी</string>
+     <string name="app_installing_title">%1$s इंस्टॉल किया जा रहा है, %2$s पूरा हो गया</string>
+     <string name="app_locked">एप लॉक हुआ</string>
+-    <string name="app_name">One UI होम</string>
++    <string name="app_name">Stardust होम</string>
+     <string name="app_pair_added_on_home_screen">एप पेयर होम स्क्रीन पर जोड़ा गया है।</string>
+     <string name="app_search">खोजें</string>
+     <string name="app_search_no_results_found">कोई परिणाम नहीं मिले</string>
+diff --git a/res/values-hr/strings.xml b/res/values-hr/strings.xml
+index bf9f179..6a5568f 100644
+--- a/res/values-hr/strings.xml
++++ b/res/values-hr/strings.xml
+@@ -124,7 +124,7 @@
+ aplikac."</string>
+     <string name="app_installing_title">Instaliranje aplikacije %1$s, %2$s dovršeno</string>
+     <string name="app_locked">Aplik. zaključana</string>
+-    <string name="app_name">Početni zaslon za One UI</string>
++    <string name="app_name">Početni zaslon za Stardust</string>
+     <string name="app_pair_added_on_home_screen">Uparivanje aplikacija dodano je na početni zaslon.</string>
+     <string name="app_search">Pretražite</string>
+     <string name="app_search_no_results_found">Nema rezultata</string>
+diff --git a/res/values-hu/strings.xml b/res/values-hu/strings.xml
+index 61501d9..2c283b1 100644
+--- a/res/values-hu/strings.xml
++++ b/res/values-hu/strings.xml
+@@ -124,7 +124,7 @@
+ infó"</string>
+     <string name="app_installing_title">Folyamatban van a(z) %1$s telepítése, %2$s kész</string>
+     <string name="app_locked">Alkalmaz. zárolva</string>
+-    <string name="app_name">One UI-kezdőképernyő</string>
++    <string name="app_name">Stardust-kezdőképernyő</string>
+     <string name="app_pair_added_on_home_screen">Alkalmazáspár hozzáadva a kezdőképernyőhöz.</string>
+     <string name="app_search">Keresés</string>
+     <string name="app_search_no_results_found">Nincs találat</string>
+diff --git a/res/values-hy-rAM/strings.xml b/res/values-hy-rAM/strings.xml
+index f860332..306c077 100644
+--- a/res/values-hy-rAM/strings.xml
++++ b/res/values-hy-rAM/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Ծրագրի
+ տեղեկութ."</string>
+     <string name="app_locked">Ծրագիրը կողպված է</string>
+-    <string name="app_name">One UI-ի Հիմնական էկրան</string>
++    <string name="app_name">Stardust-ի Հիմնական էկրան</string>
+     <string name="app_pair_added_on_home_screen">Ծրագրերի զույգն ավելացվեց Հիմնական էկրանին:</string>
+     <string name="app_search">Որոնել</string>
+     <string name="app_search_no_results_found">Արդյունքներ չեն գտնվել</string>
+diff --git a/res/values-in/strings.xml b/res/values-in/strings.xml
+index 488874b..3700b4e 100644
+--- a/res/values-in/strings.xml
++++ b/res/values-in/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Info aplikasi</string>
+     <string name="app_installing_title">%1$s sedang diinstal, %2$s selesai</string>
+     <string name="app_locked">Aplikasi dikunci</string>
+-    <string name="app_name">Beranda One UI</string>
++    <string name="app_name">Beranda Stardust</string>
+     <string name="app_pair_added_on_home_screen">Pasangan aplikasi sudah ditambahkan ke Layar depan.</string>
+     <string name="app_search">Cari</string>
+     <string name="app_search_no_results_found">Tidak menemukan hasil</string>
+diff --git a/res/values-is-rIS/strings.xml b/res/values-is-rIS/strings.xml
+index 05094a3..47352c1 100644
+--- a/res/values-is-rIS/strings.xml
++++ b/res/values-is-rIS/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Táknskildir forrits</string>
+     <string name="app_info_drop_target_label">Uppl. um forrit</string>
+     <string name="app_locked">Forrit læst</string>
+-    <string name="app_name">Heimaskjár One UI</string>
++    <string name="app_name">Heimaskjár Stardust</string>
+     <string name="app_pair_added_on_home_screen">Forritapari bætt á heimaskjá.</string>
+     <string name="app_search">Leita</string>
+     <string name="app_search_no_results_found">Engar niðurstöður</string>
+diff --git a/res/values-it/strings.xml b/res/values-it/strings.xml
+index 5c62817..45cbf6b 100644
+--- a/res/values-it/strings.xml
++++ b/res/values-it/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Info app</string>
+     <string name="app_installing_title">Installazione di %1$s, completamento: %2$s</string>
+     <string name="app_locked">App bloccata</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">Coppia di applicazioni aggiunta alla schermata Home.</string>
+     <string name="app_search">Cerca</string>
+     <string name="app_search_no_results_found">Nessun risultato trovato</string>
+diff --git a/res/values-iw/strings.xml b/res/values-iw/strings.xml
+index c619fe1..094857f 100644
+--- a/res/values-iw/strings.xml
++++ b/res/values-iw/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">פרטי יישום</string>
+     <string name="app_installing_title">%1$s בתהליך התקנה, %2$s הושלמו</string>
+     <string name="app_locked">היישום נעול</string>
+-    <string name="app_name">דף הבית של One UI</string>
++    <string name="app_name">דף הבית של Stardust</string>
+     <string name="app_pair_added_on_home_screen">זוג היישומים נוסף במסך הבית.</string>
+     <string name="app_search">חיפוש</string>
+     <string name="app_search_no_results_found">לא נמצאו תוצאות</string>
+diff --git a/res/values-ja/strings.xml b/res/values-ja/strings.xml
+index a8f2469..b4df3ec 100644
+--- a/res/values-ja/strings.xml
++++ b/res/values-ja/strings.xml
+@@ -124,7 +124,7 @@
+ 情報"</string>
+     <string name="app_installing_title">%1$s をインストールしています: %2$s 完了</string>
+     <string name="app_locked">ﾛｯｸされたｱﾌﾟﾘ</string>
+-    <string name="app_name">One UIホーム</string>
++    <string name="app_name">Stardustホーム</string>
+     <string name="app_pair_added_on_home_screen">アプリペアをホーム画面に追加しました。</string>
+     <string name="app_search">検索</string>
+     <string name="app_search_no_results_found">検索結果がありません</string>
+diff --git a/res/values-ka-rGE/strings.xml b/res/values-ka-rGE/strings.xml
+index 7a83530..3c0749d 100644
+--- a/res/values-ka-rGE/strings.xml
++++ b/res/values-ka-rGE/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">აპლიკაციის ღილაკის ნიშნები</string>
+     <string name="app_info_drop_target_label">აპის ინფო</string>
+     <string name="app_locked">აპი დაბლოკილია</string>
+-    <string name="app_name">One UI-ის საწყისი გვერდი</string>
++    <string name="app_name">Stardust-ის საწყისი გვერდი</string>
+     <string name="app_pair_added_on_home_screen">აპლიკაციის წყვილი დაემატა საწყის ეკრანზე.</string>
+     <string name="app_search">ძიება</string>
+     <string name="app_search_no_results_found">შედეგები ვერ მოიძებნა</string>
+diff --git a/res/values-kk-rKZ/strings.xml b/res/values-kk-rKZ/strings.xml
+index 55df78d..dccfceb 100644
+--- a/res/values-kk-rKZ/strings.xml
++++ b/res/values-kk-rKZ/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Қолданба
+ ақпараты"</string>
+     <string name="app_locked">Қолданба құлып-ды</string>
+-    <string name="app_name">One UI Басты беті</string>
++    <string name="app_name">Stardust Басты беті</string>
+     <string name="app_pair_added_on_home_screen">Қолданба жұбы Бастапқы экранға қосылды.</string>
+     <string name="app_search">Іздеу</string>
+     <string name="app_search_no_results_found">Нәтиже жоқ</string>
+diff --git a/res/values-km-rKH/strings.xml b/res/values-km-rKH/strings.xml
+index dbbdab3..39bd935 100644
+--- a/res/values-km-rKH/strings.xml
++++ b/res/values-km-rKH/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">សញ្ញាលក្ខណ៍​អាយខុន​កម្មវិធី</string>
+     <string name="app_info_drop_target_label">ព័ត៌មាន​កម្មវិធី</string>
+     <string name="app_locked">បាន​ចាក់សោ​កម្មវិធី</string>
+-    <string name="app_name">គេហ One UI</string>
++    <string name="app_name">គេហ Stardust</string>
+     <string name="app_pair_added_on_home_screen">បាន​ថែម​ការផ្គូ​កម្មវិធី​លើ​គេហអេក្រង់។</string>
+     <string name="app_search">ស្វែងរក</string>
+     <string name="app_search_no_results_found">រក​មិនឃើញ​លទ្ធផល​ណា​មួយ</string>
+diff --git a/res/values-kn-rIN/strings.xml b/res/values-kn-rIN/strings.xml
+index 9720fe8..dcb4d84 100644
+--- a/res/values-kn-rIN/strings.xml
++++ b/res/values-kn-rIN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">ಅನ್ವಯಿಸುವಿಕೆ ಐಕಾನ್ ಬ್ಯಾಡ್ಜ್‌ಗಳು</string>
+     <string name="app_info_drop_target_label">ಅನ್ವಯಿಸುವಿಕೆ ಮಾಹಿತಿ</string>
+     <string name="app_locked">ಅನ್ವಯಿಸುವಿಕೆ ಲಾಕ್ ಮಾಡಲಾಗಿದೆ</string>
+-    <string name="app_name">One UI ಹೋಮ್</string>
++    <string name="app_name">Stardust ಹೋಮ್</string>
+     <string name="app_pair_added_on_home_screen">ಹೋಮ್ ಸ್ಕ್ರೀನ್‌ನಲ್ಲಿ ಅನ್ವಯಿಸುವಿಕೆ ಜೋಡಿಯನ್ನು ಸೇರಿಸಲಾಗಿದೆ.</string>
+     <string name="app_search">ಶೋಧಿಸು</string>
+     <string name="app_search_no_results_found">ಯಾವುದೇ ಫಲಿತಾಂಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ</string>
+diff --git a/res/values-ko/strings.xml b/res/values-ko/strings.xml
+index 6f4d510..c7fc83f 100644
+--- a/res/values-ko/strings.xml
++++ b/res/values-ko/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">앱 정보</string>
+     <string name="app_installing_title">%1$s 설치 중, %2$s 완료</string>
+     <string name="app_locked">앱 잠김</string>
+-    <string name="app_name">One UI 홈</string>
++    <string name="app_name">Stardust 홈</string>
+     <string name="app_pair_added_on_home_screen">홈 화면에 App pair를 추가했어요.</string>
+     <string name="app_search">검색</string>
+     <string name="app_search_no_results_found">검색 결과가 없습니다</string>
+diff --git a/res/values-ky-rKG/strings.xml b/res/values-ky-rKG/strings.xml
+index 2f5a656..1c7eabc 100644
+--- a/res/values-ky-rKG/strings.xml
++++ b/res/values-ky-rKG/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Колдонмонун сүрөтчө төш белгиси</string>
+     <string name="app_info_drop_target_label">Колдонмо маалыматы</string>
+     <string name="app_locked">Колд. кулпуланган</string>
+-    <string name="app_name">One UI Үй</string>
++    <string name="app_name">Stardust Үй</string>
+     <string name="app_pair_added_on_home_screen">Колдонмолорду байланыштырууну Башкы экранга кошулду.</string>
+     <string name="app_search">Издөө</string>
+     <string name="app_search_no_results_found">Эч натыйжа табылган жок</string>
+diff --git a/res/values-lo-rLA/strings.xml b/res/values-lo-rLA/strings.xml
+index 4043aee..354b473 100644
+--- a/res/values-lo-rLA/strings.xml
++++ b/res/values-lo-rLA/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">ກາໝາຍໄອຄອນແອັບ</string>
+     <string name="app_info_drop_target_label">ຂໍ້ມູນແອັບ</string>
+     <string name="app_locked">ລັອກແອັບແລ້ວ</string>
+-    <string name="app_name">ໜ້າຫຼັກ One UI</string>
++    <string name="app_name">ໜ້າຫຼັກ Stardust</string>
+     <string name="app_pair_added_on_home_screen">ເພີ່ມການຈັບຄູ່ແອັບໃສ່ໜ້າຈໍຫຼັກແລ້ວ.</string>
+     <string name="app_search">ຊອກຫາ</string>
+     <string name="app_search_no_results_found">ບໍ່ພົບຜົນໄດ້ຮັບ</string>
+diff --git a/res/values-lt/strings.xml b/res/values-lt/strings.xml
+index d34c5c5..1f58052 100644
+--- a/res/values-lt/strings.xml
++++ b/res/values-lt/strings.xml
+@@ -123,7 +123,7 @@
+ inform."</string>
+     <string name="app_installing_title">Įdiegiama: „%1$s“; baigta: %2$s</string>
+     <string name="app_locked">Prog. užrakinta</string>
+-    <string name="app_name">„One UI“ pradžia</string>
++    <string name="app_name">„Stardust“ pradžia</string>
+     <string name="app_pair_added_on_home_screen">Programų pora pridėta pradžios ekrane.</string>
+     <string name="app_search">Paieška</string>
+     <string name="app_search_no_results_found">Rezultatų nerasta</string>
+diff --git a/res/values-lv/strings.xml b/res/values-lv/strings.xml
+index be1a853..85f759e 100644
+--- a/res/values-lv/strings.xml
++++ b/res/values-lv/strings.xml
+@@ -123,7 +123,7 @@
+ dati"</string>
+     <string name="app_installing_title">Notiek lietotnes “%1$s” instalēšana. Norise: %2$s.</string>
+     <string name="app_locked">Programma bloķēta</string>
+-    <string name="app_name">One UI sākuma ekrāns</string>
++    <string name="app_name">Stardust sākuma ekrāns</string>
+     <string name="app_pair_added_on_home_screen">Programmu pāris ir pievienots sākuma ekrānā.</string>
+     <string name="app_search">Meklēt</string>
+     <string name="app_search_no_results_found">Nav atrasts neviens rezultāts</string>
+diff --git a/res/values-mk-rMK/strings.xml b/res/values-mk-rMK/strings.xml
+index 4454d8b..2a98840 100644
+--- a/res/values-mk-rMK/strings.xml
++++ b/res/values-mk-rMK/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Значки за икона на апликација</string>
+     <string name="app_info_drop_target_label">Инф. за апликација</string>
+     <string name="app_locked">Аплик. е заклуч.</string>
+-    <string name="app_name">Почетна страница на One UI</string>
++    <string name="app_name">Почетна страница на Stardust</string>
+     <string name="app_pair_added_on_home_screen">Спарување апликации е додадено на Почетниот екран.</string>
+     <string name="app_search">Пребарај</string>
+     <string name="app_search_no_results_found">Нема резултати</string>
+diff --git a/res/values-ml-rIN/strings.xml b/res/values-ml-rIN/strings.xml
+index cc3a153..c9e71dc 100644
+--- a/res/values-ml-rIN/strings.xml
++++ b/res/values-ml-rIN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">ആപ്പ് ഐക്കൺ ബാഡ്ജുകൾ</string>
+     <string name="app_info_drop_target_label">ആപ്പ് വിവരം</string>
+     <string name="app_locked">ആപ്ലിക്കേഷനെ ലോക്ക് ചെയ്തു</string>
+-    <string name="app_name">One UI ഹോം</string>
++    <string name="app_name">Stardust ഹോം</string>
+     <string name="app_pair_added_on_home_screen">ഹോം സ്ക്രീനിൽ ആപ്പ് ജോടി ചേർത്തു.</string>
+     <string name="app_search">തിരയുക</string>
+     <string name="app_search_no_results_found">ഫലങ്ങളൊന്നും കണ്ടെത്തിയില്ല</string>
+diff --git a/res/values-mn-rMN/strings.xml b/res/values-mn-rMN/strings.xml
+index 0e249a0..3b29763 100644
+--- a/res/values-mn-rMN/strings.xml
++++ b/res/values-mn-rMN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Хэрэглүүрийн дүрсэн тэмдэгт</string>
+     <string name="app_info_drop_target_label">Хэрэглр.н мэд.лл</string>
+     <string name="app_locked">Хэр.г түгжсэн</string>
+-    <string name="app_name">One UI эхлэл</string>
++    <string name="app_name">Stardust эхлэл</string>
+     <string name="app_pair_added_on_home_screen">Эх дэлгэцэд Хэрэглүүр хослуулахыг нэмсэн.</string>
+     <string name="app_search">Хайх</string>
+     <string name="app_search_no_results_found">Үр дүн олдсонгүй</string>
+diff --git a/res/values-mr-rIN/strings.xml b/res/values-mr-rIN/strings.xml
+index 49bf7bd..0b34980 100644
+--- a/res/values-mr-rIN/strings.xml
++++ b/res/values-mr-rIN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">अनुप्रयोग आयकॉन बॅज</string>
+     <string name="app_info_drop_target_label">अनुप्रयोग माहिती</string>
+     <string name="app_locked">अनु. लॉक केला</string>
+-    <string name="app_name">One UI होम</string>
++    <string name="app_name">Stardust होम</string>
+     <string name="app_pair_added_on_home_screen">मुख्य स्क्रीन वर अनुप्रयोग जोडी जोडली.</string>
+     <string name="app_search">शोधा</string>
+     <string name="app_search_no_results_found">कोणतेही परिणाम आढळले नाही</string>
+diff --git a/res/values-ms-rMY/strings.xml b/res/values-ms-rMY/strings.xml
+index a29a7ed..916c4bd 100644
+--- a/res/values-ms-rMY/strings.xml
++++ b/res/values-ms-rMY/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Lencana ikon aplikasi</string>
+     <string name="app_info_drop_target_label">Maklumat aplikasi</string>
+     <string name="app_locked">Aplikasi dikunci</string>
+-    <string name="app_name">Skrin utama One UI</string>
++    <string name="app_name">Skrin utama Stardust</string>
+     <string name="app_pair_added_on_home_screen">Pasangan aplikasi telah ditambahkan pada Skrin utama.</string>
+     <string name="app_search">Cari</string>
+     <string name="app_search_no_results_found">Tiada keputusan ditemui</string>
+diff --git a/res/values-my-rMM/strings.xml b/res/values-my-rMM/strings.xml
+index 0c72e03..4bd8ec3 100644
+--- a/res/values-my-rMM/strings.xml
++++ b/res/values-my-rMM/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">အက်ပ်အိုင်ကွန် တံဆိပ်များ</string>
+     <string name="app_info_drop_target_label">အက်ပ် အချက်အလက်</string>
+     <string name="app_locked">အက်ပ် သော့ချထားသည်</string>
+-    <string name="app_name">One UI ပင်မ</string>
++    <string name="app_name">Stardust ပင်မ</string>
+     <string name="app_pair_added_on_home_screen">အက်ပ်အတွဲကို ပင်မဖန်သားပြင်တွင် ထည့်ပြီးပြီ။</string>
+     <string name="app_search">ရှာပါ</string>
+     <string name="app_search_no_results_found">ရလဒ်များ မတွေ့ပါ</string>
+diff --git a/res/values-my-rZG/strings.xml b/res/values-my-rZG/strings.xml
+index 2bb8b52..0c4e720 100644
+--- a/res/values-my-rZG/strings.xml
++++ b/res/values-my-rZG/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">အက္ပ္အုိင္ကြန္ တံဆိပ္မ်ား</string>
+     <string name="app_info_drop_target_label">အက္ပ္ အခ်က္အလက္</string>
+     <string name="app_locked">အက္ပ္ ေသာ့ခ်ထားသည္</string>
+-    <string name="app_name">One UI ပင္မ</string>
++    <string name="app_name">Stardust ပင္မ</string>
+     <string name="app_pair_added_on_home_screen">အက္ပ္အတြဲကို ပင္မဖန္သားျပင္တြင္ ထည့္ၿပီးၿပီ။</string>
+     <string name="app_search">ရွာပါ</string>
+     <string name="app_search_no_results_found">ရလဒ္မ်ား မေတြ႔ပါ</string>
+diff --git a/res/values-nb/strings.xml b/res/values-nb/strings.xml
+index 2a73a88..f94ee64 100644
+--- a/res/values-nb/strings.xml
++++ b/res/values-nb/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Appinfo.</string>
+     <string name="app_installing_title">%1$s installerer, %2$s er fullført</string>
+     <string name="app_locked">App er låst</string>
+-    <string name="app_name">One UI-hjem</string>
++    <string name="app_name">Stardust-hjem</string>
+     <string name="app_pair_added_on_home_screen">App-par ble lagt til på startskjermen.</string>
+     <string name="app_search">Søk</string>
+     <string name="app_search_no_results_found">Fant ingen resultater</string>
+diff --git a/res/values-ne-rNP/strings.xml b/res/values-ne-rNP/strings.xml
+index bb5fe1f..021fa67 100644
+--- a/res/values-ne-rNP/strings.xml
++++ b/res/values-ne-rNP/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">एप आइकनका ब्याजहरू</string>
+     <string name="app_info_drop_target_label">एप जानकारी</string>
+     <string name="app_locked">एपलाई लक गरियो</string>
+-    <string name="app_name">One UI को होम स्क्रीन</string>
++    <string name="app_name">Stardust को होम स्क्रीन</string>
+     <string name="app_pair_added_on_home_screen">होम स्क्रीनमा एप जोडा थपियो।</string>
+     <string name="app_search">खोज्नुहोस्</string>
+     <string name="app_search_no_results_found">कुनै परिणामहरू फेला परेनन्</string>
+diff --git a/res/values-ne/strings.xml b/res/values-ne/strings.xml
+index d6ef617..6416ccb 100644
+--- a/res/values-ne/strings.xml
++++ b/res/values-ne/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">एप जानकारी</string>
+     <string name="app_installing_title">%1$s इन्स्टल गरिँदै छ, %2$s पूरा भयो</string>
+     <string name="app_locked">एपलाई लक गरियो</string>
+-    <string name="app_name">One UI को होम स्क्रीन</string>
++    <string name="app_name">Stardust को होम स्क्रीन</string>
+     <string name="app_pair_added_on_home_screen">होम स्क्रीनमा एप जोडा थपियो।</string>
+     <string name="app_search">खोज्नुहोस्</string>
+     <string name="app_search_no_results_found">कुनै परिणामहरू फेला परेनन्</string>
+diff --git a/res/values-nl/strings.xml b/res/values-nl/strings.xml
+index df441a8..c7f0641 100644
+--- a/res/values-nl/strings.xml
++++ b/res/values-nl/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">App-info</string>
+     <string name="app_installing_title">%1$s installeren, %2$s voltooid</string>
+     <string name="app_locked">App vergrendeld</string>
+-    <string name="app_name">Startpagina One UI</string>
++    <string name="app_name">Startpagina Stardust</string>
+     <string name="app_pair_added_on_home_screen">App-paar toegevoegd aan Startscherm.</string>
+     <string name="app_search">Zoeken</string>
+     <string name="app_search_no_results_found">Geen resultaten gevonden</string>
+diff --git a/res/values-or/strings.xml b/res/values-or/strings.xml
+index 03003e6..bd7c99c 100644
+--- a/res/values-or/strings.xml
++++ b/res/values-or/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">ଆପ୍ଲିକେସନ୍‌ ସୂଚନା</string>
+     <string name="app_installing_title">%1$s ଇନଷ୍ଟଲ୍ କରାଯାଉଛି, %2$s ସମ୍ପୂର୍ଣ୍ଣ ହୋଇଛି</string>
+     <string name="app_locked">ଆପ୍‌ ଲକ୍ ହୋଇଛି</string>
+-    <string name="app_name">One UI ହୋମ୍</string>
++    <string name="app_name">Stardust ହୋମ୍</string>
+     <string name="app_pair_added_on_home_screen">ଆପ୍ଲିକେସନ୍‌ ପେୟାର୍ ହୋମ୍ ସ୍କ୍ରିନକୁ ଯୋଡାଯାଇଛି।</string>
+     <string name="app_search">ସର୍ଚ୍ଚ</string>
+     <string name="app_search_no_results_found">କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ</string>
+diff --git a/res/values-pa-rIN/strings.xml b/res/values-pa-rIN/strings.xml
+index 088b714..33ee194 100644
+--- a/res/values-pa-rIN/strings.xml
++++ b/res/values-pa-rIN/strings.xml
+@@ -86,7 +86,7 @@
+     <string name="app_icon_badges_title">ਐਪ ਪ੍ਰਤੀਰੂਪ ਬੈਜਸ</string>
+     <string name="app_info_drop_target_label">ਐਪ ਜਾਣਕਾਰੀ</string>
+     <string name="app_locked">ਐਪ ਲੌਕ ਹੋਈ</string>
+-    <string name="app_name">One UI ਹੋਮ</string>
++    <string name="app_name">Stardust ਹੋਮ</string>
+     <string name="app_pair_added_on_home_screen">ਐਪ ਜੋੜਾ ਹੋਮ ਸਕ੍ਰੀਨ ਤੇ ਜੋੜਿਆ ਗਿਆ।</string>
+     <string name="app_search">ਖੋਜੋ</string>
+     <string name="app_search_no_results_found">ਕੋਈ ਪਰਿਣਾਮ ਨਹੀਂ ਮਿਲਿਆ</string>
+diff --git a/res/values-pl-rSP/strings.xml b/res/values-pl-rSP/strings.xml
+index f47b5ef..e2b9e48 100644
+--- a/res/values-pl-rSP/strings.xml
++++ b/res/values-pl-rSP/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Kursory ikōn aplikacyji</string>
+     <string name="app_info_drop_target_label">Info ô aplikacyje</string>
+     <string name="app_locked">Apl. blokniynto</string>
+-    <string name="app_name">Ekran sztartowy One UI</string>
++    <string name="app_name">Ekran sztartowy Stardust</string>
+     <string name="app_pair_added_on_home_screen">Systym aplikacyji przidano na ekranie sztartowym.</string>
+     <string name="app_search">Wysznupej</string>
+     <string name="app_search_no_results_found">Niy znŏdłŏ wynikōw.</string>
+diff --git a/res/values-pl/strings.xml b/res/values-pl/strings.xml
+index 9143a85..e8514ab 100644
+--- a/res/values-pl/strings.xml
++++ b/res/values-pl/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Infor. o aplikacji</string>
+     <string name="app_installing_title">Instaluję aplikację %1$s, postęp: %2$s</string>
+     <string name="app_locked">Apl. zablokowana</string>
+-    <string name="app_name">Ekran startowy One UI</string>
++    <string name="app_name">Ekran startowy Stardust</string>
+     <string name="app_pair_added_on_home_screen">Powiązanie aplikacji dodano na ekranie startowym.</string>
+     <string name="app_search">Wyszukaj</string>
+     <string name="app_search_no_results_found">Nie znaleziono wyników</string>
+diff --git a/res/values-pt-rBR/strings.xml b/res/values-pt-rBR/strings.xml
+index 744e293..9211371 100644
+--- a/res/values-pt-rBR/strings.xml
++++ b/res/values-pt-rBR/strings.xml
+@@ -82,7 +82,7 @@
+     <string name="app_icon_badges_title">Selos nos ícones de aplicativos</string>
+     <string name="app_info_drop_target_label">Inform. do app</string>
+     <string name="app_locked">Aplic. bloqueado</string>
+-    <string name="app_name">Tela inicial de One UI</string>
++    <string name="app_name">Tela inicial de Stardust</string>
+     <string name="app_pair_added_on_home_screen">Par de aplicativos adicionado à Tela inicial.</string>
+     <string name="app_search">Pesquisar</string>
+     <string name="app_search_no_results_found">Nenhum resultado encontrado</string>
+diff --git a/res/values-pt-rPT/strings.xml b/res/values-pt-rPT/strings.xml
+index cba5785..4233c6b 100644
+--- a/res/values-pt-rPT/strings.xml
++++ b/res/values-pt-rPT/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Info da app</string>
+     <string name="app_installing_title">A instalar %1$s, %2$s concluído</string>
+     <string name="app_locked">App bloqueada</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">Par de aplicações adicionado ao Ecrã inicial.</string>
+     <string name="app_search">Procurar</string>
+     <string name="app_search_no_results_found">Nenhuns resultados encontrados</string>
+diff --git a/res/values-ro/strings.xml b/res/values-ro/strings.xml
+index b3a9bf4..7bfbdf9 100644
+--- a/res/values-ro/strings.xml
++++ b/res/values-ro/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Informații aplicație</string>
+     <string name="app_installing_title">%1$s se instalează, %2$s finalizat</string>
+     <string name="app_locked">Aplicaţie blocată</string>
+-    <string name="app_name">Ecran Acasă One UI</string>
++    <string name="app_name">Ecran Acasă Stardust</string>
+     <string name="app_pair_added_on_home_screen">Pereche de aplicații adăugată pe ecranul Acasă.</string>
+     <string name="app_search">Căutare</string>
+     <string name="app_search_no_results_found">Nu au fost găsite rezultate</string>
+diff --git a/res/values-ru/strings.xml b/res/values-ru/strings.xml
+index 346cf3b..7bf2b65 100644
+--- a/res/values-ru/strings.xml
++++ b/res/values-ru/strings.xml
+@@ -124,7 +124,7 @@
+ жении"</string>
+     <string name="app_installing_title">Установка приложения \"%1$s\" (выполнено %2$s)</string>
+     <string name="app_locked">Заблокировано</string>
+-    <string name="app_name">Главный экран One UI</string>
++    <string name="app_name">Главный экран Stardust</string>
+     <string name="app_pair_added_on_home_screen">Пара приложений добавлена на главный экран.</string>
+     <string name="app_search">Поиск</string>
+     <string name="app_search_no_results_found">Ничего не найдено</string>
+diff --git a/res/values-si-rLK/strings.xml b/res/values-si-rLK/strings.xml
+index e961eb9..1f0b815 100644
+--- a/res/values-si-rLK/strings.xml
++++ b/res/values-si-rLK/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">යෙදුම් අයිකන ලාංඡන</string>
+     <string name="app_info_drop_target_label">යෙදුම් තතු</string>
+     <string name="app_locked">යෙදුම අගුලු දැමි.</string>
+-    <string name="app_name">One UI මුල් පිටුව</string>
++    <string name="app_name">Stardust මුල් පිටුව</string>
+     <string name="app_pair_added_on_home_screen">යෙදුම් යුගල මුල් තිරයේ එක් කෙරිණි.</string>
+     <string name="app_search">සොයන්න</string>
+     <string name="app_search_no_results_found">ප්‍රතිඵල හමු නොවිණි</string>
+diff --git a/res/values-si/strings.xml b/res/values-si/strings.xml
+index fb83d90..868c66d 100644
+--- a/res/values-si/strings.xml
++++ b/res/values-si/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">යෙදුම් තතු</string>
+     <string name="app_installing_title">%1$s ස්ථාපනය කරමින්, %2$s සම්පූර්ණයි</string>
+     <string name="app_locked">යෙදුම අගුලු දැමි.</string>
+-    <string name="app_name">One UI මුල් පිටුව</string>
++    <string name="app_name">Stardust මුල් පිටුව</string>
+     <string name="app_pair_added_on_home_screen">යෙදුම් යුගල මුල් තිරයේ එක් කෙරිණි.</string>
+     <string name="app_search">සොයන්න</string>
+     <string name="app_search_no_results_found">ප්‍රතිඵල හමු නොවිණි</string>
+diff --git a/res/values-sk/strings.xml b/res/values-sk/strings.xml
+index 1460904..4930a02 100644
+--- a/res/values-sk/strings.xml
++++ b/res/values-sk/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Inf. o aplikácii</string>
+     <string name="app_installing_title">Inštaluje sa %1$s. Dokončené: %2$s.</string>
+     <string name="app_locked">Aplikácia zamknutá</string>
+-    <string name="app_name">Domovská obrazovka rozhrania One UI</string>
++    <string name="app_name">Domovská obrazovka rozhrania Stardust</string>
+     <string name="app_pair_added_on_home_screen">Pár aplikácií bol pridaný na domovskú obrazovku.</string>
+     <string name="app_search">Vyhľadávanie</string>
+     <string name="app_search_no_results_found">Nenašli sa žiadne výsledky</string>
+diff --git a/res/values-sl/strings.xml b/res/values-sl/strings.xml
+index 7160c72..bc3a07e 100644
+--- a/res/values-sl/strings.xml
++++ b/res/values-sl/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">Podatki o aplik.</string>
+     <string name="app_installing_title">%1$s se namešča, dokončano: %2$s</string>
+     <string name="app_locked">Aplik. zaklenjena</string>
+-    <string name="app_name">Domača stran One UI</string>
++    <string name="app_name">Domača stran Stardust</string>
+     <string name="app_pair_added_on_home_screen">Par aplikacij je bil dodan na domači zaslon.</string>
+     <string name="app_search">Iskanje</string>
+     <string name="app_search_no_results_found">Ni najdenih rezultatov</string>
+diff --git a/res/values-sq-rAL/strings.xml b/res/values-sq-rAL/strings.xml
+index 772ea00..cc77360 100644
+--- a/res/values-sq-rAL/strings.xml
++++ b/res/values-sq-rAL/strings.xml
+@@ -86,7 +86,7 @@
+     <string name="app_icon_badges_title">Stema ikonë të app-eve</string>
+     <string name="app_info_drop_target_label">Info për app-in</string>
+     <string name="app_locked">App-i është kyçur</string>
+-    <string name="app_name">Baza e One UI</string>
++    <string name="app_name">Baza e Stardust</string>
+     <string name="app_pair_added_on_home_screen">Çifti i app-eve u shtua në Ekranin bazë.</string>
+     <string name="app_search">Kërko</string>
+     <string name="app_search_no_results_found">Nuk u gjetën rezultate</string>
+diff --git a/res/values-sr/strings.xml b/res/values-sr/strings.xml
+index a42240e..30d9b04 100644
+--- a/res/values-sr/strings.xml
++++ b/res/values-sr/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Info. o aplikac.</string>
+     <string name="app_installing_title">%1$s се инсталира, %2$s готово</string>
+     <string name="app_locked">Aplik. zaključana</string>
+-    <string name="app_name">Početni ekran za One UI</string>
++    <string name="app_name">Početni ekran za Stardust</string>
+     <string name="app_pair_added_on_home_screen">Uparivanje aplikacija je dodato na početni ekran.</string>
+     <string name="app_search">Pretražite</string>
+     <string name="app_search_no_results_found">Nema rezultata</string>
+diff --git a/res/values-sv/strings.xml b/res/values-sv/strings.xml
+index 1d83745..6c5be69 100644
+--- a/res/values-sv/strings.xml
++++ b/res/values-sv/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Appinfo</string>
+     <string name="app_installing_title">%1$s installeras. %2$s har slutförts</string>
+     <string name="app_locked">Appen låst</string>
+-    <string name="app_name">Hemskärm för One UI</string>
++    <string name="app_name">Hemskärm för Stardust</string>
+     <string name="app_pair_added_on_home_screen">App-par har lagts till på hemskärmen.</string>
+     <string name="app_search">Sök</string>
+     <string name="app_search_no_results_found">Inga resultat hittades</string>
+diff --git a/res/values-ta-rIN/strings.xml b/res/values-ta-rIN/strings.xml
+index fbb160b..1612291 100644
+--- a/res/values-ta-rIN/strings.xml
++++ b/res/values-ta-rIN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">பயன்பாட்டுச் சின்ன பேட்ஜ்கள்</string>
+     <string name="app_info_drop_target_label">பயன்பாட்டு விவரம்</string>
+     <string name="app_locked">பயன்பாடு பூட்டப்பட்டுள்ளது</string>
+-    <string name="app_name">One UI முகப்பு</string>
++    <string name="app_name">Stardust முகப்பு</string>
+     <string name="app_pair_added_on_home_screen">பயன்பாடு இணைப்பு முகப்புத் திரையில் சேர்க்கப்பட்டுள்ளது.</string>
+     <string name="app_search">தேடவும்</string>
+     <string name="app_search_no_results_found">முடிவுகள் காணப்படவில்லை</string>
+diff --git a/res/values-te-rIN/strings.xml b/res/values-te-rIN/strings.xml
+index 46d91b9..81430ad 100644
+--- a/res/values-te-rIN/strings.xml
++++ b/res/values-te-rIN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">అప్లికేషన్ చిహ్నం బ్యాడ్జ్‌లు</string>
+     <string name="app_info_drop_target_label">అప్లికేషన్ సమాచారం</string>
+     <string name="app_locked">అప్లికేషన్ లాక్ చేయబడింది</string>
+-    <string name="app_name">One UI హోమ్</string>
++    <string name="app_name">Stardust హోమ్</string>
+     <string name="app_pair_added_on_home_screen">హోమ్ స్క్రీన్‌లో అప్లికేషన్ జత జోడించబడింది.</string>
+     <string name="app_search">శోధించు</string>
+     <string name="app_search_no_results_found">ఫలితాలు కనుగొనబడలేదు</string>
+diff --git a/res/values-tg/strings.xml b/res/values-tg/strings.xml
+index 6018d1b..bd848cf 100644
+--- a/res/values-tg/strings.xml
++++ b/res/values-tg/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Маълумот
+ оиди брнм"</string>
+     <string name="app_locked">Барнома баста шуд</string>
+-    <string name="app_name">Экрани асосии One UI</string>
++    <string name="app_name">Экрани асосии Stardust</string>
+     <string name="app_pair_added_on_home_screen">Ҷуфти барномаҳо аллакай ба экрани Асосӣ илова карда шудааст.</string>
+     <string name="app_search">Ҷустуҷӯ</string>
+     <string name="app_search_no_results_found">Ягон натиҷа ёфт нашуд</string>
+diff --git a/res/values-th/strings.xml b/res/values-th/strings.xml
+index 7107c46..30686e9 100644
+--- a/res/values-th/strings.xml
++++ b/res/values-th/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">ข้อมูลแอพ</string>
+     <string name="app_installing_title">กำลังติดตั้ง %1$s เสร็จแล้ว %2$s</string>
+     <string name="app_locked">ล็อกแอพแล้ว</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">เพิ่มคู่แอพไปยังหน้าจอหลักแล้ว</string>
+     <string name="app_search">ค้นหา</string>
+     <string name="app_search_no_results_found">ไม่พบผลลัพธ์</string>
+diff --git a/res/values-tk/strings.xml b/res/values-tk/strings.xml
+index e1c267d..a25688f 100644
+--- a/res/values-tk/strings.xml
++++ b/res/values-tk/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">Programma şekiljik nyşanjyklary</string>
+     <string name="app_info_drop_target_label">Programma maglumat</string>
+     <string name="app_locked">Programma gulply</string>
+-    <string name="app_name">One UI öý</string>
++    <string name="app_name">Stardust öý</string>
+     <string name="app_pair_added_on_home_screen">Programma jübüti Öý ekrana goşuldy.</string>
+     <string name="app_search">Gözle</string>
+     <string name="app_search_no_results_found">Netije tapylmady</string>
+diff --git a/res/values-tl/strings.xml b/res/values-tl/strings.xml
+index 04f3ae0..f469278 100644
+--- a/res/values-tl/strings.xml
++++ b/res/values-tl/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Info ng app</string>
+     <string name="app_installing_title">Ini-install ang %1$s, %2$s kumpleto</string>
+     <string name="app_locked">Naka-lock ang app</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">Idinagdag ang App pair sa Home screen.</string>
+     <string name="app_search">Hanapin</string>
+     <string name="app_search_no_results_found">Walang nakitang mga resulta</string>
+diff --git a/res/values-tr/strings.xml b/res/values-tr/strings.xml
+index 140fb14..8067a8d 100644
+--- a/res/values-tr/strings.xml
++++ b/res/values-tr/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Uygulama bilgileri</string>
+     <string name="app_installing_title">%1$s yükleniyor, %2$s tamamlandı</string>
+     <string name="app_locked">Uygulama kilitli</string>
+-    <string name="app_name">One UI Ana Ekranı</string>
++    <string name="app_name">Stardust Ana Ekranı</string>
+     <string name="app_pair_added_on_home_screen">Uygulama çifti Ana ekrana eklendi.</string>
+     <string name="app_search">Ara</string>
+     <string name="app_search_no_results_found">Sonuç bulunamadı</string>
+diff --git a/res/values-ug-rCN/strings.xml b/res/values-ug-rCN/strings.xml
+index cdaf570..37ac3c9 100644
+--- a/res/values-ug-rCN/strings.xml
++++ b/res/values-ug-rCN/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">ئەپ سىنبەلگە تامغىسى</string>
+     <string name="app_info_drop_target_label">ئەپ ئۇچۇرى</string>
+     <string name="app_locked">ئەپ قۇلۇپلاندى</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">ئەپ جۈپى باش ئېكرانغا قوشۇلدى.</string>
+     <string name="app_search">ئىزدەش</string>
+     <string name="app_search_no_results_found">نەتىجە تېپىلمىدى</string>
+diff --git a/res/values-uk/strings.xml b/res/values-uk/strings.xml
+index bd8b445..02f5f96 100644
+--- a/res/values-uk/strings.xml
++++ b/res/values-uk/strings.xml
+@@ -123,7 +123,7 @@
+ програму"</string>
+     <string name="app_installing_title">%1$s встановлюється, виконано %2$s</string>
+     <string name="app_locked">Заблоковано</string>
+-    <string name="app_name">Головний екран One UI</string>
++    <string name="app_name">Головний екран Stardust</string>
+     <string name="app_pair_added_on_home_screen">Пару програм додано на головний екран.</string>
+     <string name="app_search">Пошук</string>
+     <string name="app_search_no_results_found">Результатів не знайдено</string>
+diff --git a/res/values-ur-rPK/strings.xml b/res/values-ur-rPK/strings.xml
+index 951e688..6ea4f91 100644
+--- a/res/values-ur-rPK/strings.xml
++++ b/res/values-ur-rPK/strings.xml
+@@ -55,7 +55,7 @@
+     <string name="app_icon_badges_title">ایپلیکیشن شبیہ بلے</string>
+     <string name="app_info_drop_target_label">ایپلیکیشن کی معلومات</string>
+     <string name="app_locked">ایپلیکیشن لاک ہے</string>
+-    <string name="app_name">‏One UI ہوم</string>
++    <string name="app_name">‏Stardust ہوم</string>
+     <string name="app_pair_added_on_home_screen">ایپلیکیشن جوڑی ہوم اسکرین پر شامل کیاگیا۔</string>
+     <string name="app_search">تلاش کریں</string>
+     <string name="app_search_no_results_found">کوئی نتائج نہیں ملے</string>
+diff --git a/res/values-uz-rUZ/strings.xml b/res/values-uz-rUZ/strings.xml
+index 4defcdb..1b7c8f8 100644
+--- a/res/values-uz-rUZ/strings.xml
++++ b/res/values-uz-rUZ/strings.xml
+@@ -56,7 +56,7 @@
+     <string name="app_info_drop_target_label">"Ilova
+ ma’lumoti"</string>
+     <string name="app_locked">Ilova bloklandi</string>
+-    <string name="app_name">One UI Asosiy ekrani</string>
++    <string name="app_name">Stardust Asosiy ekrani</string>
+     <string name="app_pair_added_on_home_screen">Asosiy ekranda Ilova jufti qo‘shildi.</string>
+     <string name="app_search">Qidirish</string>
+     <string name="app_search_no_results_found">Natijalar topilmadi</string>
+diff --git a/res/values-vi/strings.xml b/res/values-vi/strings.xml
+index 05650c5..fe37ff1 100644
+--- a/res/values-vi/strings.xml
++++ b/res/values-vi/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">Thông tin ứng dụng</string>
+     <string name="app_installing_title">Đang cài đặt %1$s, hoàn tất %2$s</string>
+     <string name="app_locked">Ứng dụng bị khóa</string>
+-    <string name="app_name">Trang chủ One UI</string>
++    <string name="app_name">Trang chủ Stardust</string>
+     <string name="app_pair_added_on_home_screen">Đã thêm cặp ứng dụng vào màn hình Chờ.</string>
+     <string name="app_search">Tìm kiếm</string>
+     <string name="app_search_no_results_found">Không tìm thấy kết quả</string>
+diff --git a/res/values-zh-rCN/strings.xml b/res/values-zh-rCN/strings.xml
+index d641af7..7ef9984 100644
+--- a/res/values-zh-rCN/strings.xml
++++ b/res/values-zh-rCN/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">应用程序信息</string>
+     <string name="app_installing_title">正在安装%1$s，已完成 %2$s</string>
+     <string name="app_locked">已锁定应用程序</string>
+-    <string name="app_name">One UI 主屏幕</string>
++    <string name="app_name">Stardust 主屏幕</string>
+     <string name="app_pair_added_on_home_screen">应用程序对已添加至主屏幕</string>
+     <string name="app_search">搜索</string>
+     <string name="app_search_no_results_found">未找到结果</string>
+diff --git a/res/values-zh-rHK/strings.xml b/res/values-zh-rHK/strings.xml
+index 3646c19..d78fb3b 100644
+--- a/res/values-zh-rHK/strings.xml
++++ b/res/values-zh-rHK/strings.xml
+@@ -123,7 +123,7 @@
+     <string name="app_info_drop_target_label">應用程式資訊</string>
+     <string name="app_installing_title">正在安裝「%1$s」(已完成 %2$s)</string>
+     <string name="app_locked">應用程式已鎖定</string>
+-    <string name="app_name">One UI 主螢幕</string>
++    <string name="app_name">Stardust 主螢幕</string>
+     <string name="app_pair_added_on_home_screen">已加入應用程式組合至主螢幕。</string>
+     <string name="app_search">搜尋</string>
+     <string name="app_search_no_results_found">無搜尋結果</string>
+diff --git a/res/values-zh-rTW/strings.xml b/res/values-zh-rTW/strings.xml
+index 1ebfe1f..7127496 100644
+--- a/res/values-zh-rTW/strings.xml
++++ b/res/values-zh-rTW/strings.xml
+@@ -122,7 +122,7 @@
+     <string name="app_info_drop_target_label">應用程式資訊</string>
+     <string name="app_installing_title">正在安裝「%1$s」(已完成 %2$s)</string>
+     <string name="app_locked">應用程式已鎖定</string>
+-    <string name="app_name">One UI 首頁</string>
++    <string name="app_name">Stardust 首頁</string>
+     <string name="app_pair_added_on_home_screen">已將應用程式組新增至主螢幕。</string>
+     <string name="app_search">搜尋</string>
+     <string name="app_search_no_results_found">無搜尋結果</string>
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index 3e48718..39a2ea1 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -147,7 +147,7 @@
+     <string name="app_installing_title">%1$s installing, %2$s complete</string>
+     <string name="app_launch_tracker_class">com.android.launcher3.appprediction.PredictionAppTracker</string>
+     <string name="app_locked">App locked</string>
+-    <string name="app_name">One UI Home</string>
++    <string name="app_name">Stardust Home</string>
+     <string name="app_pair_added_on_home_screen">App pair added on Home screen.</string>
+     <string name="app_search">Search</string>
+     <string name="app_search_no_results_found">No results found</string>
+-- 
+2.43.0
