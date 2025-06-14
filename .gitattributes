@@ -21,3 +21,4 @@
 prebuilts/bootable/deprecated-ota/updater binary
 prebuilts/*/*/*/** binary
 platform/exynos982x/mods/s25/system/priv-app/wallpaper-res/wallpaper-res.apk filter=lfs diff=lfs merge=lfs -text
+stardust/mods/rezetprop/system/bin/rezetprop binary
