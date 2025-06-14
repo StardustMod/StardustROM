@@ -20,6 +20,10 @@
 # https://android.googlesource.com/platform/build/+/refs/tags/android-15.0.0_r1/envsetup.sh#18
 _GET_SRC_DIR()
 {
+    git lfs fetch origin > /dev/null 2>&1
+    git lfs checkout > /dev/null 2>&1
+    git submodule update --recursive > /dev/null 2>&1
+
     local TOPFILE="stardust/config.sh"
     if [ -n "$SRC_DIR" ] && [ -f "$SRC_DIR/$TOPFILE" ]; then
         # The following circumlocution ensures we remove symlinks from SRC_DIR.
