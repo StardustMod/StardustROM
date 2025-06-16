@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+
+<!--
+Copyright (C) 2016 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<favorites>
+
+    <home>
+<!-- appwidget : Weather -->
+        <appwidget 
+            screen="0" 
+            packageName="com.sec.android.daemonapp" 
+            className="com.sec.android.daemonapp.appwidget.WeatherAppWidget2x1" 
+            x="0" 
+            y="0" 
+            spanX="4" 
+            spanY="1" />
+
+        <!-- Files -->
+        <favorite 
+            screen="0" 
+            packageName="com.google.android.documentsui" 
+            className="com.google.android.documentsui.LauncherActivity" 
+            x="0" 
+            y="4" />
+
+        <!-- Gallery -->
+        <favorite 
+            screen="0" 
+            packageName="com.sec.android.gallery3d" 
+            className="com.samsung.android.gallery.app.activity.GalleryActivity" 
+            x="1" 
+            y="4" />
+
+        <!-- Google Play Store -->
+        <favorite 
+            screen="0" 
+            packageName="com.android.vending" 
+            className="com.android.vending.AssetBrowserActivity" 
+            x="2" 
+            y="4" />
+
+        <!-- Clock -->
+        <favorite 
+            screen="0" 
+            packageName="com.sec.android.app.clockpackage" 
+            className="com.sec.android.app.clockpackage.ClockPackage" 
+            x="3" 
+            y="4" />
+    </home>
+
+
+    <hotseat>
+        <!-- Phone -->
+        <favorite 
+            screen="0" 
+            packageName="com.samsung.android.dialer" 
+            className="com.samsung.android.dialer.DialtactsActivity" />
+
+        <!-- Messages -->
+        <favorite 
+            screen="1" 
+            packageName="com.samsung.android.messaging" 
+            className="com.android.mms.ui.ConversationComposer" />
+
+        <!-- Samsung Internet -->
+        <favorite 
+            screen="2" 
+            packageName="com.sec.android.app.sbrowser" 
+            className="com.sec.android.app.sbrowser.SBrowserMainActivity" />
+
+        <!-- Camera -->
+        <favorite 
+            screen="3" 
+            packageName="com.sec.android.app.camera" 
+            className="com.sec.android.app.camera.Camera" />
+
+    </hotseat>
+
+</favorites>

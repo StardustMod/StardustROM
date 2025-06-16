@@ -37,4 +37,12 @@ while read -r FILE; do
 
     # Encode XML
     $TOOLS_DIR/bin/omcdecoder --encode --in-place "$FILE"
+
+    # Locate XML location
+    CSC_DIR=$(dirname "$(dirname "$FILE")") 
+
+    # Replace launcher layout config
+    cp -a --preserve=all "$SRC_DIR/stardust/mods/csc/etc/default_application_order.xml" "$CSC_DIR/etc/default_application_order.xml"
+    cp -a --preserve=all "$SRC_DIR/stardust/mods/csc/etc/default_workspace.xml" "$CSC_DIR/etc/default_workspace.xml"
+
 done <<< "$(find "$WORK_DIR/product" -type f -name "cscfeature.xml")"
