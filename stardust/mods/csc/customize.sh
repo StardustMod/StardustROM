@@ -33,6 +33,7 @@ while read -r FILE; do
     SET_CSC_FEATURE_CONFIG "CscFeature_Setting_SupportRealTimeNetworkSpeed" "TRUE"
     SET_CSC_FEATURE_CONFIG "CscFeature_Setting_EnableHwVersionDisplay" "TRUE"
     SET_CSC_FEATURE_CONFIG "CscFeature_Setting_SupportMenuSmartTutor" "FALSE"
+    SET_CSC_FEATURE_CONFIG "CscFeature_SmartManager_ConfigSubFeatures" "Applock"
     SET_CSC_FEATURE_CONFIG "CscFeature_Common_DisableBixby" --delete
 
     # Encode XML
